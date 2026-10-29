@@ -5,47 +5,36 @@ A professional, full-stack AI-powered assistant built for the **GoLo Merchant Pl
 
 ---
 
-## 🏗️ Repository Architecture (GitLab Ready)
+## 🏗️ Repository Architecture
 
-```
+```text
 golo/
 ├── backend/                       # FastAPI AI REST server
-│   ├── app.py                     # API router with 14+ endpoints
-│   ├── ai_engine.py               # Core AI engine (sessions, quota, validation)
+│   ├── app.py                     # API router
+│   ├── ai_engine.py               # Core AI engine
 │   ├── rag_engine.py              # TF-IDF + Gemini GenAI RAG engine
-│   ├── knowledge_base.py          # 163 canonical FAQs + app domain knowledge
+│   ├── knowledge_base.py          # FAQs and application knowledge
 │   ├── requirements.txt           # Python dependencies
-│   ├── .env                       # Local environment secrets (ignored by Git)
-│   └── .env.example               # Template environment configuration
+│   ├── .env                       # Local environment secrets (do not commit)
+│   └── .env.example               # Environment configuration template
 │
-├── frontend/                      # Primary GoLo Ai v2 Web Application
-│   ├── index.html                 # Main Single-Page Application (SPA)
-│   ├── style.css                  # Light/Dark responsive styles & animations
-│   ├── script.js                  # Frontend controller (chat, voice, image, autocomplete)
-│   ├── bundled.html               # Self-contained single-file bundle distribution
-│   └── [assets]                   # Logos, card icons, and preview assets
+├── frontend/                      # Main GoLo AI web application
+│   ├── index.html                 # Main single-page application
+│   ├── style.css                  # Responsive styles and animations
+│   ├── script.js                  # Chat, voice, image and autocomplete
+│   ├── bundled.html               # Single-file frontend bundle
+│   └── [assets]                   # Logos, icons and preview assets
 │
-├── legacy-v1-robot/               # Alternative animated character interface (v1)
-│   ├── index.html                 # Robot theme standalone web interface
-│   └── [robot assets]             # 3D robot frames and state sprites
+├── legacy-v1-robot/               # Alternative animated robot interface
+│   ├── index.html
+│   └── [robot assets]
 │
-├── docs/                          # All project specifications, PDFs, and FAQs
-│   ├── AI_Assistant_Full_Specification_Report.pdf
-│   ├── AI_Assistant_Full_Specification_Report.txt
-│   ├── Golo_AI_Assistant_Features_Specification.pdf
-│   ├── Merchant_AI_Growth_Intelligence_Guide.pdf
-│   └── GOLO_FAQ_DOCUMENTATION.md
-│
-├── tests/                         # Comprehensive test suite
-│   ├── test_all_endpoints.py      # E2E test for all 14+ backend endpoints
-│   ├── test_rag.py                # Standalone RAG retrieval benchmark
-│   └── test_suggest_live.py       # Real-time autocomplete latency test
-│
-├── scripts/                       # Build & distribution utilities
-│   └── sync_bundle.py             # Compiles frontend into bundled.html
-│
-├── .gitignore                     # Git ignore rules for secrets, caches, and logs
-├── run.py                         # Single-command launcher for dev environment
+├── docs/                          # Project specifications and FAQs
+├── tests/                         # Automated tests
+├── scripts/                       # Build and distribution utilities
+│   └── sync_bundle.py
+├── .gitignore                     # Ignore rules for secrets and caches
+├── run.py                         # Development launcher
 └── README.md                      # Project documentation
 ```
 
@@ -54,10 +43,15 @@ golo/
 ## 🚀 Quick Start
 
 ### 1. Prerequisites
+
 - Python 3.10 or higher
 - pip
+- A Gemini API key if required by your configuration
 
 ### 2. Install Dependencies
+
+Open a terminal in the project root:
+
 ```bash
 cd backend
 pip install -r requirements.txt
@@ -65,108 +59,148 @@ pip install numpy scikit-learn google-genai
 cd ..
 ```
 
-### 3. Configure Environment
-```bash
-# Copy the example environment template
-cp backend/.env.example backend/.env
+### 3. Configure Environment Variables
 
-# Add your Gemini API key in backend/.env if not already present
+Create `backend/.env` using `backend/.env.example` as a template.
+
+On Windows Command Prompt:
+
+```cmd
+copy backend\.env.example backend\.env
 ```
 
-### 4. Run Everything with One Command
+Configure the required API keys and environment variables in `backend/.env`. Keep this file private and do not commit secrets to GitLab.
+
+### 4. Run the Application
+
+From the project root, run:
+
 ```bash
 python run.py
 ```
 
-Or run services individually:
+Alternatively, start the backend and frontend separately.
+
+**Backend — Terminal 1**
+
 ```bash
-# Terminal 1 — Backend (Port 8000)
 cd backend
 python -m uvicorn app:app --host 127.0.0.1 --port 8000
+```
 
-# Terminal 2 — Frontend (Port 3000)
+**Frontend — Terminal 2**
+
+```bash
 python -m http.server 3000 --directory frontend
 ```
 
-### 5. Open in Browser
-| Service | Link | Description |
+### 5. Open in Your Browser
+
+| Service | URL | Description |
 |---|---|---|
-| **Main App (GoLo Ai v2)** | http://localhost:3000 | Primary modern search & chat assistant |
-| **API Documentation** | http://localhost:8000/docs | Swagger UI for testing all API endpoints |
-| **Backend Health** | http://localhost:8000/health | Real-time service and knowledge status |
-| **Robot UI (v1)** | http://localhost:3001 | Alternative animated robot interface |
+| Main application | http://localhost:3000 | GoLo AI web interface |
+| API documentation | http://localhost:8000/docs | Swagger API documentation |
+| Backend health | http://localhost:8000/health | Service health information |
+| Robot UI (v1) | http://localhost:3001 | Alternative robot interface, if separately configured |
 
 ---
 
-## 📤 Pushing to GitLab
+## ✨ Features and Capabilities
 
-This repository is pre-configured with a `.gitignore` that safely excludes sensitive `.env` files, bytecode caches, and logs.
+- **Dual-Path RAG Engine:** Local TF-IDF retrieval combined with generative AI responses.
+- **Intent Classification:** Routes platform-related questions and handles out-of-scope queries.
+- **Real-Time Autocomplete:** Predicts merchant queries while users type.
+- **Multi-Turn Chat:** Provides a conversational interface with chat navigation.
+- **Chat Session Retention:** Supports chat history retention and cleanup.
+- **Multimodal Image Analysis:** Supports image analysis through `/multimodal/analyze`.
+- **Voice Input:** Includes speech-to-text functionality.
+- **Multilingual Support:** Provides responses in supported user-selected languages.
+- **Rate Limiting and Usage Tracking:** Supports merchant usage and quota tracking.
+- **Customer Support Escalation:** Supports escalation to customer service.
 
-```bash
-# Initialize git repository (if not already done)
-git init
-
-# Add all project files
-git add .
-
-# Create initial commit
-git commit -m "feat: complete GoLo AI Assistant with clean GitLab architecture"
-
-# Link to your GitLab remote repository
-git remote add origin https://gitlab.com/your-username/golo-ai-assistant.git
-
-# Push to main branch
-git branch -M main
-git push -u origin main
-```
+The exact behavior and availability of these features depend on the current implementation and configuration.
 
 ---
 
-## ✨ Features & Capabilities
-
-- **Dual-Path RAG Engine:** Fast local TF-IDF (163 FAQs) + Google Gemini 2.0 / 3.8 Flash generative synthesis.
-- **In-Scope Intent Classifier:** Accurately routes platform queries and refuses out-of-scope inquiries (*"It is not our app related question. Please try again."*).
-- **Google-Style Autocomplete:** Live query predictions generated as merchants type in the search bar.
-- **ChatGPT-Style Navigation:** Seamless transition from landing search capsule to active multi-turn chat.
-- **7-Day Chat Session Retention:** Automatic cleanup of chat history older than 7 calendar days.
-- **Multimodal Visual Analysis:** Direct image upload analysis (`/multimodal/analyze`) for receipts and products.
-- **Voice Speech-to-Text:** Integrated mic toggle with push-to-transcribe capabilities.
-- **100+ Global Languages:** Language selector delivering answers in the merchant's chosen language.
-- **Rate Limit & Tier Tracking:** 20 RPM / 200 RPD merchant quota tracking with upgrade workflows.
-- **Customer Service Escalation:** Direct helpline contact and one-click L2 support ticket creation.
-
----
-
-## 🔌 API Endpoints Summary
+## 🔌 API Endpoints
 
 | Method | Route | Description |
 |---|---|---|
-| `GET` | `/` | API status and root info |
-| `GET` | `/health` | System health, FAQ count, and categories |
-| `POST` | `/chat` | Main conversational reasoning endpoint |
-| `GET` | `/suggest?q=&limit=4` | Typeahead autocomplete suggestions |
-| `GET` | `/faqs` | All 163 canonical FAQs |
-| `GET` | `/faqs/popular` | Most frequently asked merchant questions |
-| `GET` | `/faqs/{category}` | Category-filtered FAQs |
-| `GET` | `/search?query=&top_k=` | TF-IDF semantic vector search |
-| `POST` | `/ratings` | Post-conversation star rating (1–5) |
-| `POST` | `/escalate` | Create customer support escalation ticket |
-| `POST` | `/multimodal/analyze` | Vision analysis on base64 image data |
-| `GET` | `/merchant/{id}/usage` | Live RPM and quota consumption |
-| `GET` | `/analytics/metrics` | System analytics and resolution rates |
-| `GET` | `/languages` | 100+ supported international languages |
+| `GET` | `/` | API status and root information |
+| `GET` | `/health` | System health and knowledge status |
+| `POST` | `/chat` | Conversational assistant |
+| `GET` | `/suggest?q=&limit=4` | Autocomplete suggestions |
+| `GET` | `/faqs` | Frequently asked questions |
+| `GET` | `/faqs/popular` | Popular merchant questions |
+| `GET` | `/faqs/{category}` | Category-specific FAQs |
+| `GET` | `/search?query=&top_k=` | Knowledge retrieval |
+| `POST` | `/ratings` | Conversation ratings |
+| `POST` | `/escalate` | Customer support escalation |
+| `POST` | `/multimodal/analyze` | Image analysis |
+| `GET` | `/merchant/{id}/usage` | Merchant usage information |
+| `GET` | `/analytics/metrics` | System analytics |
+| `GET` | `/languages` | Supported language information |
+
+For the current request parameters, response formats and endpoint behavior, refer to the running API documentation at `http://localhost:8000/docs`.
 
 ---
 
 ## 🗄️ Database Options
 
-The `.env` file supports plug-and-play database backends:
-- **`FAQ_SOURCE=memory`** (Default): High-speed in-memory database of 163 canonical FAQs.
-- **`FAQ_SOURCE=database`**: Switch to PostgreSQL, MySQL, SQLite, or MongoDB by populating `DATABASE_URL` in `backend/.env`.
+FAQ storage can be configured through environment variables in `backend/.env`.
+
+- **`FAQ_SOURCE=memory`** — Uses in-memory FAQ data when supported by the application configuration.
+- **`FAQ_SOURCE=database`** — Selects database-backed FAQ storage when implemented and configured.
+
+Set `DATABASE_URL` and any other required settings according to the project's actual database implementation. Supported database engines depend on the installed dependencies and application code.
 
 ---
 
-## 📄 License & Confidentiality
+## 🧪 Testing
 
-**© 2026 GoLo Ai Inc. / NexaPrime. All rights reserved.**  
-Proprietary software for the GoLo hyper-local discovery and retail savings ecosystem.
+The repository includes tests for API endpoints, RAG retrieval and live suggestions.
+
+Relevant files include:
+
+- `tests/test_all_endpoints.py`
+- `tests/test_rag.py`
+- `tests/test_suggest_live.py`
+
+Run tests according to the project's Python test configuration and ensure any required services and API credentials are configured.
+
+---
+
+## 🔐 Security
+
+- Keep `.env` files, API keys, passwords and tokens out of version control.
+- Use `.env.example` to document the required configuration variables.
+- Review `.gitignore` before pushing project files.
+- Never commit production credentials or private user data.
+
+---
+
+## 📤 GitLab Repository
+
+This project is maintained in GitLab:
+
+https://gitlab.com/nexaprime-group3/chat-bot-aaju-baju
+
+To upload future changes, use:
+
+```bash
+git add .
+git commit -m "Update GoLo AI Assistant"
+git push origin main
+```
+
+Ensure sensitive files are excluded before running `git add .`.
+
+---
+
+## 📄 License and Confidentiality
+
+**© 2026 GoLo AI / NexaPrime. All rights reserved.**
+
+Proprietary software for the GoLo merchant, hyper-local discovery and retail ecosystem.
+
+Do not redistribute or publish this software without the appropriate authorization.
