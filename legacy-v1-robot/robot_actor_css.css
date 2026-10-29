@@ -1,0 +1,83 @@
+.robot-actor-box {{
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }}
+
+        /* Robot Avatar Capsule Frame */
+        .robot-avatar-capsule {{
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 2px solid var(--golo-blue);
+            box-shadow: 0 0 12px var(--robot-aura-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }}
+
+        .robot-avatar-img {{
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 20%;
+            transition: transform 0.25s ease;
+        }}
+
+        /* Head Aura & Antenna Pulse */
+        .robot-antenna-aura {{
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: var(--golo-cyan);
+            box-shadow: 0 0 8px var(--golo-cyan);
+            pointer-events: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }}
+
+        /* Reaction Badge (Emoji reaction on robot's shoulder) */
+        .robot-reaction-icon {{
+            position: absolute;
+            bottom: -3px;
+            right: -5px;
+            font-size: 0.85rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-ui);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }}
+
+        /* Robot Status & Name Cluster */
+        .robot-actor-text {{
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }}
+        .robot-actor-name {{
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }}
+        .robot-actor-status {{
+            font-f

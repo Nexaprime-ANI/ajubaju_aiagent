@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golo AI — Intelligent Merchant & Retail Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+        /* ==========================================================================
+           COLOR TOKENS & SYSTEM VARIABLES
+           Default Theme: LIGHT MODE
+           Alternate Theme: DARK MODE
+           ========================================================================== */
+        :root {
+            --font-display: 'Orbitron', -apple-system, sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Brand Colors */
+            --golo-blue: #2563EB;
+            --golo-blue-dark: #1D4ED8;
+            --golo-yellow: #F5B849;
+            --golo-cyan: #06B6D4;
+            --golo-green: #10B981;
+            --golo-red: #EF4444;
+
+            /* Light Mode Variables (DEFAULT) */
+            --bg-page: #F8FAFC;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --bg-surface: #FFFFFF;
+            --bg-surface-trans: rgba(255, 255, 255, 0.94);
+            --bg-card: #F1F5F9;
+            --bg-card-hover: #E2E8F0;
+            --text-main: #0F172A;
+            --text-sub: #334155;
+            --text-muted: #64748B;
+            --border-ui: #CBD5E1;
+            --border-highlight: #93C5FD;
+            --shadow-float: 0 10px 30px rgba(37, 99, 235, 0.16);
+            --robot-aura: drop-shadow(0 4px 12px rgba(37, 99, 235, 0.25));
+        }
+
+        [data-theme="dark"] {
+            /* Dark Mode Variables */
+            --bg-page: #060A14;
+            --bg-nav: rgba(11, 19, 43, 0.95);
+            --bg-surface: #0B132B;
+            --bg-surface-trans: rgba(11, 19, 43, 0.94);
+            --bg-card: #111E3D;
+            --bg-card-hover: #1A2B52;
+            --text-main: #F8FAFC;
+            --text-sub: #CBD5E1;
+            --text-muted: #94A3B8;
+            --border-ui: #1E293B;
+            --border-highlight: #0284C7;
+            --shadow-float: 0 10px 35px rgba(6, 182, 212, 0.35);
+            --robot-aura: drop-shadow(0 0 14px rgba(6, 182, 212, 0.5));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-page);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ==========================================================================
+           TOP NAVIGATION BAR (OPTION 1 TO LAUNCH AI ASSISTANT)
+           ========================================================================== */
+        .main-navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 68px;
+            background: var(--bg-nav);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-ui);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 100;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .brand-cluster {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo-img {
+            height: 42px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .brand-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            background: rgba(37, 99, 235, 0.12);
+            color: var(--golo-blue);
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(37, 99, 235, 0.25);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn-theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-ui);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+        .btn-theme-toggle:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--golo-blue);
+            transform: scale(1.05);
+        }
+
+        /* Option 1: Top Navbar Launch Button */
+        .btn-launch-header {
+            background: linear-gradient(135deg, var(--golo-blue), var(--golo-blue-dark));
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-family: var(--font-sub);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-launch-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        /* ==========================================================================
+           INTRODUCTION PAGE (CLEAN BACKGROUND HERO - NO SHADING, NO TEXT, NO SEARCH BAR)
+           Displays the full artwork as it is, filling the screen with 100% clarity.
+           ========================================================================== */
+        .intro-hero-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 68px);
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-page);
+        }
+
+        /* User's Exact Uploaded Artwork - Full Page as it is */
+        .intro-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+            /* Zero shading, zero darkening - completely natural and clean */
+            filter: none;
+            transition: filter 0.3s ease;
+        }
+        [data-theme="dark"] .intro-bg-image {
+            filter: brightness(0.92) contrast(1.02);
+        }
+
+        /* ==========================================================================
+           OPTION 2: FLOATING LAUNCHER ICON AT BOTTOM RIGHT
+           ========================================================================== */
+        .chat-floating-button {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--golo-blue), #1D4ED8);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: floatGlow 3s ease-in-out infinite;
+        }
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45); }
+            50% { transform: translateY(-5px); box-shadow: 0 14px 34px rgba(37, 99, 235, 0.65); }
+        }
+        .chat-floating-button:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 16px 38px rgba(37, 99, 235, 0.7);
+        }
+        .floating-robot-icon {
+            width: 48px;
+            height: 48px;
+            pointer-events: none;
+        }
+
+        .minibar-dock {
+            position: fixed;
+            bottom: 26px;
+            right: 108px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-ui);
+            padding: 10px 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            z-index: 9997;
+            transition: background 0.3s;
+        }
+        .minibar-dock.visible {
+            display: flex;
+        }
+
+        /* ==========================================================================
+           ANIMATED ROBOT MASCOT (SVG + CSS KEYFRAMES)
+           5 Dynamic States: Idle, Typing, Processing, Happy, Error
+           ========================================================================== */
+        .golo-robot-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            filter: var(--robot-aura);
+        }
+
+        .golo-robot-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Eye & Accessory Initial Opacity */
+        .eyes-happy, .eyes-error, .neural-halo, .robot-keyboard, .celebration-sparkles {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+        .eyes-normal {
+            opacity: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        /* --- 1. IDLE STATE --- */
+        .state-idle .robot-head-assembly {
+            animation: robotIdleBob 3.6s ease-in-out infinite;
+        }
+        .state-idle .eyes-normal {
+            animation: eyeBlink 4.2s infinite;
+        }
+        .state-idle .antenna-wave {
+            opacity: 0;
+        }
+
+        @keyframes robotIdleBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2.5px); }
+        }
+        @keyframes eyeBlink {
+            0%, 93%, 100% { transform: scaleY(1); }
+            96% { transform: scaleY(0.1); }
+        }
+
+        /* --- 2. TYPING STATE (WHEN USER TYPES IN SEARCH BOX) --- */
+        .state-typing .robot-keyboard {
+            opacity: 1;
+        }
+        .state-typing .robot-head-assembly {
+            animation: robotTypingHead 0.28s ease-in-out infinite alternate;
+        }
+        .state-typing .arm-assembly-left {
+            animation: typeArmLeft 0.18s ease-in-out infinite alternate;
+            transform-origin: 29px 64px;
+        }
+        .state-typing .arm-assembly-right {
+            animation: typeArmRight 0.18s ease-in-out infinite alternate 0.09s;
+            transform-origin: 71px 64px;
+        }
+        .state-typing .keyboard-keys-glow {
+            animation: keyboardGlow 0.4s infinite alternate;
+        }
+
+        @keyframes robotTypingHead {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(1.5px) rotate(1deg); }
+        }
+        @keyframes typeArmLeft {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-5px) rotate(-10deg); }
+        }
+        @keyframes typeArmRight {
+            0% { transform: translateY(-5px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes keyboardGlow {
+            0% { stroke: #38BDF8; filter: drop-shadow(0 0 2px #06B6D4); }
+            100% { stroke: #F5B849; filter: drop-shadow(0 0 6px #F5B849); }
+        }
+
+        /* --- 3. PROCESSING / THINKING STATE --- */
+        .state-processing .neural-halo {
+            opacity: 1;
+        }
+        .state-processing .halo-ring {
+            animation: haloOrbitSpin 1.4s linear infinite;
+            transform-origin: 50px 7px;
+        }
+        .state-processing .robot-head-assembly {
+            animation: headThinkingTilt 2s ease-in-out infinite alternate;
+            transform-origin: 50px 50px;
+        }
+        .state-processing .antenna-wave.wave-1 {
+            animation: antennaPulseWave 1.2s infinite;
+        }
+        .state-processing .antenna-wave.wave-2 {
+            animation: antennaPulseWave 1.2s infinite 0.4s;
+        }
+        .state-processing .eye-shape {
+            animation: eyeScanner 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes haloOrbitSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes headThinkingTilt {
+            0% { transform: rotate(-3deg) translateY(-1px); }
+            100% { transform: rotate(3deg) translateY(-2px); }
+        }
+        @keyframes antennaPulseWave {
+            0% { r: 5px; opacity: 1; stroke: #00D2FF; }
+            100% { r: 18px; opacity: 0; stroke: #F5B849; }
+        }
+        @keyframes eyeScanner {
+            0% { transform: translateX(-2px); fill: #38BDF8; }
+            100% { transform: translateX(2px); fill: #F5B849; }
+        }
+
+        /* --- 4. HAPPY / SUCCESS CELEBRATION STATE --- */
+        .state-happy .eyes-normal { opacity: 0; }
+        .state-happy .eyes-happy { opacity: 1; }
+        .state-happy .celebration-sparkles {
+            opacity: 1;
+            animation: sparklesFade 2.5s forwards;
+        }
+        .state-happy .golo-robot-svg {
+            animation: happyCelebrationJump 1.8s ease-in-out infinite;
+        }
+
+        @keyframes happyCelebrationJump {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-8px) scale(1.04); }
+            50% { transform: translateY(0) scale(1); }
+            75% { transform: translateY(-5px) scale(1.02); }
+        }
+        @keyframes sparklesFade {
+            0% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 1; transform: scale(1.2); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        /* --- 5. ERROR / OUT-OF-SCOPE STATE (NO-NO HEAD SHAKE) --- */
+        .state-error .eyes-normal { opacity: 0; }
+        .state-error .eyes-error { opacity: 1; }
+        .state-error .robot-head-assembly {
+            animation: headShakeNo 0.45s ease-in-out infinite alternate;
+            transform-origin: 50px 50px;
+        }
+        .state-error .antenna-core {
+            animation: redAlertPulse 0.5s infinite alternate;
+        }
+
+        @keyframes headShakeNo {
+            0% { transform: rotate(-7deg); }
+            100% { transform: rotate(7deg); }
+        }
+        @keyframes redAlertPulse {
+            0% { fill: #EF4444; filter: drop-shadow(0 0 2px #EF4444); }
+            100% { fill: #F5B849; filter: drop-shadow(0 0 8px #EF4444); }
+        }
+
+        /* ==========================================================================
+           AI MODEL WINDOW (SEARCH / CHAT WINDOW WITH UPPER-LEFT ROBOT)
+           Full Visibility within Screen Bounds + Prominent Back Button
+           ========================================================================== */
+        .chat-drawer {
+            position: fixed;
+            bottom: 30px;
+            right: 24px;
+            width: min(450px, calc(100vw - 32px));
+            height: min(600px, calc(100vh - 100px));
+            max-height: calc(100vh - 85px);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-ui);
+            border-radius: 20px;
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            z-index: 9998;
+            transform-origin: bottom right;
+            transform: scale(0.7) translateY(40px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s, width 0.3s, height 0.3s;
+            overflow: hidden;
+        }
+        .chat-drawer.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Maximized Mode */
+        .chat-drawer.maximized {
+            width: min(920px, calc(100vw - 40px));
+            height: min(720px, calc(100vh - 90px));
+            max-height: calc(100vh - 90px);
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* Header of AI Window with Upper-Left Robot Mascot & Back Button */
+        .chat-header {
+            background: linear-gradient(135deg, #1E3A8A, var(--golo-blue));
+            color: #ffffff;
+            padding: 0.75rem 1.15rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .header-left-cluster {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Back Button to close assistant and return to portal */
+        .btn-back-header {
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: var(--font-sub);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .btn-back-header:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-2px);
+        }
+
+        /* The Animated Golo Robot Mascot stationed at Upper Left of the Search Window */
+        .header-robot-mascot {
+            width: 46px;
+            height: 46px;
+            cursor: pointer;
+            flex-shrink: 0;
+            animation: robotFlyIn 0.35s ease-out;
+        }
+        @keyframes robotFlyIn {
+            from { transform: scale(0.6) translateX(-15px); opacity: 0; }
+            to { transform: scale(1) translateX(0); opacity: 1; }
+        }
+
+        .header-title-meta {
+            display: flex;
+            flex-direction: column;
+        }
+        .header-title-text {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .header-robot-state-badge {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #A5F3FC;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .state-pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--golo-green);
+            box-shadow: 0 0 6px var(--golo-green);
+        }
+
+        .header-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header-icon-btn {
+            background: rgba(255, 255, 255, 0.14);
+            border: none;
+            color: #ffffff;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: background 0.2s ease;
+        }
+        .header-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Message Stream Body */
+        .chat-body-stream {
+            flex: 1;
+            padding: 1rem 1.15rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: var(--bg-surface);
+        }
+
+        /* Custom Scrollbar */
+        .chat-body-stream::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-body-stream::-webkit-scrollbar-thumb {
+            background: var(--border-ui);
+            border-radius: 3px;
+        }
+
+        /* Welcome Card inside Assistant Window */
+        .welcome-robot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-ui);
+            border-radius: 16px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: cardFade 0.4s ease-out;
+        }
+        @keyframes cardFade {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .welcome-robot-figure {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 4px;
+        }
+        .welcome-robot-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .welcome-robot-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 320px;
+        }
+
+        /* Chips inside Assistant Drawer */
+        .drawer-chips-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.45rem;
+            margin-top: 0.4rem;
+        }
+        .drawer-chip {
+            background: var(--bg-surface-trans);
+            border: 1px solid var(--border-ui);
+            padding: 6px 13px;
+            border-radius: 999px;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+        .drawer-chip:hover {
+            border-color: var(--golo-blue);
+            color: var(--golo-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .message-row {
+            display: flex;
+            flex-direction: column;
+            max-width: 86%;
+            animation: msgFadeIn 0.25s ease-out;
+        }
+        @keyframes msgFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-row.user {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+        .message-row.ai {
+            align-self: flex-start;
+            align-items: flex-start;
+        }
+
+        .msg-bubble-box {
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .user .msg-bubble-box {
+            background: linear-gradient(135deg, var(--golo-blue), var(--golo-blue-dark));
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+        .ai .msg-bubble-box {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-ui);
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .ai-source-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--golo-blue);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        /* Input Toolbar with Microphone and Send */
+        .chat-input-toolbar {
+            padding: 0.85rem 1rem;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-ui);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .input-capsule {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-ui);
+            border-radius: 999px;
+            padding: 4px 6px 4px 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-capsule:focus-within {
+            border-color: var(--golo-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .query-input-field {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.92rem;
+            font-family: var(--font-body);
+            outline: none;
+            padding: 6px 0;
+        }
+
+        .btn-mic-record {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-right: 4px;
+        }
+        .btn-mic-record:hover {
+            background: var(--bg-card-hover);
+            color: var(--golo-blue);
+        }
+        .btn-mic-record.recording-active {
+            background: var(--golo-red);
+            color: #ffffff;
+            animation: pulseRecord 1.2s infinite;
+        }
+        @keyframes pulseRecord {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-send-query {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--golo-blue);
+            color: #ffffff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-send-query:hover {
+            background: var(--golo-blue-dark);
+            transform: scale(1.05);
+        }
+        .btn-send-query:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .voice-feedback-bar {
+            display: none;
+            padding: 6px 12px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid var(--golo-red);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--golo-red);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .chat-drawer {
+                width: 100vw;
+                height: 100vh;
+                max-height: 100vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            .main-navbar {
+                padding: 0 1rem;
+            }
+            .btn-launch-header span {
+                display: inline-block;
+                font-size: 0.88rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         TOP NAVIGATION BAR (OPTION 1 TO LAUNCH AI ASSISTANT)
+         ========================================================================== -->
+    <header class="main-navbar">
+        <a href="#" class="brand-cluster" title="Golo Merchant Portal">
+            <img src="logo.png" alt="Golo Logo" class="brand-logo-img" onerror="this.src='logo.jpg'">
+            <span class="brand-badge">RAG NLP Model v2.5</span>
+        </a>
+
+        <div class="nav-actions">
+            <!-- Theme Toggle: Default Light Mode -->
+            <button class="btn-theme-toggle" onclick="toggleTheme()" id="btnThemeToggle" title="Toggle Light/Dark Mode">🌙</button>
+
+            <!-- Option 1: Top Navbar Button to Open AI Assistant -->
+            <button class="btn-launch-header" onclick="openAssistantModal()" id="btnLaunchHeader" title="Open Golo AI Assistant">
+                <span>💬 Launch AI Assistant</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         INTRODUCTION PAGE: CLEAN BACKGROUND HERO
+         Full page image as it is. ZERO shading, ZERO text, ZERO search bars.
+         ========================================================================== -->
+    <main class="intro-hero-container">
+        <!-- User's Exact Uploaded Artwork Unobstructed -->
+        <img src="golo_merchant_hero.jpg" alt="Golo Merchant AI" class="intro-bg-image">
+    </main>
+
+    <!-- ==========================================================================
+         OPTION 2: FLOATING LAUNCHER ICON AT BOTTOM RIGHT
+         ========================================================================== -->
+    <button class="chat-floating-button" id="chatLauncherBtn" onclick="toggleAssistantModal()" title="Ask Golo AI Assistant">
+        <div class="floating-robot-icon golo-robot-container state-idle" id="floatRobot">
+            <svg viewBox="0 0 100 100" class="golo-robot-svg">
+    <!-- Processing Neural Halo (Appears when processing) -->
+    <g class="neural-halo">
+        <ellipse cx="50" cy="7" rx="18" ry="5.5" fill="none" stroke="#F5B849" stroke-width="2.2" stroke-dasharray="5,3" class="halo-ring"/>
+        <circle cx="32" cy="7" r="2.5" fill="#06B6D4" class="halo-dot"/>
+        <circle cx="68" cy="7" r="2.5" fill="#38BDF8" class="halo-dot"/>
+    </g>
+
+    <!-- Antenna -->
+    <g class="robot-antenna">
+        <line x1="50" y1="18" x2="50" y2="9" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="50" cy="8" r="5" fill="#2563EB" class="antenna-core"/>
+        <!-- Radio broadcast rings -->
+        <circle cx="50" cy="8" r="8" fill="none" stroke="#00D2FF" stroke-width="1.8" class="antenna-wave wave-1"/>
+        <circle cx="50" cy="8" r="13" fill="none" stroke="#38BDF8" stroke-width="1.4" class="antenna-wave wave-2"/>
+    </g>
+
+    <!-- Robot Head & Ears Group -->
+    <g class="robot-head-assembly">
+        <!-- Earcups -->
+        <g class="ear-left">
+            <circle cx="15" cy="35" r="7.5" fill="#1D4ED8" stroke="#2563EB" stroke-width="1.5"/>
+            <circle cx="15" cy="35" r="4.5" fill="#06B6D4" class="ear-inner-glow"/>
+        </g>
+        <g class="ear-right">
+            <circle cx="85" cy="35" r="7.5" fill="#1D4ED8" stroke="#2563EB" stroke-width="1.5"/>
+            <circle cx="85" cy="35" r="4.5" fill="#06B6D4" class="ear-inner-glow"/>
+        </g>
+
+        <!-- Outer Head Chassis -->
+        <rect x="18" y="16" width="64" height="42" rx="21" fill="url(#robotWhiteGrad)" stroke="#CBD5E1" stroke-width="1.8"/>
+        <!-- Head Highlight -->
+        <ellipse cx="50" cy="20" rx="22" ry="3" fill="rgba(255,255,255,0.7)"/>
+
+        <!-- Glossy Visor Screen -->
+        <rect x="23" y="22" width="54" height="30" rx="15" fill="#060C1E" stroke="#1E3A8A" stroke-width="1.5" class="robot-visor"/>
+        <path d="M 27 25 Q 50 23 73 26" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Eyes: Normal State -->
+        <g class="eyes-layer eyes-normal">
+            <rect x="32" y="29" width="13" height="14" rx="6.5" fill="#00D2FF" class="eye-shape"/>
+            <circle cx="36" cy="33" r="2.2" fill="#ffffff"/>
+            <rect x="55" y="29" width="13" height="14" rx="6.5" fill="#00D2FF" class="eye-shape"/>
+            <circle cx="59" cy="33" r="2.2" fill="#ffffff"/>
+        </g>
+
+        <!-- Eyes: Happy State (^ ^) -->
+        <g class="eyes-layer eyes-happy">
+            <path d="M 31 38 Q 38.5 25 46 38" fill="none" stroke="#00E5FF" stroke-width="3.8" stroke-linecap="round" class="eye-glow"/>
+            <path d="M 54 38 Q 61.5 25 69 38" fill="none" stroke="#00E5FF" stroke-width="3.8" stroke-linecap="round" class="eye-glow"/>
+        </g>
+
+        <!-- Eyes: Error State (X X / Puzzled) -->
+        <g class="eyes-layer eyes-error">
+            <line x1="33" y1="31" x2="43" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="43" y1="31" x2="33" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="57" y1="31" x2="67" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="67" y1="31" x2="57" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+        </g>
+    </g>
+
+    <!-- Neck Joint -->
+    <rect x="44" y="56" width="12" height="4" rx="2" fill="#1E3A8A"/>
+
+    <!-- Torso -->
+    <g class="robot-body">
+        <rect x="29" y="59" width="42" height="27" rx="13" fill="url(#robotWhiteGrad)" stroke="#CBD5E1" stroke-width="1.8"/>
+        <!-- Golo Brand on Chest -->
+        <text x="50" y="73" font-family="'Inter', sans-serif" font-size="8.5" font-weight="900" fill="#2563EB" text-anchor="middle">golo</text>
+        <path d="M 47 76 Q 51.5 80 56 76" fill="none" stroke="#F5B849" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- Holographic Mini Keyboard (Appears when user types) -->
+    <g class="robot-keyboard">
+        <rect x="22" y="87" width="56" height="9" rx="3.5" fill="#0F172A" stroke="#06B6D4" stroke-width="1.2"/>
+        <line x1="26" y1="91.5" x2="74" y2="91.5" stroke="#38BDF8" stroke-width="2.2" stroke-dasharray="3,2.5" class="keyboard-keys-glow"/>
+    </g>
+
+    <!-- Articulated Arms & Typing Hands -->
+    <g class="arm-assembly-left">
+        <path d="M 29 64 Q 18 73 24 85" fill="none" stroke="#2563EB" stroke-width="4.8" stroke-linecap="round"/>
+        <circle cx="24" cy="85" r="4.2" fill="#ffffff" stroke="#2563EB" stroke-width="1.8" class="hand-dot"/>
+    </g>
+    <g class="arm-assembly-right">
+        <path d="M 71 64 Q 82 73 76 85" fill="none" stroke="#2563EB" stroke-width="4.8" stroke-linecap="round"/>
+        <circle cx="76" cy="85" r="4.2" fill="#ffffff" stroke="#2563EB" stroke-width="1.8" class="hand-dot"/>
+    </g>
+
+    <!-- Celebration Sparkles (Active on Happy Output) -->
+    <g class="celebration-sparkles">
+        <polygon points="12,18 14,23 19,25 14,27 12,32 10,27 5,25 10,23" fill="#F5B849" class="sparkle-1"/>
+        <polygon points="88,20 90,24 94,26 90,28 88,32 86,28 82,26 86,24" fill="#00D2FF" class="sparkle-2"/>
+        <circle cx="20" cy="10" r="2.5" fill="#10B981" class="sparkle-3"/>
+        <circle cx="80" cy="12" r="2.5" fill="#F5B849" class="sparkle-4"/>
+    </g>
+
+    <defs>
+        <linearGradient id="robotWhiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#E2E8F0"/>
+        </linearGradient>
+    </defs>
+</svg>
+        </div>
+    </button>
+
+    <!-- Minimized Dock -->
+    <div class="minibar-dock" id="minibarDock" onclick="openAssistantModal()">
+        <span style="width:8px; height:8px; border-radius:50%; background:var(--golo-green);"></span>
+        <span style="font-weight:700; font-size:0.88rem;">Golo Robot Active</span>
+        <span style="font-size:0.78rem; color:var(--text-muted);">(Click to restore)</span>
+    </div>
+
+    <!-- ==========================================================================
+         AI ASSISTANT WINDOW: WITH UPPER-LEFT ANIMATED ROBOT MASCOT
+         ========================================================================== -->
+    <div class="chat-drawer" id="chatAssistantDrawer">
+        <!-- Header with Back Button and Upper-Left Animated Robot Mascot -->
+        <div class="chat-header">
+            <div class="header-left-cluster">
+                <!-- Back Button -->
+                <button class="btn-back-header" onclick="closeAssistantModal()" title="Back to Portal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back</span>
+                </button>
+
+                <!-- ANIMATED ROBOT MASCOT AT THE UPPER LEFT SIDE -->
+                <div class="header-robot-mascot golo-robot-container state-idle" id="headerRobot" title="Golo AI Mascot">
+                    <svg viewBox="0 0 100 100" class="golo-robot-svg">
+    <!-- Processing Neural Halo (Appears when processing) -->
+    <g class="neural-halo">
+        <ellipse cx="50" cy="7" rx="18" ry="5.5" fill="none" stroke="#F5B849" stroke-width="2.2" stroke-dasharray="5,3" class="halo-ring"/>
+        <circle cx="32" cy="7" r="2.5" fill="#06B6D4" class="halo-dot"/>
+        <circle cx="68" cy="7" r="2.5" fill="#38BDF8" class="halo-dot"/>
+    </g>
+
+    <!-- Antenna -->
+    <g class="robot-antenna">
+        <line x1="50" y1="18" x2="50" y2="9" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="50" cy="8" r="5" fill="#2563EB" class="antenna-core"/>
+        <!-- Radio broadcast rings -->
+        <circle cx="50" cy="8" r="8" fill="none" stroke="#00D2FF" stroke-width="1.8" class="antenna-wave wave-1"/>
+        <circle cx="50" cy="8" r="13" fill="none" stroke="#38BDF8" stroke-width="1.4" class="antenna-wave wave-2"/>
+    </g>
+
+    <!-- Robot Head & Ears Group -->
+    <g class="robot-head-assembly">
+        <!-- Earcups -->
+        <g class="ear-left">
+            <circle cx="15" cy="35" r="7.5" fill="#1D4ED8" stroke="#2563EB" stroke-width="1.5"/>
+            <circle cx="15" cy="35" r="4.5" fill="#06B6D4" class="ear-inner-glow"/>
+        </g>
+        <g class="ear-right">
+            <circle cx="85" cy="35" r="7.5" fill="#1D4ED8" stroke="#2563EB" stroke-width="1.5"/>
+            <circle cx="85" cy="35" r="4.5" fill="#06B6D4" class="ear-inner-glow"/>
+        </g>
+
+        <!-- Outer Head Chassis -->
+        <rect x="18" y="16" width="64" height="42" rx="21" fill="url(#robotWhiteGrad)" stroke="#CBD5E1" stroke-width="1.8"/>
+        <!-- Head Highlight -->
+        <ellipse cx="50" cy="20" rx="22" ry="3" fill="rgba(255,255,255,0.7)"/>
+
+        <!-- Glossy Visor Screen -->
+        <rect x="23" y="22" width="54" height="30" rx="15" fill="#060C1E" stroke="#1E3A8A" stroke-width="1.5" class="robot-visor"/>
+        <path d="M 27 25 Q 50 23 73 26" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Eyes: Normal State -->
+        <g class="eyes-layer eyes-normal">
+            <rect x="32" y="29" width="13" height="14" rx="6.5" fill="#00D2FF" class="eye-shape"/>
+            <circle cx="36" cy="33" r="2.2" fill="#ffffff"/>
+            <rect x="55" y="29" width="13" height="14" rx="6.5" fill="#00D2FF" class="eye-shape"/>
+            <circle cx="59" cy="33" r="2.2" fill="#ffffff"/>
+        </g>
+
+        <!-- Eyes: Happy State (^ ^) -->
+        <g class="eyes-layer eyes-happy">
+            <path d="M 31 38 Q 38.5 25 46 38" fill="none" stroke="#00E5FF" stroke-width="3.8" stroke-linecap="round" class="eye-glow"/>
+            <path d="M 54 38 Q 61.5 25 69 38" fill="none" stroke="#00E5FF" stroke-width="3.8" stroke-linecap="round" class="eye-glow"/>
+        </g>
+
+        <!-- Eyes: Error State (X X / Puzzled) -->
+        <g class="eyes-layer eyes-error">
+            <line x1="33" y1="31" x2="43" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="43" y1="31" x2="33" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="57" y1="31" x2="67" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="67" y1="31" x2="57" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+        </g>
+    </g>
+
+    <!-- Neck Joint -->
+    <rect x="44" y="56" width="12" height="4" rx="2" fill="#1E3A8A"/>
+
+    <!-- Torso -->
+    <g class="robot-body">
+        <rect x="29" y="59" width="42" height="27" rx="13" fill="url(#robotWhiteGrad)" stroke="#CBD5E1" stroke-width="1.8"/>
+        <!-- Golo Brand on Chest -->
+        <text x="50" y="73" font-family="'Inter', sans-serif" font-size="8.5" font-weight="900" fill="#2563EB" text-anchor="middle">golo</text>
+        <path d="M 47 76 Q 51.5 80 56 76" fill="none" stroke="#F5B849" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- Holographic Mini Keyboard (Appears when user types) -->
+    <g class="robot-keyboard">
+        <rect x="22" y="87" width="56" height="9" rx="3.5" fill="#0F172A" stroke="#06B6D4" stroke-width="1.2"/>
+        <line x1="26" y1="91.5" x2="74" y2="91.5" stroke="#38BDF8" stroke-width="2.2" stroke-dasharray="3,2.5" class="keyboard-keys-glow"/>
+    </g>
+
+    <!-- Articulated Arms & Typing Hands -->
+    <g class="arm-assembly-left">
+        <path d="M 29 64 Q 18 73 24 85" fill="none" stroke="#2563EB" stroke-width="4.8" stroke-linecap="round"/>
+        <circle cx="24" cy="85" r="4.2" fill="#ffffff" stroke="#2563EB" stroke-width="1.8" class="hand-dot"/>
+    </g>
+    <g class="arm-assembly-right">
+        <path d="M 71 64 Q 82 73 76 85" fill="none" stroke="#2563EB" stroke-width="4.8" stroke-linecap="round"/>
+        <circle cx="76" cy="85" r="4.2" fill="#ffffff" stroke="#2563EB" stroke-width="1.8" class="hand-dot"/>
+    </g>
+
+    <!-- Celebration Sparkles (Active on Happy Output) -->
+    <g class="celebration-sparkles">
+        <polygon points="12,18 14,23 19,25 14,27 12,32 10,27 5,25 10,23" fill="#F5B849" class="sparkle-1"/>
+        <polygon points="88,20 90,24 94,26 90,28 88,32 86,28 82,26 86,24" fill="#00D2FF" class="sparkle-2"/>
+        <circle cx="20" cy="10" r="2.5" fill="#10B981" class="sparkle-3"/>
+        <circle cx="80" cy="12" r="2.5" fill="#F5B849" class="sparkle-4"/>
+    </g>
+
+    <defs>
+        <linearGradient id="robotWhiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#E2E8F0"/>
+        </linearGradient>
+    </defs>
+</svg>
+                </div>
+
+                <div class="header-title-meta">
+                    <span class="header-title-text">Golo AI Assistant</span>
+                    <span class="header-robot-state-badge" id="robotStatusBadge">
+                        <span class="state-pulse-dot" id="robotPulseDot"></span>
+                        <span id="robotStatusText">Ready to assist</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="header-actions-group">
+                <button class="header-icon-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌓</button>
+                <button class="header-icon-btn" onclick="toggleMaximizeDrawer()" title="Maximize / Restore" id="btnMaxToggle">⛶</button>
+                <button class="header-icon-btn" onclick="minimizeAssistantModal()" title="Minimize to Dock">─</button>
+                <button class="header-icon-btn" onclick="closeAssistantModal()" title="Close">✕</button>
+            </div>
+        </div>
+
+        <!-- Conversation Stream -->
+        <div class="chat-body-stream" id="chatMessageStream">
+            <!-- Initial Greeting Card with Robot Figure & Suggestion Chips -->
+        </div>
+
+        <!-- Input Bar with Search Field, Microphone Button & Send Button -->
+        <div class="chat-input-toolbar">
+            <div class="voice-feedback-bar" id="voiceFeedbackBar">🎙️ Listening... Speak your question now</div>
+            <div class="input-capsule">
+                <input type="text" class="query-input-field" id="userQueryInputField" placeholder="Ask Golo AI about orders, payments, KYC, logging out..." autocomplete="off">
+                
+                <!-- Microphone Button -->
+                <button class="btn-mic-record" id="btnMicRecord" onclick="toggleVoiceRecording()" title="Record Voice Question">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+
+                <!-- Send Button -->
+                <button class="btn-send-query" id="btnSendQuery" onclick="dispatchUserQuery()" disabled title="Send Question">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complete 163 FAQs Embedded Knowledge Base & Intelligent Client Engine -->
+    <script>
+        const ALL_GOLO_FAQS = [{"id": 1, "question": "What is GOLO?", "answer": "GOLO is a hyper-local discovery and retail savings platform designed to connect neighborhood merchants with local shoppers. It allows customers to discover nearby retail stores, browse real-time product catalogs, claim exclusive discount vouchers, and interact directly with store owners. For local merchants, GOLO provides digital storefronts, inventory management tools, geo-targeted promotional ad campaigns, and voucher redemption verification.", "category": "General GOLO FAQ", "tags": ["general", "general golo faq", "golo"]}, {"id": 2, "question": "How does GOLO work?", "answer": "GOLO connects buyers and sellers through location-aware technology:\n- **For Customers:** Shoppers set their location, discover promotions and products in their vicinity, claim digital vouchers with unique QR codes, and redeem them at physical store counters or chat with merchants in real time.\n- **For Merchants:** Store owners register their business, set store location coordinates, list products, launch time-bound promotional deals and banners, track customer analytics, and scan customer QR codes to validate voucher redemptions.\n- **For Admins:** Platform administrators manage merchant verifications, content moderation, user safety, and subscription plans.", "category": "General GOLO FAQ", "tags": ["general", "general golo faq", "golo", "work"]}, {"id": 3, "question": "Who can use GOLO?", "answer": "- **Customers / Shoppers:** Anyone looking to find local deals, explore neighborhood stores, save money with vouchers, and earn loyalty rewards.\n- **Merchants / Retailers:** Local business owners (boutiques, supermarkets, restaurants, specialty shops) wanting to increase footfall and digitize their business.\n- **Service Providers:** Local professionals offering appointment-based services.\n- **Platform Administrators & Managers:** Operations staff overseeing platform health, approvals, and security.", "category": "General GOLO FAQ", "tags": ["general", "general golo faq", "golo", "use"]}, {"id": 4, "question": "Is GOLO available to merchants?", "answer": "Yes. GOLO provides dedicated merchant tools and an onboarding portal. Merchants can manage store profiles, configure business hours, maintain inventory, launch banner promotions, manage customer orders, and view performance metrics from a unified merchant dashboard.", "category": "General GOLO FAQ", "tags": ["available", "general", "general golo faq", "golo", "merchants"]}, {"id": 5, "question": "Is GOLO available as a mobile application?", "answer": "Yes. GOLO is built as a fully responsive, mobile-first platform with dedicated customer and merchant mobile experiences, supporting push notifications, real-time map navigation, camera-based QR scanning, and mobile chat.", "category": "General GOLO FAQ", "tags": ["application", "available", "general", "general golo faq", "golo", "mobile"]}, {"id": 6, "question": "How can I contact GOLO support?", "answer": "Customers and merchants can access the integrated **Help Center & Support Ticket System**. You can raise support tickets categorized by topic (Billing, Technical, Security, Products), chat directly with support representatives within the ticket thread, or reach out via official support email (`support@golo.com`).\n\n---", "category": "General GOLO FAQ", "tags": ["contact", "general", "general golo faq", "golo", "support"]}, {"id": 7, "question": "Can I use GOLO without creating an account?", "answer": "Yes, guest visitors can browse the home page, explore product categories, view nearby merchant locations, and inspect deal details. However, to claim offer vouchers, save items to your wishlist, message merchants, post ads, or earn loyalty points, an account is required.", "category": "Customer FAQ", "tags": ["account", "creating", "customer", "customer faq", "use", "without"]}, {"id": 8, "question": "How do I search for a product on GOLO?", "answer": "- **Search Bar:** Type keywords, brands, or item names into the top navigation search bar.\n- **Category Filter:** Browse curated category sections.\n- **\"I Want\" Assistant:** Use the intent discovery tool to enter what you are looking for, and GOLO will match nearby merchants and products.", "category": "Customer FAQ", "tags": ["customer", "customer faq", "product", "search"]}, {"id": 9, "question": "How do I find offers and deals near me?", "answer": "1. Click **Nearby Deals** in the navigation bar.\n2. Allow location access or manually set your current city or area via **Select Location**.\n3. View nearby deals sorted by distance on interactive maps and deal cards.", "category": "Customer FAQ", "tags": ["customer", "customer faq", "deals", "find", "near", "offers"]}, {"id": 10, "question": "How do I view a merchant's store and catalog?", "answer": "Click on any merchant\u2019s name or store card from a deal or search listing to navigate to their **Public Store Profile**. You can view their full product catalog, active promotions, store photos, address, operating hours, and contact details.", "category": "Customer FAQ", "tags": ["catalog", "customer", "customer faq", "merchants", "store", "view"]}, {"id": 11, "question": "How do I claim an offer voucher?", "answer": "1. Find a deal that interests you on the home page or nearby deals feed.\n2. Click **Claim Offer** on the deal card.\n3. The platform generates a digital voucher containing a unique alphanumeric code and QR code stored in your account.\n4. Present this QR code or voucher ID at the merchant store to redeem your discount.", "category": "Customer FAQ", "tags": ["claim", "customer", "customer faq", "offer", "voucher"]}, {"id": 12, "question": "How do I contact a merchant?", "answer": "- **In-App Chat:** Click the **\"Chat with Merchant\"** button on any product or deal page.\n- **Phone / Calling:** View the store's contact number listed on their public merchant page or initiate an in-app call.\n- **Store Visit:** Use the integrated store map and turn-by-turn directions to visit the merchant's physical location.", "category": "Customer FAQ", "tags": ["contact", "customer", "customer faq", "merchant"]}, {"id": 13, "question": "How do I add items to my Wishlist?", "answer": "Click the **Heart / Wishlist** icon on any product or deal card. You can view and manage all saved items anytime under **Profile** \u2192 **Wishlist**.", "category": "Customer FAQ", "tags": ["add", "customer", "customer faq", "items", "wishlist"]}, {"id": 14, "question": "How do customer loyalty points / reward stars work?", "answer": "When you claim and redeem eligible promotional offers, merchants can reward you with loyalty points or reward stars. These accumulated points can be viewed in your profile and redeemed for future discounts at participating stores.", "category": "Customer FAQ", "tags": ["customer", "customer faq", "loyalty", "points", "reward", "stars", "work"]}, {"id": 15, "question": "How do I report a problem with a product or merchant?", "answer": "1. Open the specific product, deal, or merchant profile page.\n2. Click the **Report / Flag** button.\n3. Select the reason (e.g., fraudulent pricing, expired voucher rejection, inappropriate content, counterfeit item).\n4. Add a description and optional proof or screenshots, then click **Submit Report**. GOLO moderators will review and take appropriate action.", "category": "Customer FAQ", "tags": ["customer", "customer faq", "merchant", "problem", "product", "report"]}, {"id": 16, "question": "How do I return a product purchased at a store?", "answer": "For purchases made offline using GOLO discount vouchers, returns and exchanges are governed by the individual merchant's store return policy. Customers should present their original store receipt and voucher ID at the merchant counter. If an online order dispute arises, contact the merchant through in-app Chat or submit a support ticket under the Help Center.\n\n---", "category": "Customer FAQ", "tags": ["customer", "customer faq", "product", "purchased", "return", "store"]}, {"id": 17, "question": "What account types are supported on GOLO?", "answer": "GOLO supports three distinct account types:\n- **Customer Account:** For shoppers exploring neighborhood deals, claiming vouchers, saving favorites, and chatting with merchants.\n- **Merchant Account:** For business owners creating digital storefronts, listing products, launching offers, and scanning vouchers.\n- **Admin Account:** For platform operators managing compliance, verification, moderation, subscriptions, and system settings.", "category": "Account FAQ", "tags": ["account", "account faq", "supported", "types"]}, {"id": 18, "question": "How do I create a GOLO customer account?", "answer": "1. Navigate to the **Register** page.\n2. Select the **Customer** account type.\n3. Enter your full name, email address, mobile number, and create a secure password (with optional referral code).\n4. Enter the 6-digit **Email OTP** sent to your inbox to verify your email address.\n5. Once verified, your account is activated and you are automatically logged in.", "category": "Account FAQ", "tags": ["account", "account faq", "create", "customer"]}, {"id": 19, "question": "How do I log in to my GOLO account?", "answer": "1. Go to the **Login** page.\n2. Enter your registered email address and password.\n3. Alternatively, click **Continue with Google** to log in instantly via Google Social Authentication.\n4. Click **Sign In** to access your account.", "category": "Account FAQ", "tags": ["account", "account faq", "log"]}, {"id": 20, "question": "How does Google Social Login work on GOLO?", "answer": "Clicking **Continue with Google** authenticates your identity securely. If you are a new user, a customer account is automatically created using your verified Google email, name, and profile picture without requiring manual OTP verification.", "category": "Account FAQ", "tags": ["account", "account faq", "google", "login", "social", "work"]}, {"id": 21, "question": "How do I update my profile details and address?", "answer": "1. Click on your profile avatar in the header and select **Profile**.\n2. Click **Edit Profile**.\n3. You can update your display name, profile avatar photo, phone number, bio, street address, city, state, postal code, gender, date of birth, and shopping interest categories.\n4. Click **Save Changes** to update your profile.", "category": "Account FAQ", "tags": ["account", "account faq", "address", "details", "profile", "update"]}, {"id": 22, "question": "How do I change my password?", "answer": "1. Log in and navigate to **Profile** \u2192 **Security / Account Settings**.\n2. Select **Change Password**.\n3. Enter your current password and your new password.\n4. Click **Update Password** to confirm the change.", "category": "Account FAQ", "tags": ["account", "account faq", "change", "password"]}, {"id": 23, "question": "What should I do if I forget my password?", "answer": "1. On the login screen, click **\"Forgot Password?\"**.\n2. Enter your registered email address and click **Send OTP**.\n3. Check your email for the 6-digit verification code.\n4. Enter the OTP and your new password on the reset screen.\n5. Click **Submit** to set your new password and log in.", "category": "Account FAQ", "tags": ["account", "account faq", "forget", "password", "should"]}, {"id": 24, "question": "Why do I need to verify my email with an OTP?", "answer": "Email OTP verification ensures that all user accounts are tied to valid, reachable email addresses. This protects user accounts against unauthorized takeovers and ensures you receive important order confirmations, voucher details, and security alerts.", "category": "Account FAQ", "tags": ["account", "account faq", "email", "need", "otp", "verify"]}, {"id": 25, "question": "How can I delete my GOLO account?", "answer": "1. Go to **Profile** \u2192 **Account Settings** \u2192 **Delete Account**.\n2. Provide your account password and select a reason for deletion.\n3. Confirm the deletion prompt. Your account will be permanently deactivated, active session tokens revoked, and personal data removed in accordance with privacy regulations.", "category": "Account FAQ", "tags": ["account", "account faq", "delete"]}, {"id": 26, "question": "What happens to my data and wallet balance when I delete my account?", "answer": "Upon account deletion, your personal profile data is scrubbed, active vouchers are invalidated, and any unspent wallet balance is forfeited. It is strongly recommended to utilize your wallet balance before submitting an account deletion request.\n\n---", "category": "Account FAQ", "tags": ["account", "account faq", "balance", "data", "delete", "happens", "wallet"]}, {"id": 27, "question": "How can I register as a merchant on GOLO?", "answer": "1. Visit the **Merchant Portal** and click **Register as Merchant**.\n2. Fill in your store name, business email, contact number, store category, and create a password.\n3. Provide your physical store address and pin your location on the map.\n4. Verify your email with the OTP sent to complete the initial registration.", "category": "Merchant FAQ", "tags": ["merchant", "merchant faq", "register"]}, {"id": 28, "question": "What information is required for merchant registration?", "answer": "- Store / Business Name & Description\n- Official Business Email & Contact Number\n- Store Category & Sub-Category\n- Complete Physical Address with GPS Map Coordinates\n- Business Proof / KYC Documents (Shop photo, Aadhaar, PAN card)\n- GST Number (optional for micro-sellers, required for standard commercial tiers)", "category": "Merchant FAQ", "tags": ["information", "merchant", "merchant faq", "registration", "required"]}, {"id": 29, "question": "Do I need a GST number to register as a merchant?", "answer": "A GST number is not strictly mandatory for initial basic merchant onboarding; however, submitting a valid GST number is required to receive a **Verified Merchant Badge**, access higher product listing quotas, and participate in featured platform promotions.", "category": "Merchant FAQ", "tags": ["gst", "merchant", "merchant faq", "need", "number", "register"]}, {"id": 30, "question": "How does merchant verification (KYC) work?", "answer": "Once a merchant submits their business details and identity documents (PAN, Aadhaar, store photo), the GOLO Admin Compliance team reviews the application. Once verified, the merchant's status updates from \"Pending\" to \"Active\", unlocking all merchant privileges.", "category": "Merchant FAQ", "tags": ["kyc", "merchant", "merchant faq", "verification", "work"]}, {"id": 31, "question": "How long does merchant verification take?", "answer": "Merchant verification is typically completed within **24 to 48 business hours**. Merchants can monitor their verification status directly on the Merchant Dashboard banner.", "category": "Merchant FAQ", "tags": ["long", "merchant", "merchant faq", "take", "verification"]}, {"id": 32, "question": "How can I add a product to my store catalog?", "answer": "1. Open the **Merchant Dashboard** and go to **Products** \u2192 **Add Product**.\n2. Enter the Product Name, Category, Description, Regular Price, Discount Price, and Initial Stock Quantity.\n3. Add SKU/Barcode, Weight, and Dimensions (optional).\n4. Upload high-quality product images and brand logos.\n5. Click **Publish Product** to make it visible to customers.", "category": "Merchant FAQ", "tags": ["add", "catalog", "merchant", "merchant faq", "product", "store"]}, {"id": 33, "question": "How can I update my product information?", "answer": "1. Go to **Products** on the Merchant Dashboard.\n2. Click on the product you wish to modify.\n3. Edit pricing, stock count, description, or images.\n4. Click **Save Updates**. Changes reflect immediately in customer search results.", "category": "Merchant FAQ", "tags": ["information", "merchant", "merchant faq", "product", "update"]}, {"id": 34, "question": "How can I remove or discontinue a product?", "answer": "In the Products section, click the **Delete** icon next to the product or toggle its visibility status to **\"Inactive\" / \"Discontinued\"**. Deactivating a product hides it from public search while preserving past analytics.", "category": "Merchant FAQ", "tags": ["discontinue", "merchant", "merchant faq", "product", "remove"]}, {"id": 35, "question": "How can I create an offer or deal?", "answer": "1. Navigate to **Offers** \u2192 **Create Offer**.\n2. Enter Offer Title, Promotion Tag (e.g., Flash Sale, Weekend Special), and Description.\n3. Upload promotional banner images or video.\n4. Select products from your catalog to include in the offer and specify discounted offer prices.\n5. Select campaign start and end dates.\n6. Configure optional loyalty points/reward stars for customers.\n7. Confirm platform fee/credits and submit for publishing.", "category": "Merchant FAQ", "tags": ["create", "deal", "merchant", "merchant faq", "offer"]}, {"id": 36, "question": "How do I scan and validate customer vouchers?", "answer": "Merchants can use the in-app **Voucher Scanner** on the Merchant Dashboard or Merchant Mobile App. Scan the customer's voucher QR code using your device camera or manually input the alphanumeric voucher code. The system checks voucher validity in real time, marks it as redeemed, and updates stock and analytics.", "category": "Merchant FAQ", "tags": ["customer", "merchant", "merchant faq", "scan", "validate", "vouchers"]}, {"id": 37, "question": "How can I manage my inventory?", "answer": "In the Products tab, you can view live stock counts for every item. As customers purchase products or redeem vouchers, stock counts update automatically. You can quickly edit quantities, set low-stock thresholds, or mark items as out-of-stock.", "category": "Merchant FAQ", "tags": ["inventory", "manage", "merchant", "merchant faq"]}, {"id": 38, "question": "How can I manage incoming orders?", "answer": "Go to **Orders** on your dashboard to view pending, accepted, rejected, and completed orders. You can accept new orders, prepare items, and mark orders completed upon customer pickup or voucher scan.", "category": "Merchant FAQ", "tags": ["incoming", "manage", "merchant", "merchant faq", "orders"]}, {"id": 39, "question": "How do merchant commissions and fees work?", "answer": "GOLO operates transparently with **tiered subscription plans** and **daily promotional campaign rates** rather than charging heavy commissions on physical store sales. For digital transactions processed directly through the platform, standard minimal payment gateway processing fees apply as outlined in the Merchant Agreement.", "category": "Merchant FAQ", "tags": ["commissions", "fees", "merchant", "merchant faq", "work"]}, {"id": 40, "question": "What happens if a merchant violates GOLO policies?", "answer": "Violations (such as false advertising, counterfeit goods, refusing valid vouchers, or high complaint rates) result in risk score penalties, temporary content upload restrictions, offer locking, or administrative account suspension.", "category": "Merchant FAQ", "tags": ["happens", "merchant", "merchant faq", "policies", "violates"]}, {"id": 41, "question": "Why can a merchant account be suspended?", "answer": "Accounts may be suspended for reasons including:\n- Submission of fake or invalid KYC documents.\n- Listing prohibited or illegal products.\n- Repeated failure to honor claimed vouchers.\n- Multiple verified customer fraud reports.\n- Non-compliance with community guidelines.", "category": "Merchant FAQ", "tags": ["account", "merchant", "merchant faq", "suspended"]}, {"id": 42, "question": "How can a suspended merchant account be reviewed or reinstated?", "answer": "Merchants can submit an appeal through the Support Center or contact compliance support. The Admin Compliance Team will re-audit the account, review submitted evidence, and reinstate the account if all compliance standards are satisfied.", "category": "Merchant FAQ", "tags": ["account", "merchant", "merchant faq", "reinstated", "reviewed", "suspended"]}, {"id": 43, "question": "What products are prohibited on GOLO?", "answer": "Prohibited items include:\n- Weapons, firearms, explosives, and fireworks.\n- Illegal drugs, narcotics, prescription-only medicines, and drug paraphernalia.\n- Counterfeit or replica items, pirated software, and copyright-infringing media.\n- Adult, pornographic, or sexually explicit content.\n- Hazardous chemicals, stolen goods, and government-restricted wildlife products.\n\n---", "category": "Merchant FAQ", "tags": ["merchant", "merchant faq", "products", "prohibited"]}, {"id": 44, "question": "What is the GOLO Admin Panel?", "answer": "The GOLO Admin Panel is a dedicated administrative dashboard for platform operators and managers. It provides centralized tools for user management, merchant verification, content moderation, analytics monitoring, banner and offer oversight, subscription management, reports and complaints handling, security and fraud detection, system configuration, and support center operations.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "panel"]}, {"id": 45, "question": "Who can access the GOLO Admin Panel?", "answer": "Only authorized administrators and managers registered with specific GOLO admin roles can access the Admin Panel. Access is controlled through a separate admin authentication system with dedicated login and access-control mechanisms.", "category": "Admin FAQ", "tags": ["access", "admin", "admin faq", "panel"]}, {"id": 46, "question": "What admin roles are available on GOLO?", "answer": "GOLO implements a comprehensive Role-Based Access Control system with the following roles:\n- **Super Admin:** Full unrestricted access to all platform features and settings.\n- **Operations Manager:** Manages merchants, verifies documents, approves/rejects merchant onboarding, and monitors platform operations.\n- **Support Manager:** Handles customer complaints, merchant support, user issues, support tickets, and refund coordination.\n- **Marketing Manager:** Manages offers, coupons, banners, campaigns, featured merchants, and notifications.\n- **Finance Manager:** Monitors transactions, payouts, commissions, settlements, invoices, and refund approvals.\n- **Content Manager:** Manages categories, merchant content, images, descriptions, FAQs, and landing page content.\n- **Analytics Manager:** Views dashboards, KPIs, user growth, merchant performance, and campaign analytics (read-only).\n- **Compliance Manager:** Verifies KYC, legal documents, merchant approvals, and audits logs.\n- **Customer Success Manager:** Tracks merchant performance, improves onboarding, and resolves escalated issues.\n- **Moderator:** Reviews reported merchants, offers, reviews, and inappropriate content.\n- **System Administrator:** Manages managers, roles, permissions, and system configuration.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "available", "roles"]}, {"id": 47, "question": "How does admin merchant verification (KYC) work?", "answer": "1. When a merchant submits KYC documents (PAN, Aadhaar, store photo, GST number), they appear in the Admin Panel's merchant verification queue.\n2. An authorized admin (Operations Manager, Compliance Manager, or Super Admin) reviews the submitted documents.\n3. The admin can **Approve** (activating the merchant) or **Reject** (requesting resubmission with a reason) the application.\n4. Approved merchants receive a \"Verified\" status and unlock full merchant privileges.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "kyc", "merchant", "verification", "work"]}, {"id": 48, "question": "How do admins manage users and merchants?", "answer": "Admins can access the **User Management** section to:\n- View all registered customers and merchants.\n- Search, filter, and sort users by status, role, or registration date.\n- View detailed user profiles and activity logs.\n- **Ban** or **Suspend** accounts that violate platform policies.\n- **Unban** or reinstate previously suspended accounts after compliance review.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "manage", "merchants", "users"]}, {"id": 49, "question": "What is content moderation on GOLO?", "answer": "The **Content Moderation** module allows admins and moderators to:\n- Review flagged or reported ads, products, offers, and user-generated content.\n- Approve or reject content that may violate community guidelines.\n- Take down listings containing false advertising, counterfeit goods, or inappropriate content.\n- Manage automated moderation filters and risk scoring.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "content", "moderation"]}, {"id": 50, "question": "How do admins handle reports and complaints?", "answer": "The **Reports & Complaints** section centralizes all user-submitted reports. Admins can:\n- View reports categorized by type (fraud, inappropriate content, expired voucher rejection, etc.).\n- Investigate reported merchants, products, or deals.\n- Take action including warnings, content removal, account suspension, or escalation.\n- Track resolution status and response times.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "complaints", "handle", "reports"]}, {"id": 51, "question": "What analytics and dashboards are available for admins?", "answer": "The Admin Panel provides comprehensive analytics and a central executive dashboard including:\n- Platform-wide KPIs: total users, merchants, active deals, revenue metrics.\n- User growth trends and registration analytics.\n- Merchant performance metrics.\n- Campaign and offer analytics (impressions, redemptions).\n- Transaction and revenue reports.\n- Geographic and demographic breakdowns.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "analytics", "available", "dashboards"]}, {"id": 52, "question": "How do admins manage platform subscriptions?", "answer": "Through the **Subscriptions** module, admins can:\n- View all merchant subscription plans and their configurations.\n- Monitor active subscriptions, renewals, and cancellations.\n- Update subscription plan details, pricing, and feature quotas.\n- Manage subscription-related billing issues.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "manage", "platform", "subscriptions"]}, {"id": 53, "question": "How do admins manage banners and advertisements?", "answer": "The **Banner Advertisement** section allows admins to:\n- Review and approve/reject banner promotion requests from merchants.\n- Monitor active banner campaigns across homepage and category pages.\n- Manage banner placement schedules and priorities.\n- Take down banners that violate advertising policies.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "advertisements", "banners", "manage"]}, {"id": 54, "question": "How do admins manage security and fraud?", "answer": "The **Security & Fraud** module provides tools to:\n- Monitor suspicious account activity and login patterns.\n- Investigate fraudulent transactions or payment manipulation.\n- Review and act on fraud detection alerts.\n- Manage account security policies and enforcement actions.", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "fraud", "manage", "security"]}, {"id": 55, "question": "How can admins access audit logs?", "answer": "Authorized admins (Compliance Manager, System Administrator, Super Admin) can view the platform's **Audit Logs** which record all significant administrative actions including user bans/unbans, KYC approvals/rejections, content moderation decisions, role assignments, and system configuration changes. Audit logs can also be exported for compliance and reporting purposes.", "category": "Admin FAQ", "tags": ["access", "admin", "admin faq", "admins", "audit", "logs"]}, {"id": 56, "question": "How do admins manage system configuration?", "answer": "The **System Configuration** and **Settings** sections allow authorized admins to:\n- Manage platform-wide settings (homepage configuration, categories, regions).\n- Configure notification templates and delivery channels.\n- Manage system-level parameters and feature toggles.\n- Update platform branding and content.\n\n---", "category": "Admin FAQ", "tags": ["admin", "admin faq", "admins", "configuration", "manage", "system"]}, {"id": 57, "question": "How do I search for a product?", "answer": "Use the top global search bar on any page to search by product name, brand, or category. You can also filter by category pages, sort by nearest distance, price, or rating, or use the \"I Want\" search assistant.", "category": "Product FAQ", "tags": ["product", "product faq", "search"]}, {"id": 58, "question": "How do I view product details?", "answer": "Click on any product card in search results or merchant store pages. The Product Details page opens, displaying full specifications, images, pricing, merchant details, and customer reviews.", "category": "Product FAQ", "tags": ["details", "product", "product faq", "view"]}, {"id": 59, "question": "How can I see the price of a product?", "answer": "Product pricing is prominently displayed on the product card and details page, showing both the **Regular Price (M.R.P.)** and the active **Discounted / Offer Price**, along with the percentage savings.", "category": "Product FAQ", "tags": ["price", "product", "product faq", "see"]}, {"id": 60, "question": "How can I check product availability?", "answer": "Real-time availability is displayed on the product page (e.g., \"In Stock\", \"Only X Units Left\", or \"Out of Stock\"), powered directly by the merchant's live inventory system.", "category": "Product FAQ", "tags": ["availability", "check", "product", "product faq"]}, {"id": 61, "question": "How can I see product images?", "answer": "The product detail page features an image gallery with multiple high-resolution photos uploaded by the merchant. You can click or swipe through images and zoom in to inspect details.", "category": "Product FAQ", "tags": ["images", "product", "product faq", "see"]}, {"id": 62, "question": "How can I see product reviews?", "answer": "Scroll to the **Ratings & Reviews** section on the product page. You can view average star ratings (1 to 5 stars), total review counts, and verified customer feedback.", "category": "Product FAQ", "tags": ["product", "product faq", "reviews", "see"]}, {"id": 63, "question": "How do I know which merchant is selling a product?", "answer": "Every product page displays the merchant's Store Name, store logo, verification badge, distance from your location, store address, and a direct link to the merchant's store profile.", "category": "Product FAQ", "tags": ["know", "merchant", "product", "product faq", "selling"]}, {"id": 64, "question": "Can product information change?", "answer": "Yes. Merchants have real-time control over their catalogs and can update product pricing, stock availability, descriptions, and images at any time.", "category": "Product FAQ", "tags": ["change", "information", "product", "product faq"]}, {"id": 65, "question": "What should I do if product information appears incorrect?", "answer": "Click the **\"Report Product\"** button on the product page to alert GOLO moderators, or message the merchant directly via GOLO Chat for real-time clarification.", "category": "Product FAQ", "tags": ["appears", "incorrect", "information", "product", "product faq", "should"]}, {"id": 66, "question": "How can a merchant add a product?", "answer": "From the Merchant Dashboard, go to **Products** \u2192 **Add Product**, fill in title, pricing, category, stock, description, upload product images, and click \"Save Product\".", "category": "Product FAQ", "tags": ["add", "merchant", "product", "product faq"]}, {"id": 67, "question": "How can a merchant update a product?", "answer": "In the Products tab, select the product, make changes to prices, photos, or stock quantities, and click \"Update\".", "category": "Product FAQ", "tags": ["merchant", "product", "product faq", "update"]}, {"id": 68, "question": "What type of products can merchants list on GOLO?", "answer": "All legal consumer goods and local services belonging to supported categories (Fashion, Food, Electronics, Groceries, Home Goods, Beauty, Hardware, etc.) that comply with GOLO listing policies.\n\n---", "category": "Product FAQ", "tags": ["list", "merchants", "product", "product faq", "products", "type"]}, {"id": 69, "question": "What are GOLO offers and deals?", "answer": "GOLO offers and deals are exclusive, time-limited promotions published by local merchants, featuring percentage discounts, flat price cuts, combo specials, and bonus loyalty points redeemable at local stores.", "category": "Offers & Deals FAQ", "tags": ["deals", "offers", "offers & deals faq"]}, {"id": 70, "question": "How can I find available offers?", "answer": "Browse the homepage hero banners, check the **Trending Offers** section, or visit the **Nearby Deals** tab to view all active promotions.", "category": "Offers & Deals FAQ", "tags": ["available", "deals", "find", "offers", "offers & deals faq"]}, {"id": 71, "question": "How can I find offers near my location?", "answer": "Enable GPS location permissions or set your location manually via **Select Location**. GOLO dynamically filters deals within your radius and plots them on the map.", "category": "Offers & Deals FAQ", "tags": ["deals", "find", "location", "near", "offers", "offers & deals faq"]}, {"id": 72, "question": "How do I use an offer?", "answer": "1. Open the deal page and click **\"Claim Offer\"**.\n2. A digital voucher is generated containing a unique **QR Code** and alphanumeric **Verification Code** (e.g., `VOUCHER-XXXXX`).\n3. Visit the merchant's store and present your voucher QR code or code at checkout.\n4. The merchant scans or enters the code on their dashboard to apply the discount.", "category": "Offers & Deals FAQ", "tags": ["deals", "offer", "offers", "offers & deals faq", "use"]}, {"id": 73, "question": "How do I know when an offer expires?", "answer": "The offer banner and claimed voucher card display an explicit expiration date and countdown timer (e.g., \"Valid until DD/MM/YYYY\"). Once expired, vouchers cannot be redeemed.", "category": "Offers & Deals FAQ", "tags": ["deals", "expires", "know", "offer", "offers", "offers & deals faq"]}, {"id": 74, "question": "Can an offer have specific terms and conditions?", "answer": "Yes. Merchants specify terms such as minimum purchase requirements, validity days (e.g., weekdays only), or product-specific applicability in the \"Terms & Conditions\" section of the deal.", "category": "Offers & Deals FAQ", "tags": ["conditions", "deals", "have", "offer", "offers", "offers & deals faq", "specific", "terms"]}, {"id": 75, "question": "Can an offer be combined with another offer?", "answer": "Unless explicitly stated by the merchant, vouchers cannot be combined with other ongoing in-store promotions or third-party coupons.", "category": "Offers & Deals FAQ", "tags": ["another", "combined", "deals", "offer", "offers", "offers & deals faq"]}, {"id": 76, "question": "Why is an offer no longer available?", "answer": "An offer becomes unavailable when its validity date passes, the merchant's redemption quota is reached, or the merchant pauses/removes the campaign.", "category": "Offers & Deals FAQ", "tags": ["available", "deals", "longer", "offer", "offers", "offers & deals faq"]}, {"id": 77, "question": "Can merchants create their own offers?", "answer": "Yes. Merchants use the **Create Offer** tool to choose custom promotional titles, banner media, select specific products, configure discount pricing, and set campaign durations.", "category": "Offers & Deals FAQ", "tags": ["create", "deals", "merchants", "offers", "offers & deals faq", "own", "their"]}, {"id": 78, "question": "How can merchants manage their offers?", "answer": "In the Offers tab of the Merchant Dashboard, merchants can view real-time impression and redemption counts, edit campaign details, pause/resume offers, and save reusable offer templates.", "category": "Offers & Deals FAQ", "tags": ["deals", "manage", "merchants", "offers", "offers & deals faq", "their"]}, {"id": 79, "question": "Can GOLO remove an offer?", "answer": "Yes. GOLO Admin moderators and automated moderation filters can reject or take down offers that contain false pricing, inappropriate imagery, or violate platform standards.", "category": "Offers & Deals FAQ", "tags": ["deals", "offer", "offers", "offers & deals faq", "remove"]}, {"id": 80, "question": "What happens if an offer is incorrectly displayed?", "answer": "Merchants can edit and correct the offer details from their dashboard. If an error affected already claimed vouchers, merchant support can assist customers in resolving the discrepancy.\n\n---", "category": "Offers & Deals FAQ", "tags": ["deals", "displayed", "happens", "incorrectly", "offer", "offers", "offers & deals faq"]}, {"id": 81, "question": "What is an Order on GOLO?", "answer": "On GOLO, an order represents a formal transaction initiated when a customer claims a promotional deal or voucher, or places an order for products from a local merchant. Each order is assigned a unique Order ID linked to the customer, merchant, item count, total amount, and corresponding voucher details.", "category": "Order FAQ", "tags": ["order", "order faq"]}, {"id": 82, "question": "How are orders created on GOLO?", "answer": "Orders are automatically generated when:\n1. A customer claims an offer voucher on the platform.\n2. A customer confirms an order through a merchant store catalog.\n3. The order is dispatched to the merchant's live dashboard with an initial status of **Pending**.", "category": "Order FAQ", "tags": ["created", "order", "order faq", "orders"]}, {"id": 83, "question": "What are the different Order Statuses on GOLO?", "answer": "GOLO's order lifecycle follows four standard statuses:\n- **Pending:** The order has been placed by the customer and is awaiting merchant acknowledgment.\n- **Accepted:** The merchant has reviewed and accepted the order, reserving inventory or preparing items for pickup.\n- **Rejected:** The merchant could not fulfill the order (e.g., out of stock or store closing) and rejected the request with a stated reason.\n- **Completed:** The customer has visited the merchant store, the voucher QR code has been scanned and validated, and goods or services have been successfully delivered.", "category": "Order FAQ", "tags": ["different", "order", "order faq", "statuses"]}, {"id": 84, "question": "How do customers track their orders?", "answer": "Customers can track active and past orders by navigating to **Profile** \u2192 **My Orders**. The order tracking interface displays the current status badge, merchant contact details, ordered items, and order timeline timestamps.", "category": "Order FAQ", "tags": ["customers", "order", "order faq", "orders", "their", "track"]}, {"id": 85, "question": "Where can merchants view and process orders?", "answer": "Merchants manage incoming orders through the **Merchant Orders Dashboard**. From this view, merchants can filter orders by status (Pending, Accepted, Rejected, Completed), inspect customer details, accept incoming orders, or scan voucher QR codes to complete transactions.", "category": "Order FAQ", "tags": ["merchants", "order", "order faq", "orders", "process", "view"]}, {"id": 86, "question": "What happens when a merchant accepts an order?", "answer": "When a merchant clicks **Accept Order**, the status transitions to Accepted, the acceptance timestamp is recorded, and an instant push notification and in-app message are sent to the customer confirming that the order is ready for pickup or fulfillment.", "category": "Order FAQ", "tags": ["accepts", "happens", "merchant", "order", "order faq"]}, {"id": 87, "question": "How is an order completed at the store?", "answer": "When the customer arrives at the store, they present their digital voucher QR code. The merchant scans the code using the GOLO Merchant App or enters the voucher verification code. Upon successful scan, the order status changes to Completed, completion timestamp is stored, and loyalty reward points are credited.", "category": "Order FAQ", "tags": ["completed", "order", "order faq", "store"]}, {"id": 88, "question": "What should I do if my order is rejected by the merchant?", "answer": "If a merchant rejects an order due to stock unavailability or store closure, the customer receives an immediate notification. No payment is captured, and the customer can explore other nearby merchants offering similar products or deals.", "category": "Order FAQ", "tags": ["merchant", "order", "order faq", "rejected", "should"]}, {"id": 89, "question": "How can I resolve an order dispute?", "answer": "If there is an issue with product quality, incorrect billing, or store refusal, customers can:\n1. Chat directly with the merchant using **GOLO Chat**.\n2. Raise a support ticket in the **Help Center** providing the Order ID and merchant details for administrative mediation.\n\n---", "category": "Order FAQ", "tags": ["dispute", "order", "order faq", "resolve"]}, {"id": 90, "question": "Does GOLO provide door-to-door delivery?", "answer": "GOLO is primarily a **hyper-local discovery and in-store voucher redemption platform**. Rather than operating centralized courier fleets, GOLO connects neighborhood shoppers with nearby brick-and-mortar stores for direct in-store pickup, immediate savings, and personalized local shopping.", "category": "Delivery FAQ", "tags": ["delivery", "delivery faq", "doortodoor", "provide"]}, {"id": 91, "question": "How does the in-store pickup model work?", "answer": "1. Discover nearby stores and claim offer vouchers on GOLO.\n2. Receive a digital voucher QR code.\n3. Visit the merchant's physical store address shown on the integrated map.\n4. Present your voucher QR code at the checkout counter to collect your items at the discounted price.", "category": "Delivery FAQ", "tags": ["delivery", "delivery faq", "instore", "model", "pickup", "work"]}, {"id": 92, "question": "Can merchants offer their own local delivery?", "answer": "Yes. Independent local merchants who operate their own local home delivery staff can coordinate direct delivery with customers through GOLO Chat or direct phone contact upon accepting an order.", "category": "Delivery FAQ", "tags": ["delivery", "delivery faq", "local", "merchants", "offer", "own", "their"]}, {"id": 93, "question": "How do I set or update my address on GOLO?", "answer": "1. Navigate to **Profile** \u2192 **Edit Profile**.\n2. Enter your Street Address, City, State, and Postal Code.\n3. You can also use **Select Location** to set your current GPS coordinates, allowing GOLO to calculate accurate driving and walking distances to nearby stores.", "category": "Delivery FAQ", "tags": ["address", "delivery", "delivery faq", "set", "update"]}, {"id": 94, "question": "How do GPS coordinates and interactive maps assist my store visit?", "answer": "Every merchant listing on GOLO includes precise GPS coordinates and interactive map navigation. Clicking **\"Get Directions\"** opens turn-by-turn navigation in your preferred map app (Google Maps / Apple Maps) guiding you directly to the storefront.", "category": "Delivery FAQ", "tags": ["assist", "coordinates", "delivery", "delivery faq", "gps", "interactive", "maps", "store", "visit"]}, {"id": 95, "question": "What should I do if a store is closed when I arrive for pickup?", "answer": "Store operating hours are displayed on the merchant profile page. If a store is unexpectedly closed during listed business hours, check the merchant's GOLO chat for updates or report the issue via the Help Center. Your claimed voucher remains valid until its stated expiration date.", "category": "Delivery FAQ", "tags": ["arrive", "closed", "delivery", "delivery faq", "pickup", "should", "store"]}, {"id": 96, "question": "Are there delivery or shipping charges on GOLO?", "answer": "Because standard GOLO vouchers are redeemed in-store by the customer, **there are no GOLO platform delivery fees**. If a merchant arranges custom local self-delivery, any nominal local delivery charges are communicated directly between the merchant and the customer.\n\n---", "category": "Delivery FAQ", "tags": ["charges", "delivery", "delivery faq", "shipping"]}, {"id": 97, "question": "Can a customer cancel an order or claimed offer?", "answer": "- **Claimed Offers / Vouchers:** If you have claimed a free discount voucher and decide not to use it, you do not need to take any action. Unredeemed vouchers will simply expire automatically upon reaching their validity end date with zero penalty or cost.\n- **Pending Store Orders:** Customers can cancel a pending store order directly from the order details screen before the merchant accepts it.", "category": "Cancellation FAQ", "tags": ["cancel", "cancellation", "cancellation faq", "claimed", "customer", "offer", "order"]}, {"id": 98, "question": "Can a merchant cancel or reject an order?", "answer": "Yes. A merchant can reject an incoming order from the **Merchant Orders Dashboard** if an item is out of stock, store capacity is reached, or the store is closing. Selecting a cancellation reason automatically notifies the customer.", "category": "Cancellation FAQ", "tags": ["cancel", "cancellation", "cancellation faq", "merchant", "order", "reject"]}, {"id": 99, "question": "Can I cancel a paid advertisement campaign?", "answer": "Yes. Advertisers and merchants can request cancellation of an active or scheduled advertising campaign through the Merchant Portal or Help Center. Cancellation eligibility and adjustments are governed by GOLO's **Refund & Credit Note Policy**.", "category": "Cancellation FAQ", "tags": ["advertisement", "campaign", "cancel", "cancellation", "cancellation faq", "paid"]}, {"id": 100, "question": "How is the credit calculated when an advertising campaign is cancelled?", "answer": "For eligible advertising and promotional services charged on a duration basis, GOLO calculates the Eligible Credit Amount using the **Daily Ad Rate** formula:\n\n$$\\text{Eligible Credit Amount} = \\text{Unutilized Days} \\times \\text{Daily Ad Rate}$$\n\n*Example:*\n- 30-day campaign purchased for \u20b93,000 (Daily Ad Rate = \u20b9100/day).\n- Cancelled with 10 unutilized days remaining.\n- **Eligible Credit Amount = $10 \\times \u20b9100 = \u20b91,000$**, issued as a Credit Note or Wallet Credit by NexaPrime Pvt. Ltd.", "category": "Cancellation FAQ", "tags": ["advertising", "calculated", "campaign", "cancellation", "cancellation faq", "cancelled", "credit"]}, {"id": 101, "question": "What happens if I cancel an advertisement on the same day it was created?", "answer": "If an advertisement is created and cancelled on the **same calendar day**, that day may be treated as unutilized provided the ad has not already been materially delivered, broadcast, or displayed. The determination considers activation time, publication status, and actual delivery records.", "category": "Cancellation FAQ", "tags": ["advertisement", "cancel", "cancellation", "cancellation faq", "created", "day", "happens", "same"]}, {"id": 102, "question": "Can I cancel a banner promotion?", "answer": "Yes. Merchants can cancel active or queued banner promotions from the Banner section of the Merchant Dashboard. Any remaining unutilized daily budget or queued impressions are automatically credited back to the merchant's **GOLO Store Wallet** for use on future campaigns.", "category": "Cancellation FAQ", "tags": ["banner", "cancel", "cancellation", "cancellation faq", "promotion"]}, {"id": 103, "question": "How do I cancel a merchant subscription?", "answer": "1. Navigate to **Merchant Dashboard** \u2192 **Subscription Details**.\n2. Select **Cancel Subscription** or disable auto-renewal.\n3. Your premium features will remain active until the end of the current paid billing cycle, after which your account reverts to the Free tier without additional charges.", "category": "Cancellation FAQ", "tags": ["cancel", "cancellation", "cancellation faq", "merchant", "subscription"]}, {"id": 104, "question": "Are cancellation penalties or fees charged?", "answer": "GOLO does not charge punitive cancellation penalties. However, services that have already been utilized, published, displayed, or materially delivered are non-refundable and will be deducted from any credit adjustment.\n\n---", "category": "Cancellation FAQ", "tags": ["cancellation", "cancellation faq", "charged", "fees", "penalties"]}, {"id": 105, "question": "What payment methods are supported on GOLO?", "answer": "GOLO processes payments through **Razorpay**, a secure and authorized payment gateway. Supported payment methods include:\n- **UPI** (Google Pay, PhonePe, Paytm, BHIM, etc.)\n- **Debit Cards** (Visa, Mastercard, RuPay)\n- **Credit Cards** (Visa, Mastercard, American Express)\n- **Net Banking** (all major Indian banks)\n- **GOLO Wallet Balance** (for eligible services, can be applied during checkout)", "category": "Payment FAQ", "tags": ["methods", "payment", "payment faq", "supported"]}, {"id": 106, "question": "What paid services require payment on GOLO?", "answer": "Paid services on GOLO include:\n- Customer advertisement posting.\n- Merchant advertisement posting.\n- Banner advertisement placements (homepage and category banners).\n- Product and service promotional campaigns.\n- Featured or priority store placements.\n- Merchant subscription plans (Trial, Standard, Premium, Enterprise).\n- Other commercial promotional services introduced by NexaPrime Pvt. Ltd.", "category": "Payment FAQ", "tags": ["paid", "payment", "payment faq", "require", "services"]}, {"id": 107, "question": "How is a payment processed on GOLO?", "answer": "1. When you purchase a paid GOLO service, a secure payment order is generated.\n2. You complete authentication on Razorpay's secure checkout window.\n3. Secure transaction verification is processed by the platform.\n4. Upon successful verification, the payment status updates to **Captured**, and the purchased service is activated immediately.\n5. A formal transaction receipt is stored in your payment history.", "category": "Payment FAQ", "tags": ["payment", "payment faq", "processed"]}, {"id": 108, "question": "How can I view my payment history?", "answer": "Navigate to your **Profile** \u2192 **Payments** or access the **Wallet** page (Customer Wallet for shoppers, Store Wallet for merchants). Your complete transaction history, including payment amounts, transaction IDs, dates, descriptions, and statuses, is displayed chronologically.", "category": "Payment FAQ", "tags": ["history", "payment", "payment faq", "view"]}, {"id": 109, "question": "What are the different payment statuses on GOLO?", "answer": "- **Created:** Payment order initiated but checkout not completed.\n- **Authorized:** Payment authorized by the issuing bank, pending capture.\n- **Captured:** Payment successfully processed and confirmed.\n- **Failed:** Payment attempt was unsuccessful or declined by bank.\n- **Partially Refunded:** A partial refund/adjustment was processed.\n- **Refunded:** The full transaction amount was refunded.", "category": "Payment FAQ", "tags": ["different", "payment", "payment faq", "statuses"]}, {"id": 110, "question": "What happens if my payment fails?", "answer": "If a payment attempt fails, the associated GOLO service is not activated. Payment failures can occur due to bank declines, incorrect OTP/CVV, or network timeouts. If your bank account was debited despite a failure on GOLO, banking networks typically execute an automatic reversal within **5 to 7 business days**.", "category": "Payment FAQ", "tags": ["fails", "happens", "payment", "payment faq"]}, {"id": 111, "question": "What if I am charged twice for the same transaction (duplicate payment)?", "answer": "GOLO uses duplicate-charge prevention mechanisms. If you believe a transaction was debited twice:\n1. Report the issue through GOLO's **Help Center** with the relevant bank reference and transaction IDs.\n2. GOLO will verify the duplicate charge with the payment gateway.\n3. Upon confirmation, a Credit Note or monetary reversal will be issued in accordance with policy.", "category": "Payment FAQ", "tags": ["charged", "duplicate", "payment", "payment faq", "same", "transaction", "twice"]}, {"id": 112, "question": "Is my payment card information stored on GOLO servers?", "answer": "No. GOLO does not store sensitive card numbers, CVVs, or banking passwords. All payment transactions are handled directly through Razorpay's RBI-regulated, PCI-DSS Level 1 certified gateway. GOLO retains only transaction IDs, receipts, and status logs for billing administration.", "category": "Payment FAQ", "tags": ["card", "information", "payment", "payment faq", "servers", "stored"]}, {"id": 113, "question": "What is the minimum payment amount on GOLO?", "answer": "The minimum payment amount on GOLO is **\u20b91.00** (one rupee). Transactions below this amount cannot be initiated.", "category": "Payment FAQ", "tags": ["amount", "minimum", "payment", "payment faq"]}, {"id": 114, "question": "How does GOLO handle payment status updates?", "answer": "GOLO receives real-time payment status updates directly from the payment gateway via secure notifications. Each notification is validated using cryptographic signatures before updating internal transaction records, ensuring complete data synchronization.\n\n---", "category": "Payment FAQ", "tags": ["handle", "payment", "payment faq", "status", "updates"]}, {"id": 115, "question": "Does GOLO provide monetary cash refunds?", "answer": "GOLO **generally does not provide monetary cash refunds** for purchased services. Once a Paid Service has been purchased, activated, scheduled, reserved, published, commenced, or otherwise processed, the payment is generally non-refundable. Where an eligible cancellation or refund-related adjustment is approved, GOLO's standard remedy is the issuance of a **Credit Note** by NexaPrime Pvt. Ltd., rather than a monetary refund.\n\nA monetary refund will only be provided where:\n1. It is required by applicable law.\n2. A transaction has been incorrectly or fraudulently processed and a monetary reversal is legally or operationally required.\n3. GOLO is unable to provide a paid service and a monetary refund is required by applicable law.\n4. NexaPrime is otherwise legally required to return the amount.", "category": "Refund & Credit Note FAQ", "tags": ["cash", "credit", "monetary", "note", "provide", "refund", "refund & credit note faq", "refunds"]}, {"id": 116, "question": "What is a Credit Note?", "answer": "A Credit Note is a formal credit document issued by NexaPrime Pvt. Ltd. to an eligible User or Merchant following an approved cancellation, refund-related adjustment, service failure, or other qualifying circumstance. It represents an amount that may be adjusted against eligible future GOLO services. A Credit Note is **not** a bank balance, deposit, or GOLO Wallet balance.", "category": "Refund & Credit Note FAQ", "tags": ["credit", "note", "refund", "refund & credit note faq"]}, {"id": 117, "question": "How do I request a refund or Credit Note?", "answer": "1. Contact GOLO through the **Help Center** or **Merchant Support**.\n2. Provide your GOLO account information, Transaction ID or payment reference, service details, date of purchase, amount paid, reason for cancellation, and any supporting information.\n3. GOLO will review your request based on the applicable circumstances.\n4. Submitting a request **does not guarantee** approval.", "category": "Refund & Credit Note FAQ", "tags": ["credit", "note", "refund", "refund & credit note faq", "request"]}, {"id": 118, "question": "How is the Credit Note amount calculated for advertising cancellations?", "answer": "For eligible advertising and promotional services charged based on a defined period, GOLO calculates the Eligible Amount using:\n\n$$\\text{Eligible Credit Amount} = \\text{Unutilized Days} \\times \\text{Daily Ad Rate}$$\n\n*Example:*\n- Advertising period = 30 days\n- Total service price = \u20b93,000\n- Daily Ad Rate = \u20b9100\n- Unutilized period = 10 days\n- **Eligible Credit Amount = $10 \\times \u20b9100 = \u20b91,000$**\n\nSubject to the applicable terms, NexaPrime may issue a \u20b91,000 Credit Note.", "category": "Refund & Credit Note FAQ", "tags": ["advertising", "amount", "calculated", "cancellations", "credit", "note", "refund", "refund & credit note faq"]}, {"id": 119, "question": "Can I get a Credit Note for a service that has already been utilized?", "answer": "No. No automatic Credit Note will be issued for services that have already been fully consumed or materially delivered. This includes advertisements that have been published, displayed, delivered to users, completed their scheduled period, received promotional placement, or been substantially utilized.", "category": "Refund & Credit Note FAQ", "tags": ["already", "been", "credit", "get", "has", "note", "refund", "refund & credit note faq", "service", "utilized"]}, {"id": 120, "question": "How can I use a Credit Note?", "answer": "A Credit Note can be applied toward eligible future GOLO services including:\n- Customer advertising\n- Merchant advertising\n- Banner advertising\n- Product promotion\n- Service promotion\n- Featured promotional services\n- Other eligible paid GOLO services approved by NexaPrime\n\nThe value of the Credit Note will be adjusted against the applicable purchase amount during checkout.", "category": "Refund & Credit Note FAQ", "tags": ["credit", "note", "refund", "refund & credit note faq", "use"]}, {"id": 121, "question": "What if the future service costs more than my Credit Note balance?", "answer": "If the value of a future GOLO service exceeds the available Credit Note value, you pay the remaining balance through any supported payment method (UPI, Debit/Credit Card, Net Banking).", "category": "Refund & Credit Note FAQ", "tags": ["balance", "costs", "credit", "future", "more", "note", "refund", "refund & credit note faq", "service", "than"]}, {"id": 122, "question": "What if the future service costs less than my Credit Note balance?", "answer": "If the service costs less than the available Credit Note value, only the applicable service amount will be adjusted. The remaining value continues to be available for future eligible GOLO services, subject to the Credit Note's terms and validity.", "category": "Refund & Credit Note FAQ", "tags": ["balance", "costs", "credit", "future", "less", "note", "refund", "refund & credit note faq", "service", "than"]}, {"id": 123, "question": "Can I convert a Credit Note to cash or withdraw it to my bank?", "answer": "No. Unless required by applicable law, a Credit Note **cannot** be:\n- Redeemed for cash.\n- Withdrawn to a bank account.\n- Transferred to a UPI account.\n- Refunded to a credit or debit card.\n- Converted into cash through payment gateways.\n- Otherwise exchanged for monetary payment.", "category": "Refund & Credit Note FAQ", "tags": ["bank", "cash", "convert", "credit", "note", "refund", "refund & credit note faq", "withdraw"]}, {"id": 124, "question": "Can I transfer a Credit Note to another user?", "answer": "No. Unless expressly permitted by NexaPrime, Credit Notes are strictly associated with the specific User or Merchant for whom they were issued and cannot be sold, transferred, or assigned to another account.", "category": "Refund & Credit Note FAQ", "tags": ["another", "credit", "note", "refund", "refund & credit note faq", "transfer", "user"]}, {"id": 125, "question": "Are merchant subscription fees refundable?", "answer": "Merchant subscription fees are **generally non-refundable**, including where a Merchant terminates or cancels their account during an active subscription period. No automatic prorated refund or Credit Note will be provided for unused subscription time.", "category": "Refund & Credit Note FAQ", "tags": ["credit", "fees", "merchant", "note", "refund", "refund & credit note faq", "refundable", "subscription"]}, {"id": 126, "question": "How long does a refund or Credit Note review take?", "answer": "GOLO reviews requests based on service usage, publication records, and transaction logs. In the rare event an approved monetary refund is authorized, it is processed through the payment gateway back to the original payment source within **5 to 7 business days**.\n\n---", "category": "Refund & Credit Note FAQ", "tags": ["credit", "long", "note", "refund", "refund & credit note faq", "review", "take"]}, {"id": 127, "question": "What is the GOLO Wallet?", "answer": "The GOLO Wallet is an internal digital balance system available to both customers (Customer Wallet) and merchants (Store Wallet). It stores credits that are automatically generated when paid services (such as banner promotions or advertisements) are cancelled and a portion of the funds remain unutilized. The wallet balance can be used seamlessly during checkout when purchasing future GOLO services.", "category": "Wallet/Coupon FAQ", "tags": ["wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 128, "question": "How do I access my GOLO Wallet?", "answer": "- **Customers:** Navigate to **Profile** \u2192 **Wallet**. You will see your Available Balance and full Transaction History.\n- **Merchants:** Navigate to the **Store Wallet** from the Merchant Dashboard. You will see your Available Balance, Total Transactions, and a detailed Transaction History table.", "category": "Wallet/Coupon FAQ", "tags": ["access", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 129, "question": "How does money get added to my wallet?", "answer": "Wallet credits are automatically added when:\n- You cancel a banner promotion and leftover unutilized funds are credited.\n- You cancel an advertisement and the eligible unused portion is credited.\n- A refund-related adjustment is processed as a wallet credit.\n- Other Credit Note or refund-related resolutions result in a wallet credit.\n\nYou **cannot** manually top up your wallet with external funds. The wallet is funded exclusively through platform-generated credits.", "category": "Wallet/Coupon FAQ", "tags": ["added", "get", "money", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 130, "question": "What can I use my GOLO Wallet balance for?", "answer": "Your wallet balance can be used to pay for eligible future GOLO services during checkout, including:\n- Banner advertisement uploads and promotions.\n- Customer and merchant ad posting fees.\n- Product and service promotion campaigns.\n- Subscription payments (for merchants).\n- Other paid GOLO services.", "category": "Wallet/Coupon FAQ", "tags": ["balance", "use", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 131, "question": "Can I withdraw my wallet balance as cash?", "answer": "No. The GOLO Wallet balance is **not** redeemable for cash, cannot be withdrawn to a bank account, transferred to UPI, or refunded to a card. It is intended exclusively for use toward eligible GOLO services. The wallet balance is not a bank deposit, electronic money, or a transferable monetary instrument.", "category": "Wallet/Coupon FAQ", "tags": ["balance", "cash", "wallet", "wallet/coupon", "wallet/coupon faq", "withdraw"]}, {"id": 132, "question": "What types of wallet transactions exist?", "answer": "Wallet transactions are categorized as:\n- **Credit:** Funds added to your wallet (e.g., refund from a cancelled banner, ad cancellation credit).\n- **Debit:** Funds used from your wallet toward a GOLO service purchase.\n\nEach transaction records the amount, description, reference category (banner, ad, subscription, or other), status (completed, pending, failed), and timestamp.", "category": "Wallet/Coupon FAQ", "tags": ["exist", "transactions", "types", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 133, "question": "Can I view my wallet transaction history?", "answer": "Yes. Both the Customer Wallet page and the Merchant Store Wallet page display a complete, chronologically ordered Transaction History showing each credit and debit transaction with amounts, descriptions, and dates.", "category": "Wallet/Coupon FAQ", "tags": ["history", "transaction", "view", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 134, "question": "Is the GOLO Wallet the same as a Credit Note?", "answer": "No. As per GOLO's Refund & Credit Note Policy, a Credit Note is a formal credit document issued by NexaPrime and is separate from any wallet or digital credit system. The GOLO Wallet is an operational balance for quick service payments, while a Credit Note is a formal accounting instrument.", "category": "Wallet/Coupon FAQ", "tags": ["credit", "note", "same", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 135, "question": "What are GOLO coupons?", "answer": "GOLO coupons are promotional discount codes issued by the platform or specific merchants to provide discounts on paid GOLO services. Coupons may offer percentage discounts, flat price reductions, or category-specific promotional benefits.", "category": "Wallet/Coupon FAQ", "tags": ["coupons", "wallet/coupon", "wallet/coupon faq"]}, {"id": 136, "question": "How do I apply a coupon on GOLO?", "answer": "During the checkout process for a paid GOLO service, enter the coupon code in the designated promo code field and click **Apply**. If valid, the discount is immediately deducted from your order total before payment.", "category": "Wallet/Coupon FAQ", "tags": ["apply", "coupon", "wallet/coupon", "wallet/coupon faq"]}, {"id": 137, "question": "Why is my coupon not working?", "answer": "A coupon may not work due to:\n- The coupon code has **expired**.\n- The total order value is below the **minimum spend** requirement.\n- The coupon has already reached its **usage limit**.\n- The coupon is **restricted** to specific categories or first-time users.\n- The coupon code was entered with a typo (codes are case-sensitive).", "category": "Wallet/Coupon FAQ", "tags": ["coupon", "not", "wallet/coupon", "wallet/coupon faq", "working"]}, {"id": 138, "question": "Can I combine a coupon with my wallet balance?", "answer": "Yes. During checkout, you can apply a valid coupon code to reduce your order total, and then use your GOLO Wallet balance to pay part or all of the remaining amount.\n\n---", "category": "Wallet/Coupon FAQ", "tags": ["balance", "combine", "coupon", "wallet", "wallet/coupon", "wallet/coupon faq"]}, {"id": 139, "question": "Does GOLO offer merchant subscriptions?", "answer": "Yes. GOLO provides structured subscription plans for merchants to scale their store visibility, unlock higher product catalog listing quotas, launch concurrent active deals, and access advanced demographic and revenue analytics.", "category": "Subscription FAQ", "tags": ["merchant", "offer", "subscription", "subscription faq", "subscriptions"]}, {"id": 140, "question": "What is included in a GOLO merchant subscription?", "answer": "Key features across plan tiers include:\n- **Product Inventory Quota:** Increased maximum product listings (e.g., 20 products on basic tiers up to unlimited on enterprise tiers).\n- **Active Offers Quota:** Higher number of concurrent active deals and longer campaign durations.\n- **Banner Promotion Credits:** Monthly credits for homepage and category banner placements.\n- **Advanced Analytics:** In-depth customer demographic reports (age, gender, location heatmaps, device breakdown, revenue charts).\n- **Search Priority:** Boosted ranking in search results and nearby deal feeds.\n- **Custom Digital Storefront:** Dedicated public merchant store webpage.", "category": "Subscription FAQ", "tags": ["included", "merchant", "subscription", "subscription faq"]}, {"id": 141, "question": "How can a merchant subscribe or upgrade?", "answer": "1. In the Merchant Dashboard, go to **Upgrade Plan**.\n2. Compare available plans (Trial, Standard, Premium, Enterprise).\n3. Select your billing cycle (Monthly or Yearly) and proceed to **Checkout**.\n4. Complete the payment through Razorpay to activate your subscription instantly.", "category": "Subscription FAQ", "tags": ["merchant", "subscribe", "subscription", "subscription faq", "upgrade"]}, {"id": 142, "question": "How much does a subscription cost?", "answer": "GOLO offers competitive pricing starting with a **Free / Trial Plan (\u20b90)** for new merchants, up to cost-effective **Standard and Premium tiers**. Exact current pricing and billing options are displayed on the Upgrade Plan page.", "category": "Subscription FAQ", "tags": ["cost", "much", "subscription", "subscription faq"]}, {"id": 143, "question": "How long is a subscription valid?", "answer": "- **Monthly Plan:** Valid for 30 calendar days from purchase.\n- **Yearly Plan:** Valid for 365 calendar days from purchase.\n- **Trial Plan:** Valid for the duration of the promotional trial period (e.g., 14 or 30 days).", "category": "Subscription FAQ", "tags": ["long", "subscription", "subscription faq", "valid"]}, {"id": 144, "question": "How can I cancel my subscription?", "answer": "Navigate to **Merchant Settings** \u2192 **Subscription Details** and select **Cancel Subscription** or turn off auto-renewal. Your subscription features will remain active until the end of your current billing cycle.", "category": "Subscription FAQ", "tags": ["cancel", "subscription", "subscription faq"]}, {"id": 145, "question": "Will my subscription automatically renew?", "answer": "Auto-renewal settings can be toggled On or Off in your merchant subscription preferences according to your selected payment method.", "category": "Subscription FAQ", "tags": ["automatically", "renew", "subscription", "subscription faq", "will"]}, {"id": 146, "question": "Are subscription fees refundable?", "answer": "Subscription fees are **non-refundable** once the billing period has commenced. In the case of accidental duplicate charges or verified payment gateway errors, refund requests can be submitted via the Support Center for review.", "category": "Subscription FAQ", "tags": ["fees", "refundable", "subscription", "subscription faq"]}, {"id": 147, "question": "What happens when my subscription expires?", "answer": "If a subscription expires without renewal, your account automatically transitions to the Free/Basic tier. Your catalog and data are preserved, but premium features (extra active deals, banner credits, advanced analytics) are paused until renewed.", "category": "Subscription FAQ", "tags": ["expires", "happens", "subscription", "subscription faq"]}, {"id": 148, "question": "Can subscription benefits be transferred to another account?", "answer": "No. Subscriptions are non-transferable and remain strictly associated with the specific registered merchant user account and store profile.\n\n---", "category": "Subscription FAQ", "tags": ["account", "another", "benefits", "subscription", "subscription faq", "transferred"]}, {"id": 149, "question": "Why can't I log in to my GOLO account?", "answer": "- Ensure your email and password are typed correctly (passwords are case-sensitive).\n- Verify that your account email was verified with OTP during registration.\n- If you forgot your password, use the \"Forgot Password\" link to reset it.\n- If your account was flagged for a policy violation, contact support for assistance.", "category": "Troubleshooting FAQ", "tags": ["account", "cant", "log", "troubleshooting", "troubleshooting faq"]}, {"id": 150, "question": "What should I do if I forgot my password?", "answer": "Click **\"Forgot Password?\"** on the login screen, enter your registered email address, retrieve the 6-digit OTP from your inbox, verify the code, and set a new password.", "category": "Troubleshooting FAQ", "tags": ["forgot", "password", "should", "troubleshooting", "troubleshooting faq"]}, {"id": 151, "question": "Why am I not receiving the email OTP?", "answer": "- Check your **Spam / Junk / Promotions** folders.\n- Ensure your email address contains no typos or trailing spaces.\n- Wait 60 seconds before clicking **\"Resend OTP\"**.\n- Ensure your mail server is not blocking automated emails from the GOLO domain.", "category": "Troubleshooting FAQ", "tags": ["email", "not", "otp", "receiving", "troubleshooting", "troubleshooting faq"]}, {"id": 152, "question": "Why is the GOLO website or app not loading?", "answer": "- Check your internet connection.\n- Clear your browser cookies and cache or restart the mobile app.\n- Disable aggressive ad-blockers or VPN extensions that may block platform calls.\n- Try accessing the site in an Incognito / Private browsing window.", "category": "Troubleshooting FAQ", "tags": ["app", "loading", "not", "troubleshooting", "troubleshooting faq", "website"]}, {"id": 153, "question": "Why is a product not appearing in search results?", "answer": "- The product may be marked as \"Inactive\" or \"Out of Stock\" by the merchant.\n- The product may be outside your current location filter radius.\n- The item may be newly added and undergoing brief search indexing or admin moderation.", "category": "Troubleshooting FAQ", "tags": ["appearing", "not", "product", "results", "search", "troubleshooting", "troubleshooting faq"]}, {"id": 154, "question": "Why can't I place an order or claim an offer?", "answer": "- Ensure you are logged into an active customer account.\n- Check if your profile has an address and phone number configured.\n- Ensure the offer has not reached its maximum redemption quota or expiration date.", "category": "Troubleshooting FAQ", "tags": ["cant", "claim", "offer", "order", "place", "troubleshooting", "troubleshooting faq"]}, {"id": 155, "question": "Why did my payment fail?", "answer": "Payment failures are usually due to incorrect OTP/CVV entry, insufficient account balance, bank server downtime, or a connection timeout. Try again or select an alternate payment method (UPI, Debit/Credit Card, Net Banking).", "category": "Troubleshooting FAQ", "tags": ["fail", "payment", "troubleshooting", "troubleshooting faq"]}, {"id": 156, "question": "Why is my order status not updating?", "answer": "Order statuses update when the merchant accepts or fulfills the order. Pull down to refresh your order page or contact the merchant directly via GOLO Chat for an update.", "category": "Troubleshooting FAQ", "tags": ["not", "order", "status", "troubleshooting", "troubleshooting faq", "updating"]}, {"id": 157, "question": "Why can't I cancel my claimed offer?", "answer": "Once an offer voucher is scanned and redeemed at the merchant store, it is permanently marked as \"Redeemed\". Unredeemed vouchers can simply be left to expire automatically without any penalty.", "category": "Troubleshooting FAQ", "tags": ["cancel", "cant", "claimed", "offer", "troubleshooting", "troubleshooting faq"]}, {"id": 158, "question": "Why haven't I received my refund?", "answer": "Approved refunds are processed through the payment gateway back to the original payment source. Depending on your bank's processing cycles, refunds typically appear within **5 to 7 business days**.", "category": "Troubleshooting FAQ", "tags": ["havent", "received", "refund", "troubleshooting", "troubleshooting faq"]}, {"id": 159, "question": "Why isn't my coupon working?", "answer": "- The coupon code may have expired.\n- The total order value may be below the required minimum spend.\n- The coupon may have already been used (single-use limit).\n- The coupon may be restricted to specific categories or first-time users.", "category": "Troubleshooting FAQ", "tags": ["coupon", "isnt", "troubleshooting", "troubleshooting faq", "working"]}, {"id": 160, "question": "What should I do if the mobile app crashes?", "answer": "- Force-close and restart the app.\n- Ensure your app is updated to the latest release.\n- Clear app cache storage in your device settings.\n- Restart your mobile device.", "category": "Troubleshooting FAQ", "tags": ["app", "crashes", "mobile", "should", "troubleshooting", "troubleshooting faq"]}, {"id": 161, "question": "What should I do if I encounter an unexpected error?", "answer": "Note down the error message, take a screenshot, refresh the page, and report the issue through the **Help Center** with steps to reproduce the error.", "category": "Troubleshooting FAQ", "tags": ["encounter", "error", "should", "troubleshooting", "troubleshooting faq", "unexpected"]}, {"id": 162, "question": "How can I contact GOLO support for a technical problem?", "answer": "Submit a ticket under the **Help Center**, select the issue type **\"Technical / Bug\"**, attach screenshots and error details, or email the technical team at `support@golo.com`.", "category": "Troubleshooting FAQ", "tags": ["contact", "problem", "support", "technical", "troubleshooting", "troubleshooting faq"]}, {"id": 163, "question": "How do I log out of my GOLO account?", "answer": "To log out of your GOLO account:\n1. Click on your **Profile Avatar / Account Icon** in the top navigation bar.\n2. In the user menu dropdown, select **Log Out** (or **Sign Out**).\n3. Your active authentication session token will be cleared immediately, and you will be securely redirected to the GOLO home page.\n\n*Note:* If you are using a shared or public computer, we also recommend closing your browser window after logging out for added security.", "category": "Account FAQ", "tags": ["logout", "log out", "sign out", "signout", "exit", "session", "sign off", "account", "profile"]}];
+
+        let isDrawerOpen = false;
+        let isMaximized = false;
+        let isRecording = false;
+        let speechRecognizer = null;
+        let typingDebounceTimer = null;
+        let activeTheme = localStorage.getItem('golo_theme') || 'light'; // DEFAULT LIGHT MODE
+
+        // DOM Elements
+        const drawer = document.getElementById('chatAssistantDrawer');
+        const minibar = document.getElementById('minibarDock');
+        const stream = document.getElementById('chatMessageStream');
+        const inputField = document.getElementById('userQueryInputField');
+        const btnSend = document.getElementById('btnSendQuery');
+        const btnMic = document.getElementById('btnMicRecord');
+        const voiceBar = document.getElementById('voiceFeedbackBar');
+        const btnThemeToggle = document.getElementById('btnThemeToggle');
+        const btnMaxToggle = document.getElementById('btnMaxToggle');
+        const robotStatusBadge = document.getElementById('robotStatusBadge');
+        const robotStatusText = document.getElementById('robotStatusText');
+        const robotPulseDot = document.getElementById('robotPulseDot');
+
+        // All Robot Mascot Containers
+        const robotElements = [
+            document.getElementById('headerRobot'),
+            document.getElementById('floatRobot')
+        ];
+
+        /* ==========================================================================
+           ROBOT STATE CONTROLLER
+           States: 'idle', 'typing', 'processing', 'happy', 'error'
+           ========================================================================== */
+        function setRobotState(state, customText = null) {
+            robotElements.forEach(el => {
+                if (!el) return;
+                el.classList.remove('state-idle', 'state-typing', 'state-processing', 'state-happy', 'state-error');
+                el.classList.add(`state-${state}`);
+            });
+
+            // Also update greeting robot if present
+            const welcomeRobot = document.getElementById('welcomeMascotRobot');
+            if (welcomeRobot) {
+                welcomeRobot.classList.remove('state-idle', 'state-typing', 'state-processing', 'state-happy', 'state-error');
+                welcomeRobot.classList.add(`state-${state}`);
+            }
+
+            // Update Header Status Badge
+            if (robotStatusText && robotPulseDot) {
+                switch(state) {
+                    case 'typing':
+                        robotStatusText.innerText = customText || 'Typing on keyboard...';
+                        robotPulseDot.style.background = '#38BDF8';
+                        robotPulseDot.style.boxShadow = '0 0 6px #38BDF8';
+                        break;
+                    case 'processing':
+                        robotStatusText.innerText = customText || 'Thinking & processing...';
+                        robotPulseDot.style.background = '#F5B849';
+                        robotPulseDot.style.boxShadow = '0 0 8px #F5B849';
+                        break;
+                    case 'happy':
+                        robotStatusText.innerText = customText || 'Guidance ready! 😊';
+                        robotPulseDot.style.background = '#10B981';
+                        robotPulseDot.style.boxShadow = '0 0 8px #10B981';
+                        break;
+                    case 'error':
+                        robotStatusText.innerText = customText || 'Not app related';
+                        robotPulseDot.style.background = '#EF4444';
+                        robotPulseDot.style.boxShadow = '0 0 8px #EF4444';
+                        break;
+                    case 'idle':
+                    default:
+                        robotStatusText.innerText = customText || 'Ready to assist';
+                        robotPulseDot.style.background = '#10B981';
+                        robotPulseDot.style.boxShadow = '0 0 6px #10B981';
+                        break;
+                }
+            }
+        }
+
+        // Listen for typing events to trigger the typing animation
+        function handleUserTypingEvent() {
+            setRobotState('typing');
+            clearTimeout(typingDebounceTimer);
+            typingDebounceTimer = setTimeout(() => {
+                setRobotState('idle');
+            }, 1200);
+        }
+
+        inputField.addEventListener('input', () => {
+            btnSend.disabled = inputField.value.trim().length === 0;
+            handleUserTypingEvent();
+        });
+
+        inputField.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                dispatchUserQuery();
+            }
+        });
+
+        // Theme Initialization (Default Light)
+        function initThemeSettings() {
+            setThemeMode(activeTheme);
+        }
+
+        function setThemeMode(mode) {
+            activeTheme = mode;
+            document.documentElement.setAttribute('data-theme', mode);
+            localStorage.setItem('golo_theme', mode);
+            if (btnThemeToggle) {
+                btnThemeToggle.innerText = mode === 'light' ? '🌙' : '☀️';
+            }
+        }
+
+        function toggleTheme() {
+            const next = activeTheme === 'light' ? 'dark' : 'light';
+            setThemeMode(next);
+        }
+
+        // Assistant Modal Controls
+        function openAssistantModal() {
+            isDrawerOpen = true;
+            drawer.classList.add('open');
+            minibar.classList.remove('visible');
+            if (stream.children.length === 0) {
+                renderInitialGreeting();
+            }
+            setTimeout(() => inputField.focus(), 150);
+            scrollMessagesBottom();
+        }
+
+        function closeAssistantModal() {
+            isDrawerOpen = false;
+            drawer.classList.remove('open');
+            minibar.classList.remove('visible');
+            setRobotState('idle');
+        }
+
+        function minimizeAssistantModal() {
+            isDrawerOpen = false;
+            drawer.classList.remove('open');
+            minibar.classList.add('visible');
+        }
+
+        function toggleAssistantModal() {
+            if (isDrawerOpen) closeAssistantModal();
+            else openAssistantModal();
+        }
+
+        function toggleMaximizeDrawer() {
+            isMaximized = !isMaximized;
+            if (isMaximized) {
+                drawer.classList.add('maximized');
+                btnMaxToggle.innerText = '❐';
+            } else {
+                drawer.classList.remove('maximized');
+                btnMaxToggle.innerText = '⛶';
+            }
+            scrollMessagesBottom();
+        }
+
+        function askQuestion(q) {
+            openAssistantModal();
+            inputField.value = q;
+            btnSend.disabled = false;
+            dispatchUserQuery();
+        }
+
+        // Web Speech API Voice Recording Feature
+        function initSpeechEngine() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechClass = window.SpeechRecognition || window.webkitSpeechRecognition;
+                speechRecognizer = new SpeechClass();
+                speechRecognizer.continuous = false;
+                speechRecognizer.interimResults = true;
+                speechRecognizer.lang = 'en-US';
+
+                speechRecognizer.onstart = () => {
+                    isRecording = true;
+                    btnMic.classList.add('recording-active');
+                    voiceBar.style.display = 'block';
+                    setRobotState('typing', 'Listening to voice...');
+                };
+
+                speechRecognizer.onresult = (e) => {
+                    let transcript = '';
+                    for (let i = e.resultIndex; i < e.results.length; i++) {
+                        transcript += e.results[i][0].transcript;
+                    }
+                    inputField.value = transcript;
+                    btnSend.disabled = transcript.trim().length === 0;
+                    handleUserTypingEvent();
+                };
+
+                speechRecognizer.onerror = () => stopSpeech();
+                speechRecognizer.onend = () => stopSpeech();
+            }
+        }
+
+        function toggleVoiceRecording() {
+            if (!speechRecognizer) initSpeechEngine();
+            if (!speechRecognizer) {
+                alert('Speech recognition is not supported on this browser. Please type your query.');
+                return;
+            }
+            if (isRecording) {
+                speechRecognizer.stop();
+                stopSpeech();
+            } else {
+                speechRecognizer.start();
+            }
+        }
+
+        function stopSpeech() {
+            isRecording = false;
+            btnMic.classList.remove('recording-active');
+            voiceBar.style.display = 'none';
+            setRobotState('idle');
+        }
+
+        // Render Initial Welcome Card with Animated Golo Robot & Quick Suggestion Chips
+        function renderInitialGreeting() {
+            const card = document.createElement('div');
+            card.className = 'welcome-robot-card';
+            card.innerHTML = `
+                <div class="welcome-robot-figure golo-robot-container state-idle" id="welcomeMascotRobot">
+                    <svg viewBox="0 0 100 100" class="golo-robot-svg">
+    <!-- Processing Neural Halo (Appears when processing) -->
+    <g class="neural-halo">
+        <ellipse cx="50" cy="7" rx="18" ry="5.5" fill="none" stroke="#F5B849" stroke-width="2.2" stroke-dasharray="5,3" class="halo-ring"/>
+        <circle cx="32" cy="7" r="2.5" fill="#06B6D4" class="halo-dot"/>
+        <circle cx="68" cy="7" r="2.5" fill="#38BDF8" class="halo-dot"/>
+    </g>
+
+    <!-- Antenna -->
+    <g class="robot-antenna">
+        <line x1="50" y1="18" x2="50" y2="9" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="50" cy="8" r="5" fill="#2563EB" class="antenna-core"/>
+        <!-- Radio broadcast rings -->
+        <circle cx="50" cy="8" r="8" fill="none" stroke="#00D2FF" stroke-width="1.8" class="antenna-wave wave-1"/>
+        <circle cx="50" cy="8" r="13" fill="none" stroke="#38BDF8" stroke-width="1.4" class="antenna-wave wave-2"/>
+    </g>
+
+    <!-- Robot Head & Ears Group -->
+    <g class="robot-head-assembly">
+        <!-- Earcups -->
+        <g class="ear-left">
+            <circle cx="15" cy="35" r="7.5" fill="#1D4ED8" stroke="#2563EB" stroke-width="1.5"/>
+            <circle cx="15" cy="35" r="4.5" fill="#06B6D4" class="ear-inner-glow"/>
+        </g>
+        <g class="ear-right">
+            <circle cx="85" cy="35" r="7.5" fill="#1D4ED8" stroke="#2563EB" stroke-width="1.5"/>
+            <circle cx="85" cy="35" r="4.5" fill="#06B6D4" class="ear-inner-glow"/>
+        </g>
+
+        <!-- Outer Head Chassis -->
+        <rect x="18" y="16" width="64" height="42" rx="21" fill="url(#robotWhiteGrad)" stroke="#CBD5E1" stroke-width="1.8"/>
+        <!-- Head Highlight -->
+        <ellipse cx="50" cy="20" rx="22" ry="3" fill="rgba(255,255,255,0.7)"/>
+
+        <!-- Glossy Visor Screen -->
+        <rect x="23" y="22" width="54" height="30" rx="15" fill="#060C1E" stroke="#1E3A8A" stroke-width="1.5" class="robot-visor"/>
+        <path d="M 27 25 Q 50 23 73 26" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Eyes: Normal State -->
+        <g class="eyes-layer eyes-normal">
+            <rect x="32" y="29" width="13" height="14" rx="6.5" fill="#00D2FF" class="eye-shape"/>
+            <circle cx="36" cy="33" r="2.2" fill="#ffffff"/>
+            <rect x="55" y="29" width="13" height="14" rx="6.5" fill="#00D2FF" class="eye-shape"/>
+            <circle cx="59" cy="33" r="2.2" fill="#ffffff"/>
+        </g>
+
+        <!-- Eyes: Happy State (^ ^) -->
+        <g class="eyes-layer eyes-happy">
+            <path d="M 31 38 Q 38.5 25 46 38" fill="none" stroke="#00E5FF" stroke-width="3.8" stroke-linecap="round" class="eye-glow"/>
+            <path d="M 54 38 Q 61.5 25 69 38" fill="none" stroke="#00E5FF" stroke-width="3.8" stroke-linecap="round" class="eye-glow"/>
+        </g>
+
+        <!-- Eyes: Error State (X X / Puzzled) -->
+        <g class="eyes-layer eyes-error">
+            <line x1="33" y1="31" x2="43" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="43" y1="31" x2="33" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="57" y1="31" x2="67" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="67" y1="31" x2="57" y2="41" stroke="#EF4444" stroke-width="3.2" stroke-linecap="round"/>
+        </g>
+    </g>
+
+    <!-- Neck Joint -->
+    <rect x="44" y="56" width="12" height="4" rx="2" fill="#1E3A8A"/>
+
+    <!-- Torso -->
+    <g class="robot-body">
+        <rect x="29" y="59" width="42" height="27" rx="13" fill="url(#robotWhiteGrad)" stroke="#CBD5E1" stroke-width="1.8"/>
+        <!-- Golo Brand on Chest -->
+        <text x="50" y="73" font-family="'Inter', sans-serif" font-size="8.5" font-weight="900" fill="#2563EB" text-anchor="middle">golo</text>
+        <path d="M 47 76 Q 51.5 80 56 76" fill="none" stroke="#F5B849" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- Holographic Mini Keyboard (Appears when user types) -->
+    <g class="robot-keyboard">
+        <rect x="22" y="87" width="56" height="9" rx="3.5" fill="#0F172A" stroke="#06B6D4" stroke-width="1.2"/>
+        <line x1="26" y1="91.5" x2="74" y2="91.5" stroke="#38BDF8" stroke-width="2.2" stroke-dasharray="3,2.5" class="keyboard-keys-glow"/>
+    </g>
+
+    <!-- Articulated Arms & Typing Hands -->
+    <g class="arm-assembly-left">
+        <path d="M 29 64 Q 18 73 24 85" fill="none" stroke="#2563EB" stroke-width="4.8" stroke-linecap="round"/>
+        <circle cx="24" cy="85" r="4.2" fill="#ffffff" stroke="#2563EB" stroke-width="1.8" class="hand-dot"/>
+    </g>
+    <g class="arm-assembly-right">
+        <path d="M 71 64 Q 82 73 76 85" fill="none" stroke="#2563EB" stroke-width="4.8" stroke-linecap="round"/>
+        <circle cx="76" cy="85" r="4.2" fill="#ffffff" stroke="#2563EB" stroke-width="1.8" class="hand-dot"/>
+    </g>
+
+    <!-- Celebration Sparkles (Active on Happy Output) -->
+    <g class="celebration-sparkles">
+        <polygon points="12,18 14,23 19,25 14,27 12,32 10,27 5,25 10,23" fill="#F5B849" class="sparkle-1"/>
+        <polygon points="88,20 90,24 94,26 90,28 88,32 86,28 82,26 86,24" fill="#00D2FF" class="sparkle-2"/>
+        <circle cx="20" cy="10" r="2.5" fill="#10B981" class="sparkle-3"/>
+        <circle cx="80" cy="12" r="2.5" fill="#F5B849" class="sparkle-4"/>
+    </g>
+
+    <defs>
+        <linearGradient id="robotWhiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#E2E8F0"/>
+        </linearGradient>
+    </defs>
+</svg>
+                </div>
+                <h3>Hi there! I'm Golo AI</h3>
+                <p>Your intelligent retail companion. Ask me anything about orders, payments, KYC verification, logging out, or store management!</p>
+            `;
+            stream.appendChild(card);
+
+            const chipsDiv = document.createElement('div');
+            chipsDiv.className = 'drawer-chips-group';
+
+            const quickFaqs = [
+                "How do I log out of my GOLO account?",
+                "What is GOLO and how does it work?",
+                "How do I claim an offer voucher?",
+                "What is a Credit Note?",
+                "How does KYC verification work?",
+                "How to register as a merchant?"
+            ];
+
+            quickFaqs.forEach(q => {
+                const chip = document.createElement('button');
+                chip.className = 'drawer-chip';
+                chip.innerHTML = `<span>💬</span> ${q}`;
+                chip.onclick = () => {
+                    askQuestion(q);
+                };
+                chipsDiv.appendChild(chip);
+            });
+
+            stream.appendChild(chipsDiv);
+            scrollMessagesBottom();
+        }
+
+        function appendMessage(sender, text, source = null) {
+            const row = document.createElement('div');
+            row.className = `message-row ${sender}`;
+
+            let formatted = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+
+            let badgeHtml = '';
+            if (source && sender === 'ai') {
+                badgeHtml = `<span class="ai-source-badge">⚡ ${source}</span>`;
+            }
+
+            row.innerHTML = `
+                ${badgeHtml}
+                <div class="msg-bubble-box">${formatted}</div>
+            `;
+            stream.appendChild(row);
+            scrollMessagesBottom();
+        }
+
+        function scrollMessagesBottom() {
+            setTimeout(() => {
+                stream.scrollTop = stream.scrollHeight;
+            }, 50);
+        }
+
+        // Dual-Path Query Dispatcher: Live FastAPI RAG Backend -> Client Fallback Engine
+        async function dispatchUserQuery() {
+            const query = inputField.value.trim();
+            if (!query) return;
+
+            appendMessage('user', query);
+            inputField.value = '';
+            btnSend.disabled = true;
+
+            // Trigger PROCESSING animation on robot
+            setRobotState('processing', 'Analyzing query...');
+
+            const session_id = sessionStorage.getItem('golo_session_id') || ('sess_' + Math.random().toString(36).substring(2, 9));
+            sessionStorage.setItem('golo_session_id', session_id);
+            const merchant_id = localStorage.getItem('golo_merchant_id') || 'MRC-DEMO';
+
+            // 1. Try Live FastAPI Server with RAG Engine
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+                const res = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, session_id, merchant_id }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                if (res.ok) {
+                    const data = await res.json();
+                    appendMessage('ai', data.response, data.category || 'Golo AI');
+                    
+                    // Check if response was out-of-scope refusal
+                    if (data.source === 'out_of_scope') {
+                        setRobotState('error', 'Not app related');
+                        setTimeout(() => setRobotState('idle'), 3500);
+                    } else {
+                        setRobotState('happy', 'Here is your guidance! 😊');
+                        setTimeout(() => setRobotState('idle'), 3500);
+                    }
+                    return;
+                }
+            } catch (err) {
+                // Server unavailable or timeout, fallback to Client RAG Engine
+            }
+
+            // 2. Embedded Client-Side Engine (Semantic match across 163 FAQs)
+            setTimeout(() => {
+                const clientRes = matchClientFaq(query);
+                appendMessage('ai', clientRes.answer, clientRes.source);
+                
+                if (clientRes.isError) {
+                    setRobotState('error', 'Not app related');
+                } else {
+                    setRobotState('happy', 'Here is your guidance! 😊');
+                }
+                setTimeout(() => setRobotState('idle'), 3500);
+            }, 400);
+        }
+
+        function matchClientFaq(query) {
+            const qLower = query.toLowerCase().trim();
+
+            // Strict Out-of-Scope check
+            const outOfScopeTerms = ['cricket', 'football', 'world cup', 'weather', 'recipe', 'movie', 'president', 'sing a song', 'joke', 'python code'];
+            if (outOfScopeTerms.some(t => qLower.includes(t)) && !qLower.includes('golo')) {
+                return {
+                    answer: "It is not our app related question. Please try again. I am the Golo Merchant AI Assistant, specialized exclusively in guiding you through the Golo web application, product listings, orders, payments, KYC verification, and store settings. 😊",
+                    source: "Scope Guardrail",
+                    isError: true
+                };
+            }
+
+            // Logout intent fast path
+            if (qLower.includes('logout') || qLower.includes('log out') || qLower.includes('sign out') || qLower.includes('signout')) {
+                const logoutFaq = ALL_GOLO_FAQS.find(f => f.id === 163);
+                if (logoutFaq) {
+                    return { answer: logoutFaq.answer, source: logoutFaq.category, isError: false };
+                }
+            }
+
+            // Domain check
+            const appTerms = [
+                'golo', 'merchant', 'product', 'products', 'order', 'orders', 'payment', 'payout',
+                'voucher', 'vouchers', 'deal', 'deals', 'offer', 'offers', 'wallet', 'credit note',
+                'kyc', 'verification', 'store', 'shop', 'dashboard', 'delivery', 'pickup', 'refund',
+                'cancellation', 'subscription', 'wishlist', 'loyalty', 'points', 'stars', 'nexaprime',
+                'account', 'admin', 'coupon', 'help', 'support', 'logout', 'login', 'password', 'profile'
+            ];
+            const isRelevant = appTerms.some(term => qLower.includes(term));
+            if (!isRelevant) {
+                return {
+                    answer: "It is not our app related question. Please try again. I am the Golo Merchant AI Assistant, specialized exclusively in guiding you through the Golo web application, product listings, orders, payments, KYC verification, and store settings. 😊",
+                    source: "Scope Guardrail",
+                    isError: true
+                };
+            }
+
+            // Semantic scoring across 163 FAQs
+            let best = null;
+            let maxScore = 0;
+            const words = qLower.replace(/[^\w\s]/g, '').split(/\s+/);
+
+            for (let f of ALL_GOLO_FAQS) {
+                let score = 0;
+                const fqLower = f.question.toLowerCase();
+                if (qLower.includes(fqLower)) score += 15;
+                for (let tag of f.tags) {
+                    if (words.includes(tag.toLowerCase())) score += 3;
+                    if (qLower.includes(tag.toLowerCase())) score += 2;
+                }
+                if (score > maxScore) {
+                    maxScore = score;
+                    best = f;
+                }
+            }
+
+            if (best && maxScore >= 2) {
+                return { answer: best.answer, source: best.category, isError: false };
+            }
+
+            return {
+                answer: "For this inquiry regarding the GOLO platform, please check your **Dashboard** settings or submit a ticket to **support@golo.com**. Our operations team will guide you step by step.",
+                source: "GOLO Knowledge Base",
+                isError: false
+            };
+        }
+
+        // Initialize on DOM load
+        window.addEventListener('DOMContentLoaded', () => {
+            initThemeSettings();
+            initSpeechEngine();
+            setRobotState('idle');
+
+            // URL parameter handling for deep linking & state inspection
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('theme')) {
+                setThemeMode(params.get('theme'));
+            }
+            if (params.get('open') === 'true') {
+                openAssistantModal();
+            }
+            if (params.get('state')) {
+                const s = params.get('state');
+                if (s === 'typing') {
+                    setRobotState('typing', 'Typing question on keyboard...');
+                    inputField.value = 'How do I log out of my GOLO account?';
+                } else if (s === 'processing') {
+                    setRobotState('processing', 'Thinking & processing...');
+                } else if (s === 'happy' || s === 'success') {
+                    setRobotState('happy', 'Guidance ready! 😊');
+                } else if (s === 'error') {
+                    setRobotState('error', 'Not app related');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

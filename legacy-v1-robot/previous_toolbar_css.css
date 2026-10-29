@@ -1,0 +1,68 @@
+er-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }}
+
+        .ai-source-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--golo-blue);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }}
+
+        /* Query Input Bar */
+        .chat-input-toolbar {{
+            padding: 0.85rem 1rem;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-ui);
+            position: relative;
+        }}
+
+        .input-capsule {{
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-ui);
+            border-radius: 999px;
+            padding: 4px 6px 4px 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }}
+        .input-capsule:focus-within {{
+            border-color: var(--golo-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }}
+
+        .query-input-field {{
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.92rem;
+            font-family: var(--font-body);
+            outline: none;
+            padding: 6px 0;
+        }}
+
+        .btn-mic-record {{
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-right: 4px;
+        }}
+        .btn-mic-record:hover {{
+            background: var(--bg-card-hover);
+            color: var(--golo-blue);
+        }}

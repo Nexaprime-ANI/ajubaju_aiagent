@@ -1,0 +1,63 @@
+function setRobotState(state, statusText = null) {{
+            if (!robotActor) return;
+            robotActor.setAttribute('data-robot-state', state);
+
+            switch(state) {{
+                case 'typing':
+                    robotReactionIcon.innerText = '⌨️';
+                    robotActorStatus.innerText = statusText || '⌨️ Typing...';
+                    break;
+                case 'processing':
+                    robotReactionIcon.innerText = '🧠';
+                    robotActorStatus.innerText = statusText || '🧠 Thinking...';
+                    break;
+                case 'happy':
+                    robotReactionIcon.innerText = '✨';
+                    robotActorStatus.innerText = statusText || '✨ Insight found!';
+                    // Auto-revert to idle after 4 seconds
+                    setTimeout(() => {{
+                        if (robotActor.getAttribute('data-robot-state') === 'happy') {{
+                            setRobotState('idle');
+                        }}
+                    }}, 4000);
+                    break;
+                case 'error':
+                    robotReactionIcon.innerText = '⚠️';
+                    robotActorStatus.innerText = statusText || '⚠️ Not app related';
+                    // Auto-revert to idle after 5 seconds
+                    setTimeout(() => {{
+                        if (robotActor.getAttribute('data-robot-state') === 'error') {{
+                            setRobotState('idle');
+                        }}
+                    }}, 5000);
+                    break;
+                case 'idle':
+                default:
+                    robotReactionIcon.innerText = '🤖';
+                    robotActorStatus.innerText = '● Ready';
+                    break;
+            }}
+        }}
+
+        // Theme Initialization (Default Light)
+        function initThemeSettings() {{
+            setThemeMode(activeTheme);
+        }}
+
+        function setThemeMode(mode) {{
+            activeTheme = mode;
+            document.documentElement.setAttribute('data-theme', mode);
+            localStorage.setItem('golo_theme', mode);
+            btnQuickTheme.innerText = mode === 'light' ? '🌙' : '☀️';
+        }}
+
+        function toggleTheme() {{
+            const next = activeTheme === 'light' ? 'dark' : 'light';
+            setThemeMode(next);
+        }}
+
+        // Assistant Modal Controls
+        function openAssistantModal() {{
+            isDrawerOpen = true;
+            drawer.classList.add('open');
+    

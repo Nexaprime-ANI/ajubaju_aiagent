@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoLo Ai — Intelligent Search & Reasoning Engine</title>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css?v=20261029_1530">
+</head>
+<body>
+
+    <!-- Main Page Container with Ambient Soft Lavender Glow -->
+    <div class="page-wrapper">
+        
+        <!-- Navigation Bar -->
+        <header class="navbar">
+            <div class="nav-container">
+                <!-- Left: Brand Logo & Main Nav Links -->
+                <div class="nav-left">
+                    <a href="#search" class="brand-logo" onclick="switchView('search', event)" title="GoLo Ai Home">
+                        <div class="logo-icon">
+                            <span class="sphere-half left"></span>
+                            <span class="sphere-half right"></span>
+                        </div>
+                        <span class="logo-text">
+                            <span class="logo-brand">GoLo</span>
+                            <span class="logo-ai">Ai</span>
+                        </span>
+                    </a>
+
+                    <nav class="nav-menu">
+                        <a href="#search" class="nav-link active" id="nav-search" onclick="switchView('search', event)">Search</a>
+                        <a href="#assistant" class="nav-link" id="nav-assistant" onclick="switchView('assistant', event)">Assistant</a>
+                        <a href="#enterprise" class="nav-link" id="nav-enterprise" onclick="switchView('enterprise', event)">Enterprise</a>
+                    </nav>
+                </div>
+
+                <!-- Right: Language Selector -->
+                <div class="nav-right">
+                    <button class="btn-lang" title="Select Global Language" id="btnLangSelect" onclick="openLanguageModal(event)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Signed in profile state -->
+                    <div class="user-profile-btn" id="navUserProfile" style="display: none;" onclick="toggleUserDropdown(event)">
+                        <div class="user-avatar-circle" id="userAvatarText">A</div>
+                        <span id="userNameLabel">Alex M.</span>
+                        <span style="font-size: 0.7rem; color: #64748B;">▾</span>
+                    </div>
+
+                    <!-- User Dropdown Menu -->
+                    <div id="userDropdownMenu" style="display: none; position: absolute; top: 62px; right: 2rem; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 220px; z-index: 100; overflow: hidden; padding: 6px;">
+                        <div style="padding: 10px 12px; border-bottom: 1px solid #F1F5F9;">
+                            <div style="font-size: 0.85rem; font-weight: 700; color: #0F172A;" id="menuUserFullName">Alex Merchant</div>
+                            <div style="font-size: 0.75rem; color: #64748B;">Merchant ID: <strong id="menuMerchantId">MRC-8821</strong></div>
+                        </div>
+                        <button onclick="switchView('assistant'); toggleUserDropdown();" style="width: 100%; text-align: left; padding: 8px 12px; background: none; border: none; font-size: 0.85rem; color: #334155; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 8px;">
+                            💬 Open AI Assistant
+                        </button>
+                        <button onclick="switchView('analysis'); toggleUserDropdown();" style="width: 100%; text-align: left; padding: 8px 12px; background: none; border: none; font-size: 0.85rem; color: #334155; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 8px;">
+                            📊 Analytics Dashboard
+                        </button>
+                        <div style="height: 1px; background: #F1F5F9; margin: 4px 0;"></div>
+                        <button onclick="handleUserLogout()" style="width: 100%; text-align: left; padding: 8px 12px; background: #FEF2F2; border: none; font-size: 0.85rem; color: #B91C1C; font-weight: 600; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 8px;">
+                            🚪 Log Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- ===============================================================
+                 VIEW 1: SEARCH & LANDING (EXACT DESIGN MATCH)
+                 =============================================================== -->
+            <div class="view-panel active" id="view-search">
+                <!-- SECTION 1: HERO & CORE PILLARS (FRAMED AS IN DESIGN) -->
+                <section class="framed-section hero-framed-section">
+                    <div class="section-dashed-border"></div>
+
+                    <div class="hero-inner">
+                        <!-- Hero Typography -->
+                        <h1 class="hero-headline">
+                            <span class="headline-dark">Ask anything.</span>
+                            <span class="headline-purple">Get intelligent answers.</span>
+                        </h1>
+
+                        <p class="hero-subtext">
+                            Powered by GoLo Ai's advanced models to understand, analyze, and create across the web.
+                        </p>
+
+                        <!-- Search Capsule with Google-Style Autocomplete -->
+                        <div class="search-capsule-wrapper">
+                            <div class="autocomplete-container">
+                                <div class="search-capsule" id="searchCapsule">
+                                    <input 
+                                        type="text" 
+                                        class="search-input" 
+                                        id="searchInput" 
+                                        placeholder="Ask me anything (e.g. how to register a number, how to log out, list product)..." 
+                                        autocomplete="off"
+                                        spellcheck="false"
+                                        oninput="handleSearchAutocomplete(event)"
+                                        onfocus="handleSearchAutocomplete(event)"
+                                    >
+
+                                    <!-- Attachment Preview Tag (Hidden by default) -->
+                                    <div class="attachment-preview" id="attachmentPreview" style="display: none;">
+                                        <span class="attachment-name" id="attachmentName">image.png</span>
+                                        <button type="button" class="btn-remove-attachment" onclick="removeAttachment()">✕</button>
+                                    </div>
+
+                                    <div class="search-controls">
+                                        <!-- Multimodal Image / Document Upload -->
+                                        <button type="button" class="btn-control btn-upload" id="btnUpload" title="Upload image or document" onclick="triggerFileUpload()">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                                <polyline points="21 15 16 10 5 21"></polyline>
+                                            </svg>
+                                        </button>
+                                        <input type="file" id="fileInput" accept="image/*,.pdf,.doc,.docx" style="display: none;" onchange="handleFileSelected(event)">
+
+                                        <!-- Microphone Voice Input -->
+                                        <button type="button" class="btn-control btn-mic" id="btnMic" title="Voice search" onclick="toggleVoiceSearch()">
+                                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                                            </svg>
+                                        </button>
+
+                                        <!-- Send Arrow Button -->
+                                        <button type="button" class="btn-send" id="btnSend" title="Submit Search" onclick="submitSearchQuery()">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                                <polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor"></polygon>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Autocomplete Dropdown List -->
+                                <div class="autocomplete-dropdown" id="searchAutocomplete">
+                                    <div class="autocomplete-header">
+                                        <span>Suggested Queries</span>
+                                        <span style="color:#6366F1;">Predicted by GoLo AI</span>
+                                    </div>
+                                    <div id="searchAutocompleteList"></div>
+                                </div>
+                            </div>
+
+                            <!-- Speech Recognition Feedback Bar -->
+                            <div class="voice-status-bar" id="voiceStatusBar" style="display: none;">
+                                <span class="voice-pulse-dot"></span>
+                                <span id="voiceStatusText">Listening... Speak your question now</span>
+                            </div>
+                        </div>
+
+                        <!-- 3 Feature Cards -->
+                        <div class="feature-cards-grid">
+                            <!-- Card 1: Intelligent Analysis -->
+                            <div class="feature-card" onclick="switchView('analysis')" title="Open Intelligent Analysis">
+                                <div class="card-icon-badge badge-indigo">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <line x1="6" y1="18" x2="18" y2="6" stroke="#4F46E5" stroke-width="4" stroke-linecap="round"/>
+                                        <path d="M5 4v3M3.5 5.5h3M19 16v3M17.5 17.5h3" stroke="#4F46E5" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title">Intelligent Analysis</h3>
+                                <p class="card-desc">Deeply understand complex queries and provide structured, accurate responses instantly with GoLo Ai's reasoning engine.</p>
+                            </div>
+
+                            <!-- Card 2: Multimodal Search -->
+                            <div class="feature-card" onclick="switchView('multimodal')" title="Open Multimodal Search">
+                                <div class="card-icon-badge badge-purple">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="2" y="6" width="15" height="13" rx="2.5" stroke="#9333EA" stroke-width="1.8" fill="none" opacity="0.6"/>
+                                        <rect x="6" y="3" width="16" height="14" rx="2.5" stroke="#9333EA" stroke-width="2" fill="#FAF5FF"/>
+                                        <circle cx="10.5" cy="7.5" r="1.5" fill="#9333EA"/>
+                                        <path d="M7.5 14l3.5-3.5 3 3 2.5-2.5 4 4" stroke="#9333EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title">Multimodal Search</h3>
+                                <p class="card-desc">Upload images or documents and let AI extract insights and answer questions about them with visual understanding.</p>
+                            </div>
+
+                            <!-- Card 3: Real-time Data -->
+                            <div class="feature-card" onclick="switchView('realtime')" title="Explore Real-time 171+ Knowledge Catalog">
+                                <div class="card-icon-badge badge-blue">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M4 4v14a2 2 0 0 0 2 2h14" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/>
+                                        <polyline points="8 14 12 9 15 12 20 6" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title">Real-time Data</h3>
+                                <p class="card-desc">Access up-to-date information from across the web with cited, verifiable sources and live browsing capabilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: WHY CHOOSE GOLO AI (4 PILLARS) -->
+                <section class="framed-section why-framed-section">
+                    <div class="section-dashed-border"></div>
+
+                    <div class="why-inner">
+                        <h2 class="why-headline">Why choose GoLo Ai?</h2>
+                        <p class="why-subtext">A new generation of search designed for how you actually work and learn.</p>
+
+                        <div class="why-pillars-grid">
+                            <!-- Pillar 1: Lightning Fast -->
+                            <div class="pillar-item" onclick="openBenchmarkModal()" style="cursor: pointer;" title="Inspect Live Benchmarks & Latency">
+                                <div class="pillar-icon-circle">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                    </svg>
+                                </div>
+                                <h4 class="pillar-title">Lightning Fast</h4>
+                                <p class="pillar-desc">Answers generated in milliseconds with GoLo's optimized inference hardware.</p>
+                            </div>
+
+                            <!-- Pillar 2: Private & Secure -->
+                            <div class="pillar-item" onclick="openSecurityModal()" style="cursor: pointer;" title="View Security & PII Redactor Specs">
+                                <div class="pillar-icon-circle">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="pillar-title">Private & Secure</h4>
+                                <p class="pillar-desc">Your conversations stay private with enterprise-grade encryption and data protection.</p>
+                            </div>
+
+                            <!-- Pillar 3: Code & Math -->
+                            <div class="pillar-item" onclick="openCodeModal()" style="cursor: pointer;" title="Open Interactive API & Code Playground">
+                                <div class="pillar-icon-circle">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="16 18 22 12 16 6"></polyline>
+                                        <polyline points="8 6 2 12 8 18"></polyline>
+                                    </svg>
+                                </div>
+                                <h4 class="pillar-title">Code & Math</h4>
+                                <p class="pillar-desc">Solve complex problems, debug code, and compute on the fly with specialized logic models.</p>
+                            </div>
+
+                            <!-- Pillar 4: Global Languages -->
+                            <div class="pillar-item" onclick="openLanguageModal()" style="cursor: pointer;" title="Browse 100+ Global Languages">
+                                <div class="pillar-icon-circle">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="2" y="4" width="20" height="16" rx="4" fill="#4F46E5"/>
+                                        <text x="6" y="15.5" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="700">A</text>
+                                        <path d="M14 8h5M16.5 8v2M14 11h5M18 11c-.5 2.5-2 4.5-4 5.5M15.5 13.5c1 1.5 2 2.5 3.5 3" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <h4 class="pillar-title">Global Languages</h4>
+                                <p class="pillar-desc">Fluent in over 100 languages with natural-sounding translation and cultural context.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 2: ASSISTANT WORKSPACE (LIVE CHAT & SPECS)
+                 =============================================================== -->
+            <div class="view-panel" id="view-assistant">
+                <div class="view-header-bar">
+                    <button class="btn-back-nav" onclick="switchView('search')">
+                        ← Back to Search
+                    </button>
+                    <div class="view-title-group">
+                        <span class="view-badge">Workspace</span>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: #0F172A;">GoLo AI Assistant & Specification Hub</h2>
+                    </div>
+                    <div style="font-size: 0.82rem; color: #64748B;">
+                        Session: <span id="currentSessionIdLabel" style="font-family: var(--font-mono); font-weight: 600;">v2_demo_session</span>
+                    </div>
+                </div>
+
+                <div class="assistant-workspace" id="assistantWorkspace">
+                    <!-- Left Sidebar (Static ChatGPT-Style) -->
+                    <aside class="assistant-sidebar">
+                        <!-- New Chat Button -->
+                        <button type="button" class="btn-new-chat" onclick="createNewChatSession()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span>New Chat</span>
+                        </button>
+
+                        <!-- Chat History List (Recent Conversations - Expanded Height) -->
+                        <div class="sidebar-history-container">
+                            <div class="sidebar-section-title">
+                                <span>Recent Chats</span>
+                                <button type="button" class="btn-clear-history-icon" title="Clear All History" onclick="clearAllChatHistory()">🗑️</button>
+                            </div>
+                            <div class="sidebar-chat-history" id="sidebarChatHistoryList">
+                                <!-- Populated dynamically by script.js -->
+                            </div>
+                        </div>
+
+                        <!-- API Quota & Update Plan Section -->
+                        <div class="quota-indicator" id="quotaCard">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; margin-bottom: 4px;">
+                                <span>API Quota (RPM)</span>
+                                <span id="quotaLabel">3 / 20 Used</span>
+                            </div>
+                            <div class="quota-bar-wrapper">
+                                <div class="quota-bar-fill" id="quotaFill" style="width: 15%;"></div>
+                            </div>
+                            <button type="button" class="btn-upgrade-pill" id="btnUpgradeSidebar" onclick="openUpgradeModal()">
+                                ⚡ Update Plan
+                            </button>
+                        </div>
+
+                        <!-- User Profile Card -->
+                        <div class="sidebar-profile-card" onclick="openProfileModal()">
+                            <div class="profile-av">A</div>
+                            <div class="profile-info">
+                                <div class="profile-name">Alex Merchant</div>
+                                <div class="profile-plan-badge" id="sidebarPlanBadge">Free Tier (20 RPM)</div>
+                            </div>
+                            <div class="profile-dots">⚙️</div>
+                        </div>
+
+                        <!-- Ecosystem Branding Note -->
+                        <div style="font-size: 0.7rem; color: #94A3B8; text-align: center; margin-top: 4px; flex-shrink: 0;">
+                            © 2026 GoLo Ai • Product by NexaPrime
+                        </div>
+                    </aside>
+
+                    <!-- Main Chat Area (Scrollable Passage & Static Input) -->
+                    <section class="assistant-main-chat">
+                        <!-- Most Frequently Asked Questions (NLP Curated) -->
+                        <div class="popular-faqs-section" id="popularFaqsSection">
+                            <div class="popular-faqs-title">
+                                <span>🔥 Frequently Asked Questions (NLP Curated)</span>
+                            </div>
+                            <div class="popular-faqs-grid" id="popularFaqsList">
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('How do I register a mobile number or create a new account on GOLO?')">📱 Register Mobile / Account</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('How do I log out of my GOLO account?')">🚪 Log Out of Account</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('How to list a product on Golo?')">🏷️ List / Add Product</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('What is the payout schedule and settlement cycle for merchants on GOLO?')">💳 Payouts (T+2/T+3)</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('How to complete KYC verification?')">📑 KYC Verification</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('How do I contact GOLO Customer Care & Support?')">🎧 Customer Care Support</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('What is GOLO?')">💡 What is GOLO?</button>
+                                <button class="popular-faq-pill" onclick="sendQuickChatMessage('How does GOLO work?')">🔄 How GOLO Works</button>
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages History (THE ONLY PART THAT SCROLLS) -->
+                        <div class="chat-history-container" id="chatHistoryContainer">
+                            <!-- Initial Welcome Message -->
+                            <div class="chat-msg assistant">
+                                <div class="chat-avatar ai-av">G</div>
+                                <div>
+                                    <div class="chat-bubble">
+                                        <strong>Hello! I'm the GoLo AI Assistant. 👋</strong><br>
+                                        I can provide instant, verified guidance on all <strong>Golo Merchant features</strong> (listings, payouts, orders, KYC, settings, policies). You can also <strong>upload images</strong> (receipts, products, QR codes) or use <strong>voice dictation</strong> in any language. What can I help you with today?
+                                    </div>
+                                    <div class="source-badge-tag">
+                                        ⚡ Verified Knowledge Engine • 176 FAQs Indexed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Tray (STATIC AT BOTTOM) -->
+                        <div class="assistant-input-tray" id="assistantInputTray">
+                            <!-- Image Attachment Preview Tag (Hidden by default) -->
+                            <div class="attachment-preview" id="assistantAttachmentPreview" style="display: none; margin-bottom: 8px;">
+                                <span class="attachment-name" id="assistantAttachmentName">image.png</span>
+                                <button type="button" class="btn-remove-attachment" onclick="removeAssistantAttachment()">✕</button>
+                            </div>
+
+                            <div class="autocomplete-container">
+                                <div class="search-capsule" style="width: 100%; box-shadow: none; border: 1px solid #CBD5E1; padding-left: 10px;">
+                                    <!-- Image Upload Button (+) -->
+                                    <button type="button" class="btn-control btn-attach-plus" id="btnAssistantUpload" title="Upload Image for Multimodal Analysis" onclick="triggerAssistantFileUpload()">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg>
+                                    </button>
+                                    <input type="file" id="assistantFileInput" accept="image/*" style="display: none;" onchange="handleAssistantFileSelected(event)">
+
+                                    <input 
+                                        type="text" 
+                                        class="search-input" 
+                                        id="assistantChatInput" 
+                                        placeholder="Ask anything about GOLO or attach an image..." 
+                                        autocomplete="off"
+                                        oninput="handleAssistantAutocomplete(event)"
+                                        onfocus="handleAssistantAutocomplete(event)"
+                                    >
+                                    <div class="search-controls">
+                                        <!-- Speech-to-Text Mic Button -->
+                                        <button type="button" class="btn-control" id="btnAssistantMic" title="Voice dictation" onclick="toggleAssistantVoice()">
+                                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                                            </svg>
+                                        </button>
+                                        <!-- Send Button -->
+                                        <button type="button" class="btn-send" id="btnAssistantSend" title="Send message" onclick="submitAssistantChatMessage()">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                                <polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor"></polygon>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Assistant Autocomplete Dropdown List (Opens Upward) -->
+                                <div class="autocomplete-dropdown" id="assistantAutocomplete">
+                                    <div class="autocomplete-header">
+                                        <span>Suggested Queries</span>
+                                        <span style="color:#6366F1;">Predicted by GoLo AI</span>
+                                    </div>
+                                    <div id="assistantAutocompleteList"></div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.74rem; color: #94A3B8; padding: 6px 4px 0;">
+                                <span id="assistantStatusNote">Enter to submit • Grounded in Dual-Path RAG • Multimodal Vision Active</span>
+                                <span id="charCountLabel">0/2000</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 3: ENTERPRISE PLATFORM VIEW
+                 =============================================================== -->
+            <div class="view-panel" id="view-enterprise" style="padding: 2rem 0; max-width: 1200px; margin: 0 auto; width: 100%;">
+                <div class="view-header-bar">
+                    <button class="btn-back-nav" onclick="switchView('search')">
+                        ← Back to Search
+                    </button>
+                    <div class="view-title-group">
+                        <span class="view-badge">Enterprise</span>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: #0F172A;">GoLo Enterprise Infrastructure & High-Volume Platform</h2>
+                    </div>
+                </div>
+
+                <div class="enterprise-grid">
+                    <div class="enterprise-metric-card">
+                        <div class="metric-val">99.99%</div>
+                        <div class="metric-label">Guaranteed High-Availability SLA</div>
+                        <div class="metric-sub">Multi-region active-active cluster deployment with zero-second failover.</div>
+                    </div>
+                    <div class="enterprise-metric-card">
+                        <div class="metric-val">42ms</div>
+                        <div class="metric-label">Average P95 Inference Latency</div>
+                        <div class="metric-sub">Accelerated TPU/GPU inference nodes for instant merchant resolutions.</div>
+                    </div>
+                    <div class="enterprise-metric-card">
+                        <div class="metric-val">10,000+</div>
+                        <div class="metric-label">Concurrent Merchant Sessions</div>
+                        <div class="metric-sub">Auto-scaling serverless architecture with real-time token rate limits.</div>
+                    </div>
+                </div>
+
+                <!-- API Key Generator Card -->
+                <div class="api-key-box">
+                    <div>
+                        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 4px;">Production API Gateway Credentials</h3>
+                        <p style="font-size: 0.88rem; color: #94A3B8;">Generate secure Bearer tokens to query the Golo AI RAG endpoints programmatically.</p>
+                        <div class="key-display" id="generatedApiKeyDisplay">golo_live_sec_9948a27b10c934e8f1</div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-signin" style="background: #3B82F6;" onclick="generateNewApiKey()">Generate New Key</button>
+                        <button class="btn-signin" style="background: #334155;" onclick="copyApiKey()">Copy Key</button>
+                    </div>
+                </div>
+
+                <!-- Enterprise Demo Booking Form -->
+                <div style="background: #FFFFFF; border: 1px solid #EDE9FE; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
+                    <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; color: #0F172A;">Schedule an Enterprise Platform Demo</h3>
+                    <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 1.5rem;">Explore private VPC deployment, custom fine-tuned weights, and custom CRM webhook integrations.</p>
+
+                    <form onsubmit="handleDemoRequestSubmit(event)" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Full Name</label>
+                            <input type="text" required placeholder="Alex Merchant" class="signin-input" style="margin-bottom: 0;" id="demoFullName">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Work Email</label>
+                            <input type="email" required placeholder="alex@downtownretail.com" class="signin-input" style="margin-bottom: 0;" id="demoWorkEmail">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Monthly Merchant Order Volume</label>
+                            <select class="signin-input" style="margin-bottom: 0;" id="demoVolume">
+                                <option>1,000 – 10,000 orders/mo</option>
+                                <option>10,000 – 50,000 orders/mo</option>
+                                <option>50,000+ orders/mo (Enterprise Tier)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Deployment Preference</label>
+                            <select class="signin-input" style="margin-bottom: 0;" id="demoDeployment">
+                                <option>Google Cloud Platform (GCP)</option>
+                                <option>Amazon Web Services (AWS VPC)</option>
+                                <option>GoLo Managed Dedicated Cluster</option>
+                            </select>
+                        </div>
+                        <div style="grid-column: 1 / -1; margin-top: 0.5rem;">
+                            <button type="submit" class="btn-signin" style="background: #4F46E5; padding: 12px 24px;">Submit Enterprise Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 4: INTELLIGENT ANALYSIS & MERCHANT TELEMETRY VIEW
+                 =============================================================== -->
+            <div class="view-panel" id="view-analysis" style="padding: 2rem 0; max-width: 1200px; margin: 0 auto; width: 100%;">
+                <div class="view-header-bar">
+                    <button class="btn-back-nav" onclick="switchView('search')">
+                        ← Back to Search
+                    </button>
+                    <div class="view-title-group">
+                        <span class="view-badge">Analytics</span>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: #0F172A;">Merchant Intelligence & Telemetry Dashboard</h2>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-sample-doc" onclick="refreshAnalyticsMetrics()">🔄 Refresh Live Data</button>
+                    </div>
+                </div>
+
+                <div class="analytics-metrics-grid">
+                    <div class="analysis-stat-card">
+                        <span class="stat-pill">+18.4% vs last month</span>
+                        <div class="analysis-stat-val" id="statGrossSales">₹3,48,200</div>
+                        <div class="analysis-stat-title">MTD Gross Sales Volume</div>
+                    </div>
+                    <div class="analysis-stat-card">
+                        <span class="stat-pill" style="background: #EFF6FF; color: #2563EB;">98.2% on-time</span>
+                        <div class="analysis-stat-val" id="statTotalOrders">1,240</div>
+                        <div class="analysis-stat-title">Total Orders Fulfilled</div>
+                    </div>
+                    <div class="analysis-stat-card">
+                        <span class="stat-pill" style="background: #FEF3C7; color: #D97706;">Settlement: Tomorrow</span>
+                        <div class="analysis-stat-val" id="statPendingPayout">₹82,500</div>
+                        <div class="analysis-stat-title">Pending Bank Payout (T+2)</div>
+                    </div>
+                    <div class="analysis-stat-card">
+                        <span class="stat-pill">420 Verified Reviews</span>
+                        <div class="analysis-stat-val" id="statRating">4.8 ★</div>
+                        <div class="analysis-stat-title">Store Satisfaction Rating</div>
+                    </div>
+                </div>
+
+                <!-- Interactive 7-Day Performance Visualizer -->
+                <div class="chart-card-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: #0F172A;">7-Day Sales Trend & Order Velocity</h3>
+                        <span style="font-size: 0.8rem; color: #64748B;">Average Daily Velocity: ₹49,740 / day</span>
+                    </div>
+
+                    <div class="bars-wrapper">
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 60%;" title="Mon: ₹42,000"></div>
+                            <span class="bar-day">Mon</span>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 75%;" title="Tue: ₹52,400"></div>
+                            <span class="bar-day">Tue</span>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 50%;" title="Wed: ₹35,100"></div>
+                            <span class="bar-day">Wed</span>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 85%;" title="Thu: ₹61,200"></div>
+                            <span class="bar-day">Thu</span>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 95%;" title="Fri: ₹68,500"></div>
+                            <span class="bar-day">Fri</span>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 100%;" title="Sat: ₹72,000"></div>
+                            <span class="bar-day">Sat</span>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-visual" style="height: 80%;" title="Sun: ₹58,000"></div>
+                            <span class="bar-day">Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Alerts & AI Recommendations -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div style="background: #FFFFFF; border: 1px solid #EDE9FE; border-radius: 16px; padding: 1.5rem;">
+                        <h4 style="font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; color: #0F172A;">⚠️ Live Inventory & Restock Alerts</h4>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 10px 12px; border-radius: 8px; font-size: 0.85rem;">
+                                <strong>Wireless Noise-Canceling Earbuds Pro:</strong> 3 units remaining.<br>
+                                <span style="color: #92400E; font-size: 0.8rem;">💡 AI Recommendation: Reorder 40 units immediately to avoid stockout by Friday.</span>
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 12px; border-radius: 8px; font-size: 0.85rem;">
+                                <strong>Fast-Charging USB-C Cable (2m):</strong> 14 units remaining.<br>
+                                <span style="color: #475569; font-size: 0.8rem;">Stock level sufficient for 4 days based on current order rate.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #FFFFFF; border: 1px solid #EDE9FE; border-radius: 16px; padding: 1.5rem;">
+                        <h4 style="font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; color: #0F172A;">🤖 Ask AI Analytics</h4>
+                        <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 10px;">Ask any question about store performance, margin calculations, or restocking schedules.</p>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="analyticsPromptInput" placeholder="e.g., How can I increase my average order value?" class="signin-input" style="margin-bottom: 0;">
+                            <button class="btn-signin" onclick="submitAnalyticsQuestion()">Analyze</button>
+                        </div>
+                        <div id="analyticsAnswerOutput" style="margin-top: 10px; font-size: 0.86rem; color: #334155; line-height: 1.5;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 5: MULTIMODAL SEARCH & VISION INSPECTOR VIEW
+                 =============================================================== -->
+            <div class="view-panel" id="view-multimodal" style="padding: 2rem 0; max-width: 1200px; margin: 0 auto; width: 100%;">
+                <div class="view-header-bar">
+                    <button class="btn-back-nav" onclick="switchView('search')">
+                        ← Back to Search
+                    </button>
+                    <div class="view-title-group">
+                        <span class="view-badge">Vision AI</span>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: #0F172A;">Multimodal Document & Visual Catalog Inspector</h2>
+                    </div>
+                </div>
+
+                <div class="multimodal-container">
+                    <!-- Left: Upload & Sample Selector -->
+                    <div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: #0F172A; margin-bottom: 0.5rem;">Input Document or Product Image</h3>
+                        <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1rem;">Upload any GST certificate, invoice, or merchandise image to test visual OCR extraction.</p>
+
+                        <div class="dropzone-box" onclick="triggerFileUpload()">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            <div style="font-weight: 600; font-size: 0.95rem; color: #0F172A;">Click or Drag Document Here</div>
+                            <div style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">Supports PNG, JPEG, WEBP, PDF (Max 10MB)</div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <span style="font-size: 0.8rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Or Test with Verified Samples:</span>
+                            <div class="sample-docs-tray">
+                                <button class="btn-sample-doc" onclick="inspectSampleDoc('gst')">📑 GST Certificate Sample</button>
+                                <button class="btn-sample-doc" onclick="inspectSampleDoc('invoice')">🧾 Supplier Invoice Sample</button>
+                                <button class="btn-sample-doc" onclick="inspectSampleDoc('photo')">📸 Product Photo Sample</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Analysis Output -->
+                    <div class="ocr-results-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h4 style="font-weight: 700; font-size: 0.95rem; color: #0F172A;">AI Visual Extraction Results</h4>
+                            <span class="tag" id="multimodalStatusTag">Ready for Input</span>
+                        </div>
+
+                        <div id="multimodalResultsBody" style="font-size: 0.88rem; color: #334155; line-height: 1.6;">
+                            <div style="text-align: center; padding: 2rem; color: #94A3B8;">
+                                Select a verified sample above or upload a document to inspect OCR extraction, security validation, and catalog classification.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 6: REAL-TIME DATA & 171 FAQ CATALOG VIEW
+                 =============================================================== -->
+            <div class="view-panel" id="view-realtime" style="padding: 2rem 0; max-width: 1200px; margin: 0 auto; width: 100%;">
+                <div class="view-header-bar">
+                    <button class="btn-back-nav" onclick="switchView('search')">
+                        ← Back to Search
+                    </button>
+                    <div class="view-title-group">
+                        <span class="view-badge">Knowledge Catalog</span>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: #0F172A;">Real-time Knowledge Base Explorer (171 FAQs)</h2>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.25rem;">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="faqCatalogSearchInput" 
+                        placeholder="Search all 171 FAQs instantly (e.g. project overview, logout, credit note, KYC)..." 
+                        oninput="filterFaqCatalog()"
+                        style="width: 100%; border: 1px solid #CBD5E1; border-radius: 12px; padding: 12px 16px; font-size: 0.95rem;"
+                    >
+                </div>
+
+                <div class="faq-filter-bar">
+                    <button class="faq-pill-btn active" onclick="setFaqFilter('all', this)">All Topics (171)</button>
+                    <button class="faq-pill-btn" onclick="setFaqFilter('Project', this)">Project Specs (8)</button>
+                    <button class="faq-pill-btn" onclick="setFaqFilter('Product', this)">Product Listings (18)</button>
+                    <button class="faq-pill-btn" onclick="setFaqFilter('Payment', this)">Payments & Payouts (14)</button>
+                    <button class="faq-pill-btn" onclick="setFaqFilter('Order', this)">Orders & Delivery (16)</button>
+                    <button class="faq-pill-btn" onclick="setFaqFilter('Account', this)">Account & KYC (15)</button>
+                    <button class="faq-pill-btn" onclick="setFaqFilter('Troubleshooting', this)">Troubleshooting (12)</button>
+                </div>
+
+                <div class="faq-catalog-list" id="faqCatalogList">
+                    <!-- Populated dynamically via script.js -->
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-dashed-border"></div>
+            <div class="footer-container">
+                <div class="footer-left">
+                    <p class="copyright-text">© 2026 GoLo Ai — <strong>Product by NexaPrime Ecosystem</strong>. All rights reserved.</p>
+                    <span style="font-size: 0.78rem; color: #10B981; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+                        Backend Active: 176 FAQs Indexed • Port 8000
+                    </span>
+                </div>
+
+                <div class="footer-right">
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Twitter">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76c.97 0 1.76.79 1.76 1.76s-.79 1.76-1.76 1.76M5.07 18.5h2.78v-8.37H5.07v8.37z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ===============================================================
+         INTERACTIVE REASONING ANSWER MODAL
+         =============================================================== -->
+    <div class="results-overlay" id="resultsOverlay" onclick="closeResultsModal(event)">
+        <div class="results-modal" onclick="event.stopPropagation()">
+            <div class="results-header">
+                <div class="results-title-group">
+                    <div class="ai-avatar-badge">
+                        <span class="sphere-half left"></span>
+                        <span class="sphere-half right"></span>
+                    </div>
+                    <div>
+                        <h3 class="results-title">GoLo Ai Reasoning Answer</h3>
+                        <span class="results-query-label" id="resultsQueryLabel">Query: "How does GoLo Ai work?"</span>
+                    </div>
+                </div>
+                <button class="btn-close-modal" onclick="closeResultsModal()">✕</button>
+            </div>
+
+            <div class="results-body" id="resultsBody">
+                <!-- Dynamic AI streaming answer appears here -->
+            </div>
+
+            <div class="results-footer">
+                <div class="results-meta-tags">
+                    <span class="tag" id="modalLatencyTag">⚡ Inference: 42ms</span>
+                    <span class="tag">🛡️ Enterprise Guardrails Active</span>
+                    <span class="tag">🌐 Web Grounded</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn-copy-answer" onclick="openAssistantWithCurrentQuery()">Open in Assistant</button>
+                    <button class="btn-copy-answer" style="background: #334155;" onclick="copyResultsAnswer()">Copy Answer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign-in is handled by the parent GOLO app — modal removed intentionally -->
+
+    <!-- ===============================================================
+         LANGUAGE SELECTOR MODAL (105 LANGUAGES)
+         =============================================================== -->
+    <div class="results-overlay" id="languageOverlay" onclick="closeLanguageModal(event)">
+        <div class="signin-modal" style="max-width: 540px;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeLanguageModal()">✕</button>
+            <div class="signin-header">
+                <h2>🌐 Global Language Support</h2>
+                <p>Select your native language. GoLo AI supports over 105 global and regional languages.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem;" id="languageGrid">
+                <!-- Populated dynamically via script.js -->
+            </div>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 10px; font-size: 0.85rem; color: #475569;" id="langSampleDisplay">
+                Selected Language: <strong>English (Default)</strong><br>
+                <em>"How can I help you manage your store today?"</em>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         BENCHMARK / LATENCY MODAL (PILLAR 1)
+         =============================================================== -->
+    <div class="results-overlay" id="benchmarkOverlay" onclick="closeBenchmarkModal(event)">
+        <div class="signin-modal" style="max-width: 520px; text-align: left;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeBenchmarkModal()">✕</button>
+            <div class="signin-header" style="text-align: left;">
+                <h2 style="font-size: 1.3rem;">⚡ Lightning Fast Dual-Path Architecture</h2>
+                <p>Real-time P95 latency and inference metrics benchmark.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem;">
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0F172A; font-size: 0.9rem;">
+                        <span>Path A: Canonical In-Memory Matching</span>
+                        <span style="color: #10B981;">< 50 ms ($0 cost)</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">Resolves 70% of standard merchant queries instantly from the 171-FAQ index.</p>
+                </div>
+
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0F172A; font-size: 0.9rem;">
+                        <span>Path B: Google Gemini 3 Grounded RAG</span>
+                        <span style="color: #6366F1;">< 1.8 s (Complex)</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">Deep reasoning with 1M token context window, strict source attribution, and zero hallucination.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="pingResultLabel" style="font-size: 0.85rem; font-weight: 600; color: #4F46E5;">Click ping to test live latency...</span>
+                <button class="btn-signin" onclick="testLiveLatency()">Ping Backend API</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         SECURITY & PII REDACTION MODAL (PILLAR 2)
+         =============================================================== -->
+    <div class="results-overlay" id="securityOverlay" onclick="closeSecurityModal(event)">
+        <div class="signin-modal" style="max-width: 540px; text-align: left;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeSecurityModal()">✕</button>
+            <div class="signin-header" style="text-align: left;">
+                <h2 style="font-size: 1.3rem;">🛡️ Private & Secure Enterprise Guardrails</h2>
+                <p>Real-time PII anonymization, AES-256 encryption, and out-of-scope refusals.</p>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Interactive PII Redactor Playground</label>
+                <input type="text" id="piiInputTest" class="signin-input" value="Call merchant at 9876543210 or email test@example.com for card 4111-2222-3333-4444" oninput="runPiiRedactionDemo()">
+            </div>
+
+            <div style="background: #0F172A; color: #FFFFFF; border-radius: 12px; padding: 14px; font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                <div style="color: #94A3B8; font-size: 0.75rem; margin-bottom: 4px;">AI INFERENCE RECEIVES (REDACTED STREAM):</div>
+                <div id="piiOutputTest" style="color: #38BDF8;">Call merchant at [PHONE_REDACTED] or email [EMAIL_REDACTED] for card [CARD_REDACTED]</div>
+            </div>
+
+            <div style="font-size: 0.82rem; color: #64748B;">
+                ✅ SOC2 Type II Certified • TLS 1.3 In-Transit • Zero Data Storage for Training
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         CODE & API PLAYGROUND MODAL (PILLAR 3)
+         =============================================================== -->
+    <div class="results-overlay" id="codeOverlay" onclick="closeCodeModal(event)">
+        <div class="signin-modal" style="max-width: 600px; text-align: left;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeCodeModal()">✕</button>
+            <div class="signin-header" style="text-align: left;">
+                <h2 style="font-size: 1.3rem;">💻 Code & Developer API Playground</h2>
+                <p>Direct integration examples for Python, cURL, and Node.js.</p>
+            </div>
+
+            <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <button class="btn-sample-doc" onclick="switchCodeSnippet('curl')">cURL</button>
+                <button class="btn-sample-doc" onclick="switchCodeSnippet('python')">Python</button>
+                <button class="btn-sample-doc" onclick="switchCodeSnippet('js')">Node.js</button>
+            </div>
+
+            <pre style="background: #0F172A; color: #E2E8F0; padding: 14px; border-radius: 12px; font-family: var(--font-mono); font-size: 0.82rem; overflow-x: auto; max-height: 220px;" id="codeSnippetPre">
+curl -X POST "http://127.0.0.1:8000/chat" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "What is the project overview?", "session_id": "api_demo"}'
+            </pre>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                <span id="apiExecStatus" style="font-size: 0.82rem; color: #10B981; font-weight: 600;">Status: Ready to execute</span>
+                <button class="btn-signin" onclick="executePlaygroundCode()">Run Live Request</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         HUMAN SUPPORT ESCALATION MODAL
+         =============================================================== -->
+    <div class="results-overlay" id="escalateOverlay" onclick="closeEscalateModal(event)">
+        <div class="signin-modal" style="max-width: 480px; text-align: left;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeEscalateModal()">✕</button>
+            <div class="signin-header" style="text-align: left;">
+                <h2 style="font-size: 1.25rem; color: #B91C1C;">🎫 Escalate to Human Support (L2)</h2>
+                <p>If the AI response did not fully solve your issue, our senior operations desk is on standby.</p>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Escalation Reason</label>
+                <select class="signin-input" id="escalateReason">
+                    <option>Payment Settlement Dispute (T+2)</option>
+                    <option>KYC Document Rejection Review</option>
+                    <option>Product Listing Bulk Upload Error</option>
+                    <option>Technical Bug / System Glitch</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+                <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; display: block;">Additional Details (Optional)</label>
+                <textarea class="signin-input" id="escalateDetails" rows="3" placeholder="Provide any extra merchant context..."></textarea>
+            </div>
+
+            <button class="btn-signin" style="background: #B91C1C; width: 100%;" onclick="submitEscalationTicket()">Create Support Ticket</button>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         API QUOTA UPDATE / UPGRADE MODAL
+         =============================================================== -->
+    <div class="results-overlay" id="upgradeOverlay" onclick="closeUpgradeModal(event)">
+        <div class="signin-modal" style="max-width: 530px; text-align: left;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeUpgradeModal()">✕</button>
+            <div class="signin-header" style="text-align: left;">
+                <h2 style="font-size: 1.3rem; color: #4F46E5;">⚡ Update Plan & API Quota</h2>
+                <p>Unlock higher reasoning concurrency, multimodal vision, and all 105+ global languages.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem;">
+                <!-- Option 1: Monthly Plan with First Month Discount -->
+                <div class="upgrade-plan-card active" id="planCardPro" onclick="selectUpgradeTier('pro')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 700; font-size: 1rem; color: #0F172A;">🚀 Professional Monthly</span>
+                        <div style="text-align: right;">
+                            <span style="text-decoration: line-through; color: #94A3B8; font-size: 0.9rem; margin-right: 6px;">₹8,000</span>
+                            <span style="font-weight: 800; color: #4F46E5; font-size: 1.25rem;">₹5,000 / mo</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                        <p style="font-size: 0.8rem; color: #64748B; margin: 0;">First month special discount! 100 RPM quota • Multimodal OCR • Sub-second Dual-Path RAG.</p>
+                        <span style="background: #DCFCE7; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-left: 8px;">SAVE ₹3,000</span>
+                    </div>
+                </div>
+
+                <!-- Option 2: Yearly Plan (Replacing Custom SLA) -->
+                <div class="upgrade-plan-card" id="planCardEnt" onclick="selectUpgradeTier('enterprise')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 700; font-size: 1rem; color: #0F172A;">🌟 Annual All-Access Pass</span>
+                        <div style="text-align: right;">
+                            <span style="text-decoration: line-through; color: #94A3B8; font-size: 0.9rem; margin-right: 6px;">₹9,600</span>
+                            <span style="font-weight: 800; color: #10B981; font-size: 1.25rem;">₹5,000 / yr</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                        <p style="font-size: 0.8rem; color: #64748B; margin: 0;">Only ₹416/mo (calculated at ₹800/mo × 12 = ₹9,600). Unlimited RPM • All 105+ Languages • Priority Speech Dictation.</p>
+                        <span style="background: #FEF3C7; color: #92400E; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-left: 8px;">BEST VALUE</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-signin" style="width: 100%;" onclick="confirmUpgradePlan()">Confirm & Activate Plan</button>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         PROFILE & STORE SETTINGS MODAL
+         =============================================================== -->
+    <div class="results-overlay" id="profileOverlay" onclick="closeProfileModal(event)">
+        <div class="signin-modal" style="max-width: 480px; text-align: left;" onclick="event.stopPropagation()">
+            <button class="btn-close-modal" onclick="closeProfileModal()">✕</button>
+            <div class="signin-header" style="text-align: left;">
+                <h2 style="font-size: 1.3rem; color: #0F172A;">👤 Merchant Profile & Session</h2>
+                <p>Manage store credentials and active merchant configuration.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem;">
+                <div style="padding: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;">
+                    <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">MERCHANT ID</div>
+                    <div style="font-weight: 700; color: #0F172A; font-size: 0.95rem;" id="profileModalId">MRC-8821</div>
+                </div>
+                <div style="padding: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;">
+                    <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">STORE OUTLET</div>
+                    <div style="font-weight: 700; color: #0F172A; font-size: 0.95rem;">Downtown Electronics</div>
+                </div>
+                <div style="padding: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;">
+                    <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">OPERATOR EMAIL</div>
+                    <div style="font-weight: 600; color: #0F172A; font-size: 0.9rem;">alex@downtownretail.com</div>
+                </div>
+                <div style="padding: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;">
+                    <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">SUBSCRIPTION TIER</div>
+                    <div style="font-weight: 700; color: #4F46E5; font-size: 0.95rem;" id="profileModalTier">Free Tier (20 RPM)</div>
+                </div>
+            </div>
+
+            <button class="btn-signin" style="width: 100%; background: #64748B;" onclick="closeProfileModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js?v=20261029_1530"></script>
+</body>
+</html>

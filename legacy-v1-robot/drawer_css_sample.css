@@ -1,0 +1,131 @@
+.chat-drawer {{
+            position: fixed;
+            bottom: 85px;
+            right: 24px;
+            width: min(440px, calc(100vw - 32px));
+            height: min(580px, calc(100vh - 105px));
+            max-height: calc(100vh - 100px);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-ui);
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            z-index: 9998;
+            transform-origin: bottom right;
+            transform: scale(0.7) translateY(40px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s, width 0.3s, height 0.3s;
+            overflow: hidden;
+        }}
+        .chat-drawer.open {{
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }}
+
+        /* Maximized Mode */
+        .chat-drawer.maximized {{
+            width: min(920px, calc(100vw - 40px));
+            height: min(720px, calc(100vh - 90px));
+            max-height: calc(100vh - 90px);
+            bottom: 30px;
+            right: 20px;
+        }}
+
+        /* Chat Header with Dedicated Back Button & Left Animated Robot Character */
+        .chat-header {{
+            background: linear-gradient(135deg, #1E3A8A, var(--golo-blue));
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }}
+
+        .header-left-cluster {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+
+        /* Dedicated Back Button */
+        .btn-back-header {{
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: var(--font-sub);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }}
+        .btn-back-header:hover {{
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-2px);
+        }}
+
+        .header-actions-group {{
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }}
+        .header-icon-btn {{
+            background: rgba(255, 255, 255, 0.14);
+            border: none;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }}
+        .header-icon-btn:hover {{
+            background: rgba(255, 255, 255, 0.3);
+        }}
+
+        /* Message Stream Body */
+        .chat-body-stream {{
+            flex: 1;
+            padding: 1rem 1.15rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: var(--bg-surface);
+        }}
+
+        .message-row {{
+            display: flex;
+            flex-direction: column;
+            max-width: 86%;
+            animation: msgFadeIn 0.25s ease-out;
+        }}
+        @keyframes msgFadeIn {{
+            from {{ opacity: 0; transform: translateY(6px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+
+        .message-row.user {{
+            align-self: flex-end;
+            align-items: flex-end;
+        }}
+        .message-row.ai {{
+            align-self: flex-start;
+            align-items: flex-start;
+        }}
+
+        .msg-bubble-box {{
+            padding: 0.75rem 1rem;
+            border-
