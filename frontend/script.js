@@ -213,7 +213,7 @@ function renderStructuredAnswer(rawText, source, category, faqId, needsCustomerS
             <div>
                 <strong>Source:</strong> ${sourceLabel} ${category ? '• ' + category : ''}
             </div>
-            <span style="font-size: 0.78rem; background: #EEF2FF; color: #4338CA; padding: 2px 8px; border-radius: 999px; font-weight: 600;">Verified Grounding</span>
+            <span style="font-size: 0.78rem; background: #E8F5EF; color: #157A4F; padding: 2px 8px; border-radius: 999px; font-weight: 600;">Verified Grounding</span>
         </div>
         ${careCard}
         <div class="resolution-actions-bar" style="margin-top:12px;">
@@ -230,7 +230,7 @@ function formatMarkdown(text) {
     return text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/`([^`]+)`/g, '<code style="background:#F1F5F9; color:#4F46E5; padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:0.88em;">$1</code>')
+        .replace(/`([^`]+)`/g, '<code style="background:#F1F5F9; color:#157A4F; padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:0.88em;">$1</code>')
         .replace(/^• (.*?)$/gm, '<li style="margin-left: 20px;">$1</li>')
         .replace(/\n\n/g, '<br><br>')
         .replace(/\n/g, '<br>');
@@ -598,9 +598,9 @@ function appendChatThinkingIndicator(id) {
         <div class="chat-avatar ai-av">G</div>
         <div class="chat-bubble" style="display: flex; gap: 10px; align-items: center; padding: 12px 18px; background: #FAF5FF; border: 1px solid #E9D5FF;">
             <div style="display: flex; gap: 4px; align-items: center;">
-                <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
-                <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
-                <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
+                <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
+                <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
+                <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
             </div>
             <span style="font-size: 0.84rem; color: #6B21A8; font-weight: 600;">Synthesizing response with Dual-Path RAG & Gemini 3.8 Flash...</span>
         </div>
@@ -715,7 +715,7 @@ function appendChatMessage(role, text, meta = {}) {
     if (role === 'user') {
         const imgHtml = meta.image_base64 ? `<img src="${meta.image_base64}" class="chat-attached-thumbnail" alt="Uploaded attachment">` : '';
         msgDiv.innerHTML = `
-            <div class="chat-avatar user-av">👤</div>
+            <div class="chat-avatar user-av">A</div>
             <div>
                 <div class="chat-bubble">
                     ${escapeHtml(text)}
@@ -800,9 +800,9 @@ function appendChatTypingIndicator(id) {
     div.innerHTML = `
         <div class="chat-avatar ai-av">G</div>
         <div class="chat-bubble" style="display: flex; gap: 6px; align-items: center; padding: 14px 18px;">
-            <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
-            <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
-            <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
+            <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
+            <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
+            <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
         </div>
     `;
     container.appendChild(div);
@@ -897,12 +897,12 @@ function inspectSampleDoc(type) {
     const body = document.getElementById('multimodalResultsBody');
 
     statusTag.innerText = 'Analyzing Visuals...';
-    statusTag.style.background = '#EEF2FF';
-    statusTag.style.color = '#4F46E5';
+    statusTag.style.background = '#E8F5EF';
+    statusTag.style.color = '#157A4F';
 
     body.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; color: #4F46E5; margin-bottom: 12px;">
-            <span style="display:inline-block; width:16px; height:16px; border:2px solid #4F46E5; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></span>
+        <div style="display: flex; align-items: center; gap: 10px; color: #157A4F; margin-bottom: 12px;">
+            <span style="display:inline-block; width:16px; height:16px; border:2px solid #157A4F; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></span>
             <span>Running OCR text recognition & catalog entity resolution...</span>
         </div>
     `;
@@ -987,8 +987,8 @@ function renderFaqList(faqs) {
     list.innerHTML = faqs.map(faq => `
         <div class="faq-card-item" onclick="toggleFaqCard(this)">
             <div class="faq-item-question">
-                <span><span style="color:#6366F1; font-family:var(--font-mono); margin-right:8px;">#${faq.id}</span> ${escapeHtml(faq.question)}</span>
-                <span style="font-size: 0.78rem; background: #EEF2FF; color: #4338CA; padding: 3px 8px; border-radius: 999px;">${escapeHtml(faq.category)}</span>
+                <span><span style="color:#157A4F; font-family:var(--font-mono); margin-right:8px;">#${faq.id}</span> ${escapeHtml(faq.question)}</span>
+                <span style="font-size: 0.78rem; background: #E8F5EF; color: #157A4F; padding: 3px 8px; border-radius: 999px;">${escapeHtml(faq.category)}</span>
             </div>
             <div class="faq-item-answer">
                 ${formatMarkdown(faq.answer)}
@@ -1140,7 +1140,7 @@ console.log(data);`;
 async function executePlaygroundCode() {
     const status = document.getElementById('apiExecStatus');
     status.innerText = 'Executing live request...';
-    status.style.color = '#4F46E5';
+    status.style.color = '#157A4F';
     try {
         const res = await fetch(`${API_BASE}/chat`, {
             method: 'POST',
@@ -1160,83 +1160,110 @@ async function executePlaygroundCode() {
 }
 
 // ==========================================================================
-// PILLAR 4 & NAV: GLOBAL LANGUAGES
+// PILLAR 4 & NAV: ACTIVE LANGUAGE PREFERENCES (ENGLISH, HINDI, MARATHI)
 // ==========================================================================
-async function preloadLanguageList() {
-    const grid = document.getElementById('languageGrid');
-    if (!grid) return;
-    const defaultLangs = [
-        { code: 'en', name: 'English (US)', flag: '🇺🇸' },
-        { code: 'hi', name: 'हिन्दी (Hindi)', flag: '🇮🇳' },
-        { code: 'es', name: 'Español (Spanish)', flag: '🇪🇸' },
-        { code: 'fr', name: 'Français (French)', flag: '🇫🇷' },
-        { code: 'de', name: 'Deutsch (German)', flag: '🇩🇪' },
-        { code: 'ja', name: '日本語 (Japanese)', flag: '🇯🇵' },
-        { code: 'zh', name: '中文 (Mandarin)', flag: '🇨🇳' },
-        { code: 'ar', name: 'العربية (Arabic)', flag: '🇸🇦' },
-        { code: 'pt', name: 'Português (Portuguese)', flag: '🇧🇷' }
-    ];
+let pendingSelectedLanguage = currentSelectedLanguage || 'English';
 
-    grid.innerHTML = defaultLangs.map(l => `
-        <button class="btn-sample-doc" onclick="selectLanguage('${l.name}')" style="display:flex; align-items:center; gap:6px;">
-            <span>${l.flag}</span>
-            <span>${l.name}</span>
-        </button>
-    `).join('');
-}
-function openLanguageModal(event) {
-    if (event) event.preventDefault();
-    document.getElementById('languageOverlay').style.display = 'flex';
-}
-function closeLanguageModal(event) {
-    if (event && event.target !== event.currentTarget && !event.target.classList.contains('btn-close-modal')) return;
-    document.getElementById('languageOverlay').style.display = 'none';
-}
+const SUPPORTED_LANGUAGES = [
+    { code: 'en', name: 'English', native: 'English', flag: '🇬🇧', label: 'Global', greeting: 'Ask anything. Get instant intelligent answers.' },
+    { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳', label: 'राजभाषा', greeting: 'कुछ भी पूछें। समझदार और सटीक उत्तर पाएं।' },
+    { code: 'mr', name: 'Marathi', native: 'मराठी', flag: '🇮🇳', label: 'प्रादेशिक', greeting: 'काहीही विचारा. बुद्धिमान आणि अचूक उत्तरे मिळवा.' }
+];
+
 const LANGUAGE_LOCALE_MAP = {
     'English': 'en-US',
     'Hindi': 'hi-IN',
-    'Spanish': 'es-ES',
-    'French': 'fr-FR',
-    'German': 'de-DE',
-    'Marathi': 'mr-IN',
-    'Gujarati': 'gu-IN',
-    'Bengali': 'bn-IN',
-    'Tamil': 'ta-IN',
-    'Telugu': 'te-IN',
-    'Kannada': 'kn-IN',
-    'Arabic': 'ar-SA',
-    'Chinese': 'zh-CN',
-    'Japanese': 'ja-JP',
-    'Portuguese': 'pt-BR',
-    'Russian': 'ru-RU',
-    'Italian': 'it-IT'
+    'Marathi': 'mr-IN'
 };
 
-function selectLanguage(langName) {
-    currentSelectedLanguage = langName;
-    currentLanguageCode = LANGUAGE_LOCALE_MAP[langName] || 'en-US';
+async function preloadLanguageList() {
+    // Check saved local preference
+    const saved = localStorage.getItem('golo_selected_language');
+    if (saved && (saved === 'English' || saved === 'Hindi' || saved === 'Marathi')) {
+        currentSelectedLanguage = saved;
+        pendingSelectedLanguage = saved;
+    }
+    renderLanguageCards();
+    updateLanguageUIState();
+}
+
+function renderLanguageCards() {
+    const grid = document.getElementById('languageGrid');
+    if (!grid) return;
+
+    grid.innerHTML = SUPPORTED_LANGUAGES.map(l => {
+        const isSelected = (pendingSelectedLanguage === l.name);
+        return `
+            <div class="lang-choice-card ${isSelected ? 'active-lang' : ''}" 
+                 onclick="choosePendingLanguage('${l.name}')" 
+                 style="border: 2px solid ${isSelected ? '#F5B849' : '#E5E7EB'}; background: ${isSelected ? '#FEF8EC' : '#FFFFFF'}; border-radius: 12px; padding: 14px 10px; cursor: pointer; text-align: center; transition: all 0.2s ease; position: relative;">
+                ${isSelected ? '<span style="position: absolute; top: 6px; right: 8px; font-size: 0.85rem; color: #D97706; font-weight: 800;">✓</span>' : ''}
+                <div style="font-size: 1.8rem; margin-bottom: 4px;">${l.flag}</div>
+                <div style="font-weight: 700; font-size: 0.95rem; color: #1F2937;">${l.name}</div>
+                <div style="font-size: 0.85rem; color: #6B7280; margin-top: 2px; font-weight: 600;">${l.native}</div>
+                <span style="display: inline-block; margin-top: 6px; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: ${isSelected ? '#FCE4B8' : '#F3F4F6'}; color: ${isSelected ? '#92400E' : '#4B5563'};">${l.label}</span>
+            </div>
+        `;
+    }).join('');
+
+    const matched = SUPPORTED_LANGUAGES.find(l => l.name === pendingSelectedLanguage) || SUPPORTED_LANGUAGES[0];
+    const headerEl = document.getElementById('langSelectedHeader');
+    const quoteEl = document.getElementById('langSelectedQuote');
+    if (headerEl) headerEl.innerText = `Selected Language: ${matched.name} (${matched.native})`;
+    if (quoteEl) quoteEl.innerText = `"${matched.greeting}"`;
+}
+
+function choosePendingLanguage(langName) {
+    pendingSelectedLanguage = langName;
+    renderLanguageCards();
+}
+
+function openLanguageModal(event) {
+    if (event) event.preventDefault();
+    pendingSelectedLanguage = currentSelectedLanguage;
+    renderLanguageCards();
+    document.getElementById('languageOverlay').style.display = 'flex';
+}
+
+function closeLanguageModal(event) {
+    if (event && event.target !== event.currentTarget && !event.target.classList.contains('btn-close-modal') && !event.target.classList.contains('btn-cancel-lang')) return;
+    document.getElementById('languageOverlay').style.display = 'none';
+}
+
+function saveSelectedLanguage() {
+    currentSelectedLanguage = pendingSelectedLanguage;
+    localStorage.setItem('golo_selected_language', currentSelectedLanguage);
+    currentLanguageCode = LANGUAGE_LOCALE_MAP[currentSelectedLanguage] || 'en-US';
 
     if (speechRecognizer) {
         speechRecognizer.lang = currentLanguageCode;
     }
 
-    const disp = document.getElementById('langSampleDisplay');
-    if (disp) {
-        disp.innerHTML = `Active Language: <strong>${langName}</strong><br><em>All responses and voice recognition calibrated to ${langName}.</em>`;
-    }
+    updateLanguageUIState();
+    document.getElementById('languageOverlay').style.display = 'none';
+    showToast(`🌐 Language saved: ${currentSelectedLanguage}. Next answers will be generated in ${currentSelectedLanguage}!`);
+}
 
-    const navBtn = document.getElementById('navLangBtn');
+function updateLanguageUIState() {
+    const navBtn = document.getElementById('btnLangSelect');
     if (navBtn) {
-        navBtn.innerHTML = `🌐 ${langName.substring(0, 8)}`;
+        const matched = SUPPORTED_LANGUAGES.find(l => l.name === currentSelectedLanguage) || SUPPORTED_LANGUAGES[0];
+        navBtn.innerHTML = `
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #FEF8EC; border: 1.5px solid #FCE4B8; border-radius: 9999px; font-size: 0.88rem; font-weight: 700; color: #92400E; cursor: pointer;">
+                <span>${matched.flag}</span>
+                <span>${matched.native}</span>
+                <span style="font-size: 0.7rem; color: #B45309;">▾</span>
+            </span>
+        `;
+        navBtn.style.width = 'auto';
+        navBtn.style.height = 'auto';
+        navBtn.style.background = 'transparent';
     }
 
     const statusNote = document.getElementById('assistantStatusNote');
     if (statusNote) {
-        statusNote.innerText = `Active Language: ${langName} • Dual-Path RAG • Multimodal Vision`;
+        statusNote.innerText = `Active Language: ${currentSelectedLanguage} • Dual-Path RAG • Grounded Output`;
     }
-
-    showToast(`🌐 Language set to ${langName}. All answers will be generated in ${langName}!`);
-    setTimeout(() => closeLanguageModal(), 300);
 }
 
 // ==========================================================================
@@ -1502,6 +1529,78 @@ function removeElement(id) {
 // CLIENT-SIDE SPECIFICATION & FAQ FALLBACK
 // ==========================================================================
 function generateClientFallbackAnswer(query) {
+    const lang = (currentSelectedLanguage || 'English').toLowerCase();
+    const isHi = lang === 'hindi' || lang === 'hi';
+    const isMr = lang === 'marathi' || lang === 'mr';
+
+    if (isHi) {
+        const ql = query.toLowerCase();
+        if (ql.includes('logout') || ql.includes('log out') || ql.includes('sign out')) {
+            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: '**GOLO खाते से लॉग आउट करने की सुरक्षित प्रक्रिया:**
+
+1. **चरण 1:** शीर्ष नेविगेशन बार में अपने **Profile Avatar (Alex Merchant)** पर क्लिक करें।
+2. **चरण 2:** मेनू में से **Log Out / Sign Out** चुनें।
+3. **चरण 3:** आपका प्रमाणीकरण सत्र तुरंत समाप्त हो जाएगा।' };
+        }
+        if (ql.includes('product') || ql.includes('item') || ql.includes('listing')) {
+            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: '**GOLO पर नया उत्पाद जोड़ने की प्रक्रिया:**
+
+1. **चरण 1:** मर्चेंट पोर्टल में **Catalog → Products** खोलें।
+2. **चरण 2:** **Add Product** बटन दबाएं।
+3. **चरण 3:** उत्पाद का नाम, श्रेणी, मूल्य और स्टॉक दर्ज करें।
+4. **चरण 4:** स्पष्ट तस्वीरें अपलोड करके **Publish** पर क्लिक करें।' };
+        }
+        if (ql.includes('payout') || ql.includes('settlement') || ql.includes('money') || ql.includes('payment')) {
+            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: '**GOLO मर्चेंट पेआउट और निपटान चक्र:**
+
+• **निपटान चक्र:** T+2 / T+3 कार्य दिवस।
+• **न्यूनतम पेआउट:** ₹500 शुद्ध आय।
+• **भुगतान विधि:** सीधे पंजीकृत बैंक खाते में सुरक्षित NEFT/RTGS स्थानांतरण।' };
+        }
+        if (ql.includes('support') || ql.includes('care') || ql.includes('help') || ql.includes('contact')) {
+            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: '**GOLO मर्चेंट कस्टमर सपोर्ट सहायता (२४/७ उपलब्ध):**
+
+• **टोल-फ्री:** `1800-267-4656` (सुबह ९:०० से रात ९:०० IST)
+• **ईमेल:** `support@golo.com`
+• **लाइव टिकट:** तुरंत समाधान के लिए Create Ticket पर क्लिक करें।' };
+        }
+        return { faq_id: 1, category: 'General GOLO FAQ', source: 'faq', answer: '**GOLO** एक अग्रणी हाइपर-लोकल खोज और रिटेल बचत प्लेटफ़ॉर्म है, जिसे **NexaPrime Ecosystem** द्वारा संचालित किया जाता है। यह स्थानीय दुकानदारों और ग्राहकों को डिजिटल स्टोरफ़्रंट और क्यूआर कोड वाउचर छूट से जोड़ता है।' };
+    }
+
+    if (isMr) {
+        const ql = query.toLowerCase();
+        if (ql.includes('logout') || ql.includes('log out') || ql.includes('sign out')) {
+            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: '**GOLO खात्यामधून सुरक्षितपणे लॉग आउट करण्याची प्रक्रिया:**
+
+1. **पायरी १:** वरच्या नेव्हिगेशन बारमधील तुमच्या **Profile Avatar (Alex Merchant)** वर क्लिक करा.
+2. **पायरी २:** मेनूमधून **Log Out / Sign Out** पर्याय निवडा.
+3. **पायरी ३:** तुमचे प्रमाणीकरण सत्र त्वरित बंद होईल.' };
+        }
+        if (ql.includes('product') || ql.includes('item') || ql.includes('listing')) {
+            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: '**GOLO वर नवीन उत्पादन जोडण्याची सोपी पद्धत:**
+
+1. **पायरी १:** मर्चंट पोर्टलवर **Catalog → Products** उघडा.
+2. **पायरी २:** **Add Product** बटण दाबा.
+3. **पायरी ३:** उत्पादनाचे नाव, श्रेणी, किंमत व उपलब्ध स्टॉक प्रविष्ट करा.
+4. **पायरी ४:** स्पष्ट फोटो अपलोड करून **Publish** दाबा.' };
+        }
+        if (ql.includes('payout') || ql.includes('settlement') || ql.includes('money') || ql.includes('payment')) {
+            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: '**GOLO मर्चंट्ससाठी पेआउट आणि सेटलमेंट सायकल:**
+
+• **सेटलमेंट सायकल:** T+2 / T+3 व्यावसायिक दिवस.
+• **किमान पेआउट:** ₹500 शुद्ध उत्पन्न.
+• **पद्धत:** थेट नोंदणीकृत बँक खात्यात NEFT/RTGS द्वारे सुरक्षित ट्रान्सफर.' };
+        }
+        if (ql.includes('support') || ql.includes('care') || ql.includes('help') || ql.includes('contact')) {
+            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: '**GOLO मर्चंट कस्टमर सपोर्ट सहाय्य (२४/७ उपलब्ध):**
+
+• **टोल-फ्री:** `1800-267-4656` (सकाळी ९:०० ते रात्री ९:०० IST)
+• **ईमेल:** `support@golo.com`
+• **लाइव्ह तिकीट:** तांत्रिक मदतीसाठी Create Ticket बटणावर क्लिक करा.' };
+        }
+        return { faq_id: 1, category: 'General GOLO FAQ', source: 'faq', answer: '**GOLO** हे एक अग्रगण्य हायपर-लोकल शोध आणि रिटेल सेव्हिंग्स प्लॅटफॉर्म आहे, जे **NexaPrime Ecosystem** द्वारे चालवले जाते. हे स्थानिक दुकानदार आणि ग्राहकांना डिजिटल स्टोअरफ्रंट आणि QR कोड व्हाउचर सवलतींद्वारे जोडते.' };
+    }
+
     const q = query.toLowerCase();
 
     // 1. Project Specifications

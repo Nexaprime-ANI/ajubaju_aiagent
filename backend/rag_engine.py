@@ -1,3 +1,4 @@
+from translations import translate_text, OUT_OF_SCOPE_MESSAGES, FALLBACK_MESSAGES
 """
 Golo AI Assistant - RAG (Retrieval-Augmented Generation) & NLP Engine
 ===================================================================
@@ -184,12 +185,13 @@ class GoloRAGEngine:
         
         # 1. Out of scope check
         if not self.is_in_scope(query):
-            refusal = (
-                "It is not our app related question. Please try again. "
-                "I am the Golo Merchant AI Assistant, specialized exclusively in guiding you "
-                "through the Golo web application, product listings, orders, payments, KYC verification, "
-                "and store settings. 😊"
-            )
+            lang_clean = (language or "").strip().lower()
+            if "marathi" in lang_clean or lang_clean == "mr" or lang_clean.startswith("mr-"):
+                refusal = OUT_OF_SCOPE_MESSAGES["mr"]
+            elif "hindi" in lang_clean or lang_clean == "hi" or lang_clean.startswith("hi-"):
+                refusal = OUT_OF_SCOPE_MESSAGES["hi"]
+            else:
+                refusal = OUT_OF_SCOPE_MESSAGES["en"]
             return {
                 "response": refusal,
                 "source": "out_of_scope",
@@ -489,8 +491,9 @@ USER QUESTION: {query}
 
         # 5. Deterministic RAG Fallback
         if best_score >= 0.10:
+            final_ans = translate_text(best_faq["answer"], language, faq_id=best_faq["id"])
             return {
-                "response": best_faq["answer"],
+                "response": final_ans,
                 "source": "faq",
                 "category": best_faq["category"],
                 "faq_id": best_faq["id"],
@@ -509,8 +512,9 @@ USER QUESTION: {query}
             "• **Live Operations Desk:** `+91 80 4567 8900`\n\n"
             "You can click the **Customer Service** button below to connect with our support team."
         )
+        fallback_resp = translate_text(fallback_msg, language)
         return {
-            "response": fallback_msg,
+            "response": fallback_resp,
             "source": "customer_support",
             "category": "Customer Support",
             "confidence": 0.50,

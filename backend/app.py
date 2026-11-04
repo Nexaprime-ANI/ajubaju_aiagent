@@ -407,18 +407,13 @@ async def analyze_multimodal_file(file_name: str, query: Optional[str] = None):
 
 @app.get("/languages", tags=["Languages"])
 async def get_supported_languages():
-    """Returns list of supported international languages and sample greetings."""
+    """Returns list of supported international languages (English, Hindi, Marathi) and sample greetings."""
     return {
-        "supported_count": 105,
+        "supported_count": 3,
         "primary_languages": [
             {"code": "en", "name": "English", "native": "English", "greeting": "Ask anything. Get intelligent answers."},
-            {"code": "es", "name": "Spanish", "native": "Español", "greeting": "Pregunta lo que sea. Obtén respuestas inteligentes."},
             {"code": "hi", "name": "Hindi", "native": "हिन्दी", "greeting": "कुछ भी पूछें। समझदार और सटीक उत्तर पाएं।"},
-            {"code": "fr", "name": "French", "native": "Français", "greeting": "Demandez n'importe quoi. Obtenez des réponses intelligentes."},
-            {"code": "de", "name": "German", "native": "Deutsch", "greeting": "Fragen Sie alles. Erhalten Sie intelligente Antworten."},
-            {"code": "ja", "name": "Japanese", "native": "日本語", "greeting": "何でも質問してください。的確な回答を提供します。"},
-            {"code": "zh", "name": "Mandarin", "native": "中文", "greeting": "随心提问。获取智能准确的答案。"},
-            {"code": "ar", "name": "Arabic", "native": "العربية", "greeting": "اسأل أي شيء. واحصل على إجابات ذكية وموثوقة."}
+            {"code": "mr", "name": "Marathi", "native": "मराठी", "greeting": "काहीही विचारा. बुद्धिमान आणि अचूक उत्तरे मिळवा."}
         ]
     }
 

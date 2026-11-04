@@ -20,30 +20,49 @@
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    /* Color Tokens from UI PNG */
-    --color-bg-base: #FFFFFF;
-    --color-bg-ambient: linear-gradient(180deg, #F5F3FF 0%, #FAF8FF 35%, #FFFFFF 100%);
-    --color-text-dark: #0F172A;
-    --color-text-sub: #475569;
-    --color-text-muted: #64748B;
-    --color-text-light: #94A3B8;
+    /* GOLO UI Dominant Warm Orange-Yellow Palette (Matching golowebapp.vercel.app) */
+    --color-primary: #F5B849;
+    --color-primary-dark: #D99B26;
+    --color-primary-light: #F8C76D;
+    --color-primary-tint: #FEF8EC;
+    --color-primary-border: #FCE4B8;
 
-    /* Vibrant Brand Purples */
-    --color-purple-primary: #4F46E5;
-    --color-purple-dark: #4338CA;
-    --color-purple-light: #6366F1;
-    --color-purple-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #7C3AED 100%);
+    --color-secondary: #157A4F;
+    --color-secondary-dark: #0E5E3B;
+    --color-secondary-light: #1E9E66;
+    --color-secondary-tint: #E8F5EF;
+    --color-secondary-border: #C1E4D4;
 
-    /* Cards & Containers */
+    --color-accent-amber: #F9A641;
+    --color-neutral-base: #F8F6F2;
+    --color-neutral-border: #E5E1D8;
     --color-card-bg: #FFFFFF;
-    --color-card-border: #F1F5F9;
-    --color-dashed-border: rgba(167, 139, 250, 0.45);
-    
-    /* Shadows */
-    --shadow-search: 0 10px 30px rgba(99, 102, 241, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
-    --shadow-search-focus: 0 14px 40px rgba(99, 102, 241, 0.22), 0 0 0 3px rgba(99, 102, 241, 0.15);
-    --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-    --shadow-card-hover: 0 16px 40px rgba(99, 102, 241, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+    --color-card-border: #E8E4DA;
+
+    --color-text-dark: #333333;
+    --color-text-sub: #555555;
+    --color-text-muted: #777777;
+    --color-text-light: #999999;
+
+    /* Accents & System Colours */
+    --color-warning: #F9A641;
+    --color-warning-bg: #FFF3E0;
+    --color-success: #157A4F;
+    --color-success-bg: #E8F5EF;
+    --color-error: #E04F4D;
+    --color-error-bg: #FDF2F2;
+
+    /* Ambient Hero Gradient (golowebapp.vercel.app golden banner) */
+    --color-bg-base: #F8F6F2;
+    --color-bg-ambient: linear-gradient(180deg, #F9D087 0%, #FBE6BC 25%, #FAF4E8 65%, #F8F6F2 100%);
+    --color-brand-gradient: linear-gradient(135deg, #F5B849 0%, #F9A641 50%, #FF9800 100%);
+    --color-dashed-border: rgba(245, 184, 73, 0.45);
+
+    /* Shadows with Warm Amber Tone */
+    --shadow-search: 0 10px 30px rgba(245, 184, 73, 0.15), 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-search-focus: 0 14px 40px rgba(245, 184, 73, 0.28), 0 0 0 3px rgba(245, 184, 73, 0.25);
+    --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-card-hover: 0 16px 40px rgba(245, 184, 73, 0.20), 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 * {
@@ -82,7 +101,8 @@ body {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
+    border-bottom: 1px solid rgba(245, 184, 73, 0.28);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 }
@@ -126,11 +146,11 @@ body {
     border-radius: 9px 0 0 9px;
 }
 .sphere-half.left {
-    background: #4F46E5;
+    background: #157A4F;
     margin-right: 2px;
 }
 .sphere-half.right {
-    background: #4338CA;
+    background: #F5B849;
     border-radius: 0 9px 9px 0;
 }
 
@@ -143,10 +163,10 @@ body {
     gap: 3px;
 }
 .logo-brand {
-    color: #4338CA;
+    color: #157A4F;
 }
 .logo-ai {
-    color: var(--color-text-dark);
+    color: #F5B849;
 }
 
 /* Navigation Links */
@@ -164,7 +184,7 @@ body {
     transition: color 0.15s ease;
 }
 .nav-link:hover, .nav-link.active {
-    color: var(--color-text-dark);
+    color: #157A4F;
     font-weight: 600;
 }
 
@@ -189,20 +209,21 @@ body {
     transition: background-color 0.2s ease;
 }
 .btn-lang:hover {
-    background: rgba(99, 102, 241, 0.08);
+    background: rgba(21, 122, 79, 0.08);
 }
 
 .btn-signin {
-    background: #0F172A;
-    color: #FFFFFF;
+    background: #F5B849;
+    color: #1F2937;
     border: none;
     padding: 8px 18px;
     border-radius: 8px;
     font-family: var(--font-sans);
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(245, 184, 73, 0.35);
 }
 .btn-signin:hover {
     background: #1E293B;
@@ -267,8 +288,8 @@ body {
 }
 
 .headline-purple {
-    color: #581C87;
-    background: var(--color-purple-gradient);
+    color: #D97706;
+    background: linear-gradient(135deg, #B45309 0%, #D97706 45%, #F5B849 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -306,7 +327,7 @@ body {
 }
 
 .search-capsule:focus-within {
-    border-color: rgba(99, 102, 241, 0.4);
+    border-color: rgba(21, 122, 79, 0.4);
     box-shadow: var(--shadow-search-focus);
     transform: translateY(-1px);
 }
@@ -329,19 +350,19 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #EEF2FF;
-    border: 1px solid #C7D2FE;
+    background: #E8F5EF;
+    border: 1px solid #C1E4D4;
     padding: 4px 10px;
     border-radius: 999px;
     font-size: 0.8rem;
-    color: #4F46E5;
+    color: #157A4F;
     font-weight: 600;
     margin-right: 8px;
 }
 .btn-remove-attachment {
     background: none;
     border: none;
-    color: #4F46E5;
+    color: #157A4F;
     cursor: pointer;
     font-size: 0.8rem;
 }
@@ -366,8 +387,8 @@ body {
     transition: all 0.18s ease;
 }
 .btn-control:hover {
-    color: var(--color-purple-primary);
-    background: #F5F3FF;
+    color: #157A4F;
+    background: #E8F5EF;
 }
 
 .btn-mic.recording-active {
@@ -383,8 +404,8 @@ body {
 
 /* Send Button: Purple Squircle */
 .btn-send {
-    background: #4338CA;
-    color: #FFFFFF;
+    background: linear-gradient(135deg, #F5B849 0%, #F9A641 100%);
+    color: #1F2937;
     border: none;
     width: 44px;
     height: 44px;
@@ -394,12 +415,13 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 12px rgba(67, 56, 202, 0.35);
+    box-shadow: 0 4px 14px rgba(245, 184, 73, 0.45);
 }
 .btn-send:hover {
-    background: #4F46E5;
+    background: #E59819;
+    color: #111827;
     transform: scale(1.04);
-    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.45);
+    box-shadow: 0 6px 18px rgba(245, 184, 73, 0.55);
 }
 .btn-send:active {
     transform: scale(0.97);
@@ -474,7 +496,7 @@ body {
     margin-bottom: 1.25rem;
 }
 .badge-indigo {
-    background: #EEF2FF;
+    background: #E8F5EF;
 }
 .badge-purple {
     background: #FAF5FF;
@@ -543,7 +565,7 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: #EEF2FF;
+    background: #E8F5EF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -664,7 +686,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #FAF8FF;
+    background: #F8F6F2;
 }
 
 .results-title-group {
@@ -677,7 +699,7 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #EEF2FF;
+    background: #E8F5EF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -723,7 +745,7 @@ body {
 }
 
 .results-body strong {
-    color: #4338CA;
+    color: #157A4F;
     font-weight: 700;
 }
 
@@ -747,12 +769,12 @@ body {
     font-weight: 600;
     padding: 3px 8px;
     border-radius: 6px;
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: #E8F5EF;
+    color: #157A4F;
 }
 
 .btn-copy-answer {
-    background: #4F46E5;
+    background: #157A4F;
     color: #FFFFFF;
     border: none;
     padding: 8px 16px;
@@ -763,7 +785,7 @@ body {
     transition: background 0.15s ease;
 }
 .btn-copy-answer:hover {
-    background: #4338CA;
+    background: #0E5E3B;
 }
 
 /* ==========================================================================
@@ -848,7 +870,7 @@ body {
 }
 .signin-input:focus {
     border-color: var(--color-purple-primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 0 3px rgba(21, 122, 79, 0.12);
 }
 
 .btn-signin-submit {
@@ -947,8 +969,8 @@ body {
     transition: all 0.15s ease;
 }
 .btn-back-nav:hover {
-    background: #F5F3FF;
-    border-color: var(--color-purple-light);
+    background: #E8F5EF;
+    border-color: #157A4F;
     transform: translateX(-2px);
 }
 
@@ -958,7 +980,7 @@ body {
     gap: 12px;
 }
 .view-badge {
-    background: #EEF2FF;
+    background: #E8F5EF;
     color: var(--color-purple-primary);
     font-size: 0.78rem;
     font-weight: 700;
@@ -1001,8 +1023,8 @@ body.in-assistant-view .footer {
     flex-direction: row;
     background: #FFFFFF;
     border-radius: 16px;
-    border: 1px solid #EDE9FE;
-    box-shadow: 0 10px 35px rgba(99, 102, 241, 0.08);
+    border: 1px solid #E5E1D8;
+    box-shadow: 0 10px 35px rgba(21, 122, 79, 0.08);
     overflow: hidden;
 }
 
@@ -1013,8 +1035,8 @@ body.in-assistant-view .footer {
     max-width: 280px;
     height: 100%;
     flex-shrink: 0;
-    background: #FAF8FF;
-    border-right: 1px solid #EDE9FE;
+    background: #F8F6F2;
+    border-right: 1px solid #E5E1D8;
     padding: 1.25rem 1rem;
     display: flex;
     flex-direction: column;
@@ -1030,7 +1052,7 @@ body.in-assistant-view .footer {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: linear-gradient(135deg, #4F46E5, #6366F1);
+    background: linear-gradient(135deg, #157A4F, #1E9E66);
     color: #FFFFFF;
     border: none;
     padding: 10px 14px;
@@ -1038,14 +1060,14 @@ body.in-assistant-view .footer {
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    box-shadow: 0 4px 12px rgba(21, 122, 79, 0.25);
     transition: all 0.2s ease;
     flex-shrink: 0;
 }
 .btn-new-chat:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
-    background: linear-gradient(135deg, #4338CA, #4F46E5);
+    box-shadow: 0 6px 16px rgba(21, 122, 79, 0.35);
+    background: linear-gradient(135deg, #0E5E3B, #157A4F);
 }
 
 .merchant-selector-card {
@@ -1130,14 +1152,14 @@ body.in-assistant-view .footer {
     border: 1px solid transparent;
 }
 .sidebar-history-item:hover {
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: #E8F5EF;
+    color: #157A4F;
 }
 .sidebar-history-item.active {
-    background: #EDE9FE;
-    color: #4338CA;
+    background: #E8F5EF;
+    color: #157A4F;
     font-weight: 600;
-    border-color: #C7D2FE;
+    border-color: #C1E4D4;
 }
 .sidebar-history-title {
     white-space: nowrap;
@@ -1222,7 +1244,7 @@ body.in-assistant-view .footer {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #4F46E5;
+    background: #157A4F;
     color: #FFFFFF;
     display: flex;
     align-items: center;
@@ -1298,9 +1320,11 @@ body.in-assistant-view .footer {
     flex-shrink: 0;
 }
 .popular-faq-pill:hover {
-    background: #EEF2FF;
-    border-color: #6366F1;
-    color: #4F46E5;
+    background: #E8F5EF;
+    border-color: #157A4F;
+    color: #157A4F;
+    border-color: #1E9E66;
+    color: #157A4F;
     transform: translateY(-1px);
 }
 
@@ -1345,11 +1369,16 @@ body.in-assistant-view .footer {
     flex-shrink: 0;
 }
 .chat-avatar.user-av {
-    background: #0F172A;
+    background: #333333;
     color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 .chat-avatar.ai-av {
-    background: #4F46E5;
+    background: #157A4F;
     color: #FFFFFF;
 }
 
@@ -1361,12 +1390,14 @@ body.in-assistant-view .footer {
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 .chat-msg.user .chat-bubble {
-    background: #4F46E5;
-    color: #FFFFFF;
-    border-bottom-right-radius: 4px;
+    background: #F5B849;
+    color: #1F2937;
+    font-weight: 500;
+    border-radius: 14px 14px 2px 14px;
+    box-shadow: 0 2px 10px rgba(245, 184, 73, 0.25);
 }
 .chat-msg.assistant .chat-bubble {
-    background: #F8FAFC;
+    background: #F8F6F2;
     color: var(--color-text-dark);
     border: 1px solid #E2E8F0;
     border-bottom-left-radius: 4px;
@@ -1376,9 +1407,9 @@ body.in-assistant-view .footer {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #EEF2FF;
-    color: #4338CA;
-    border: 1px solid #C7D2FE;
+    background: #E8F5EF;
+    color: #157A4F;
+    border: 1px solid #C1E4D4;
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 0.76rem;
@@ -1433,7 +1464,7 @@ body.in-assistant-view .footer {
     flex-shrink: 0;
     padding: 0.75rem 1.25rem 0.85rem 1.25rem;
     background: #FFFFFF;
-    border-top: 1px solid #EDE9FE;
+    border-top: 1px solid #E5E1D8;
     position: relative;
     z-index: 30;
     display: flex;
@@ -1458,9 +1489,9 @@ body.in-assistant-view .footer {
     flex-shrink: 0;
 }
 .btn-attach-plus:hover {
-    background: #EEF2FF;
-    border-color: #6366F1;
-    color: #4F46E5;
+    background: #E8F5EF;
+    border-color: #1E9E66;
+    color: #157A4F;
     transform: scale(1.05);
 }
 
@@ -1468,13 +1499,13 @@ body.in-assistant-view .footer {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #EEF2FF;
-    border: 1px solid #C7D2FE;
+    background: #E8F5EF;
+    border: 1px solid #C1E4D4;
     border-radius: 8px;
     padding: 4px 10px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #4338CA;
+    color: #157A4F;
     width: fit-content;
 }
 .attachment-name {
@@ -1488,7 +1519,7 @@ body.in-assistant-view .footer {
     border: none;
     cursor: pointer;
     font-weight: 700;
-    color: #6366F1;
+    color: #1E9E66;
     font-size: 0.85rem;
 }
 .btn-remove-attachment:hover {
@@ -1543,12 +1574,12 @@ body.in-assistant-view .footer {
     background: #FFFFFF;
 }
 .upgrade-plan-card:hover {
-    border-color: #C7D2FE;
-    background: #FAF8FF;
+    border-color: #C1E4D4;
+    background: #E8F5EF;
 }
 .upgrade-plan-card.active {
-    border-color: #4F46E5;
-    background: #EEF2FF;
+    border-color: #157A4F;
+    background: #E8F5EF;
 }
 
 /* ==========================================================================
@@ -1563,7 +1594,7 @@ body.in-assistant-view .footer {
 
 .enterprise-metric-card {
     background: #FFFFFF;
-    border: 1px solid #EDE9FE;
+    border: 1px solid #E5E1D8;
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.02);
@@ -1687,7 +1718,7 @@ body.in-assistant-view .footer {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     background: #FFFFFF;
-    border: 1px solid #EDE9FE;
+    border: 1px solid #E5E1D8;
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 8px 30px rgba(99, 102, 241, 0.06);
@@ -1703,8 +1734,8 @@ body.in-assistant-view .footer {
     transition: all 0.2s ease;
 }
 .dropzone-box:hover {
-    border-color: var(--color-purple-primary);
-    background: #F5F3FF;
+    border-color: #157A4F;
+    background: #E8F5EF;
 }
 
 .sample-docs-tray {
@@ -1724,9 +1755,9 @@ body.in-assistant-view .footer {
     transition: all 0.15s;
 }
 .btn-sample-doc:hover {
-    background: #EEF2FF;
-    border-color: var(--color-purple-primary);
-    color: var(--color-purple-primary);
+    background: #E8F5EF;
+    border-color: #157A4F;
+    color: #157A4F;
 }
 
 .ocr-results-card {
@@ -1759,9 +1790,9 @@ body.in-assistant-view .footer {
     transition: all 0.15s;
 }
 .faq-pill-btn.active, .faq-pill-btn:hover {
-    background: #4F46E5;
+    background: #157A4F;
     color: #FFFFFF;
-    border-color: #4F46E5;
+    border-color: #157A4F;
 }
 
 .faq-catalog-list {
@@ -1771,7 +1802,7 @@ body.in-assistant-view .footer {
 }
 .faq-card-item {
     background: #FFFFFF;
-    border: 1px solid #EDE9FE;
+    border: 1px solid #E5E1D8;
     border-radius: 12px;
     padding: 1.25rem;
     cursor: pointer;
@@ -1779,7 +1810,7 @@ body.in-assistant-view .footer {
 }
 .faq-card-item:hover {
     box-shadow: 0 4px 14px rgba(99,102,241,0.08);
-    border-color: #C7D2FE;
+    border-color: #C1E4D4;
 }
 .faq-item-question {
     font-weight: 700;
@@ -1820,7 +1851,7 @@ body.in-assistant-view .footer {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #4F46E5;
+    background: #157A4F;
     color: #FFFFFF;
     display: flex;
     align-items: center;
@@ -1846,7 +1877,7 @@ body.in-assistant-view .footer {
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 16px;
-    box-shadow: 0 14px 40px rgba(99, 102, 241, 0.15), 0 4px 12px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 14px 40px rgba(21, 122, 79, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
     z-index: 99999 !important;
     overflow: hidden;
     display: none;
@@ -1896,7 +1927,7 @@ body.in-assistant-view .footer {
 }
 
 .autocomplete-item:hover, .autocomplete-item.active {
-    background: #F5F3FF;
+    background: #E8F5EF;
     color: var(--color-purple-primary);
     padding-left: 20px;
 }
@@ -1922,8 +1953,8 @@ body.in-assistant-view .footer {
 .autocomplete-category {
     font-size: 0.74rem;
     font-weight: 600;
-    background: #EEF2FF;
-    color: #4338CA;
+    background: #E8F5EF;
+    color: #157A4F;
     padding: 2px 8px;
     border-radius: 999px;
     flex-shrink: 0;
@@ -1968,15 +1999,15 @@ body.in-assistant-view .footer {
     border-color: #CBD5E1;
 }
 .btn-resolution-pill.feedback:hover {
-    background: #EEF2FF;
-    border-color: #818CF8;
+    background: #E8F5EF;
+    border-color: #157A4F;
     color: var(--color-purple-primary);
 }
 
 .btn-resolution-pill.resolved-yes {
-    background: #F0FDF4;
-    border-color: #BBF7D0;
-    color: #166534;
+    background: #E8F5E9;
+    border-color: #C8E6C9;
+    color: #2E7D32;
 }
 .btn-resolution-pill.resolved-yes:hover {
     background: #DCFCE7;
@@ -1984,9 +2015,9 @@ body.in-assistant-view .footer {
 }
 
 .btn-resolution-pill.resolved-no {
-    background: #FEF2F2;
-    border-color: #FECACA;
-    color: #991B1B;
+    background: #FDF2F2;
+    border-color: #F8C8C6;
+    color: #C62828;
 }
 .btn-resolution-pill.resolved-no:hover {
     background: #FEE2E2;
@@ -1994,13 +2025,13 @@ body.in-assistant-view .footer {
 }
 
 .btn-resolution-pill.customer-service {
-    background: #0F172A;
-    border-color: #0F172A;
+    background: #333333;
+    border-color: #333333;
     color: #FFFFFF;
 }
 .btn-resolution-pill.customer-service:hover {
-    background: #1E293B;
-    border-color: #1E293B;
+    background: #157A4F;
+    border-color: #157A4F;
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
 }
 
@@ -2021,8 +2052,8 @@ body.in-assistant-view .footer {
    CUSTOMER CARE CALLOUT CARD (MISSING / UNKNOWN DATA)
    ========================================================================== */
 .customer-care-card {
-    background: #FFFBEB;
-    border: 1px solid #FDE68A;
+    background: #FEF8EC;
+    border: 1px solid #FCE4B8;
     border-radius: 14px;
     padding: 16px 18px;
     margin-top: 14px;
@@ -2033,7 +2064,7 @@ body.in-assistant-view .footer {
     gap: 8px;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #92400E;
+    color: #B87B10;
     margin-bottom: 8px;
 }
 .customer-care-contacts-grid {
@@ -2044,14 +2075,14 @@ body.in-assistant-view .footer {
 }
 .care-contact-item {
     background: #FFFFFF;
-    border: 1px solid #FCD34D;
+    border: 1px solid #F5B849;
     border-radius: 8px;
     padding: 8px 10px;
     font-size: 0.8rem;
 }
 .care-contact-item strong {
     display: block;
-    color: #78350F;
+    color: #B87B10;
     font-size: 0.74rem;
     text-transform: uppercase;
 }
@@ -2060,8 +2091,8 @@ body.in-assistant-view .footer {
    MOST FREQUENTLY ASKED FAQS SECTION (AI MODE)
    ========================================================================== */
 .popular-faqs-section {
-    background: #FAF8FF;
-    border-bottom: 1px solid #EDE9FE;
+    background: #F8F6F2;
+    border-bottom: 1px solid #E5E1D8;
     padding: 12px 18px;
 }
 .popular-faqs-title {
@@ -2094,7 +2125,9 @@ body.in-assistant-view .footer {
     transition: all 0.15s ease;
 }
 .popular-faq-pill:hover {
-    background: #EEF2FF;
+    background: #E8F5EF;
+    border-color: #157A4F;
+    color: #157A4F;
     border-color: var(--color-purple-primary);
     color: var(--color-purple-primary);
     transform: translateY(-1px);
@@ -2246,7 +2279,7 @@ body.in-assistant-view .footer {
                                 <div class="autocomplete-dropdown" id="searchAutocomplete">
                                     <div class="autocomplete-header">
                                         <span>Suggested Queries</span>
-                                        <span style="color:#6366F1;">Predicted by GoLo AI</span>
+                                        <span style="color:#157A4F;">Predicted by GoLo AI</span>
                                     </div>
                                     <div id="searchAutocompleteList"></div>
                                 </div>
@@ -2265,8 +2298,8 @@ body.in-assistant-view .footer {
                             <div class="feature-card" onclick="switchView('analysis')" title="Open Intelligent Analysis">
                                 <div class="card-icon-badge badge-indigo">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <line x1="6" y1="18" x2="18" y2="6" stroke="#4F46E5" stroke-width="4" stroke-linecap="round"/>
-                                        <path d="M5 4v3M3.5 5.5h3M19 16v3M17.5 17.5h3" stroke="#4F46E5" stroke-width="2" stroke-linecap="round"/>
+                                        <line x1="6" y1="18" x2="18" y2="6" stroke="#157A4F" stroke-width="4" stroke-linecap="round"/>
+                                        <path d="M5 4v3M3.5 5.5h3M19 16v3M17.5 17.5h3" stroke="#157A4F" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
                                 <h3 class="card-title">Intelligent Analysis</h3>
@@ -2277,10 +2310,10 @@ body.in-assistant-view .footer {
                             <div class="feature-card" onclick="switchView('multimodal')" title="Open Multimodal Search">
                                 <div class="card-icon-badge badge-purple">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect x="2" y="6" width="15" height="13" rx="2.5" stroke="#9333EA" stroke-width="1.8" fill="none" opacity="0.6"/>
-                                        <rect x="6" y="3" width="16" height="14" rx="2.5" stroke="#9333EA" stroke-width="2" fill="#FAF5FF"/>
-                                        <circle cx="10.5" cy="7.5" r="1.5" fill="#9333EA"/>
-                                        <path d="M7.5 14l3.5-3.5 3 3 2.5-2.5 4 4" stroke="#9333EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="2" y="6" width="15" height="13" rx="2.5" stroke="#F5B849" stroke-width="1.8" fill="none" opacity="0.6"/>
+                                        <rect x="6" y="3" width="16" height="14" rx="2.5" stroke="#F5B849" stroke-width="2" fill="#FAF5FF"/>
+                                        <circle cx="10.5" cy="7.5" r="1.5" fill="#F5B849"/>
+                                        <path d="M7.5 14l3.5-3.5 3 3 2.5-2.5 4 4" stroke="#F5B849" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
                                 <h3 class="card-title">Multimodal Search</h3>
@@ -2291,8 +2324,8 @@ body.in-assistant-view .footer {
                             <div class="feature-card" onclick="switchView('realtime')" title="Explore Real-time 171+ Knowledge Catalog">
                                 <div class="card-icon-badge badge-blue">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M4 4v14a2 2 0 0 0 2 2h14" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/>
-                                        <polyline points="8 14 12 9 15 12 20 6" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M4 4v14a2 2 0 0 0 2 2h14" stroke="#4CAF50" stroke-width="2.2" stroke-linecap="round"/>
+                                        <polyline points="8 14 12 9 15 12 20 6" stroke="#4CAF50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
                                 <h3 class="card-title">Real-time Data</h3>
@@ -2314,7 +2347,7 @@ body.in-assistant-view .footer {
                             <!-- Pillar 1: Lightning Fast -->
                             <div class="pillar-item" onclick="openBenchmarkModal()" style="cursor: pointer;" title="Inspect Live Benchmarks & Latency">
                                 <div class="pillar-icon-circle">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#157A4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                     </svg>
                                 </div>
@@ -2325,7 +2358,7 @@ body.in-assistant-view .footer {
                             <!-- Pillar 2: Private & Secure -->
                             <div class="pillar-item" onclick="openSecurityModal()" style="cursor: pointer;" title="View Security & PII Redactor Specs">
                                 <div class="pillar-icon-circle">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#157A4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                                     </svg>
                                 </div>
@@ -2336,7 +2369,7 @@ body.in-assistant-view .footer {
                             <!-- Pillar 3: Code & Math -->
                             <div class="pillar-item" onclick="openCodeModal()" style="cursor: pointer;" title="Open Interactive API & Code Playground">
                                 <div class="pillar-icon-circle">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#157A4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <polyline points="16 18 22 12 16 6"></polyline>
                                         <polyline points="8 6 2 12 8 18"></polyline>
                                     </svg>
@@ -2345,17 +2378,17 @@ body.in-assistant-view .footer {
                                 <p class="pillar-desc">Solve complex problems, debug code, and compute on the fly with specialized logic models.</p>
                             </div>
 
-                            <!-- Pillar 4: Global Languages -->
-                            <div class="pillar-item" onclick="openLanguageModal()" style="cursor: pointer;" title="Browse 100+ Global Languages">
+                            <!-- Pillar 4: Active Language Preferences -->
+                            <div class="pillar-item" onclick="openLanguageModal()" style="cursor: pointer;" title="Select Language Preferences">
                                 <div class="pillar-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect x="2" y="4" width="20" height="16" rx="4" fill="#4F46E5"/>
-                                        <text x="6" y="15.5" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="700">A</text>
-                                        <path d="M14 8h5M16.5 8v2M14 11h5M18 11c-.5 2.5-2 4.5-4 5.5M15.5 13.5c1 1.5 2 2.5 3.5 3" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+                                        <rect x="2" y="4" width="20" height="16" rx="4" fill="#F5B849"/>
+                                        <text x="6" y="15.5" fill="#1F2937" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="700">A</text>
+                                        <path d="M14 8h5M16.5 8v2M14 11h5M18 11c-.5 2.5-2 4.5-4 5.5M15.5 13.5c1 1.5 2 2.5 3.5 3" stroke="#1F2937" stroke-width="1.2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
-                                <h4 class="pillar-title">Global Languages</h4>
-                                <p class="pillar-desc">Fluent in over 100 languages with natural-sounding translation and cultural context.</p>
+                                <h4 class="pillar-title">Active Languages</h4>
+                                <p class="pillar-desc">Native support for English, Hindi (हिन्दी), and Marathi (मराठी) with step-by-step reasoning.</p>
                             </div>
                         </div>
                     </div>
@@ -2520,7 +2553,7 @@ body.in-assistant-view .footer {
                                 <div class="autocomplete-dropdown" id="assistantAutocomplete">
                                     <div class="autocomplete-header">
                                         <span>Suggested Queries</span>
-                                        <span style="color:#6366F1;">Predicted by GoLo AI</span>
+                                        <span style="color:#157A4F;">Predicted by GoLo AI</span>
                                     </div>
                                     <div id="assistantAutocompleteList"></div>
                                 </div>
@@ -2574,13 +2607,13 @@ body.in-assistant-view .footer {
                         <div class="key-display" id="generatedApiKeyDisplay">golo_live_sec_9948a27b10c934e8f1</div>
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <button class="btn-signin" style="background: #3B82F6;" onclick="generateNewApiKey()">Generate New Key</button>
+                        <button class="btn-signin" style="background: #157A4F;" onclick="generateNewApiKey()">Generate New Key</button>
                         <button class="btn-signin" style="background: #334155;" onclick="copyApiKey()">Copy Key</button>
                     </div>
                 </div>
 
                 <!-- Enterprise Demo Booking Form -->
-                <div style="background: #FFFFFF; border: 1px solid #EDE9FE; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
+                <div style="background: #FFFFFF; border: 1px solid #E5E1D8; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
                     <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; color: #0F172A;">Schedule an Enterprise Platform Demo</h3>
                     <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 1.5rem;">Explore private VPC deployment, custom fine-tuned weights, and custom CRM webhook integrations.</p>
 
@@ -2610,7 +2643,7 @@ body.in-assistant-view .footer {
                             </select>
                         </div>
                         <div style="grid-column: 1 / -1; margin-top: 0.5rem;">
-                            <button type="submit" class="btn-signin" style="background: #4F46E5; padding: 12px 24px;">Submit Enterprise Request</button>
+                            <button type="submit" class="btn-signin" style="background: #157A4F; padding: 12px 24px;">Submit Enterprise Request</button>
                         </div>
                     </form>
                 </div>
@@ -2640,12 +2673,12 @@ body.in-assistant-view .footer {
                         <div class="analysis-stat-title">MTD Gross Sales Volume</div>
                     </div>
                     <div class="analysis-stat-card">
-                        <span class="stat-pill" style="background: #EFF6FF; color: #2563EB;">98.2% on-time</span>
+                        <span class="stat-pill" style="background: #E8F5EF; color: #157A4F;">98.2% on-time</span>
                         <div class="analysis-stat-val" id="statTotalOrders">1,240</div>
                         <div class="analysis-stat-title">Total Orders Fulfilled</div>
                     </div>
                     <div class="analysis-stat-card">
-                        <span class="stat-pill" style="background: #FEF3C7; color: #D97706;">Settlement: Tomorrow</span>
+                        <span class="stat-pill" style="background: #FEF8EC; color: #B87B10;">Settlement: Tomorrow</span>
                         <div class="analysis-stat-val" id="statPendingPayout">₹82,500</div>
                         <div class="analysis-stat-title">Pending Bank Payout (T+2)</div>
                     </div>
@@ -2697,12 +2730,12 @@ body.in-assistant-view .footer {
 
                 <!-- Inventory Alerts & AI Recommendations -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                    <div style="background: #FFFFFF; border: 1px solid #EDE9FE; border-radius: 16px; padding: 1.5rem;">
+                    <div style="background: #FFFFFF; border: 1px solid #E5E1D8; border-radius: 16px; padding: 1.5rem;">
                         <h4 style="font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; color: #0F172A;">⚠️ Live Inventory & Restock Alerts</h4>
                         <div style="display: flex; flex-direction: column; gap: 10px;">
                             <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 10px 12px; border-radius: 8px; font-size: 0.85rem;">
                                 <strong>Wireless Noise-Canceling Earbuds Pro:</strong> 3 units remaining.<br>
-                                <span style="color: #92400E; font-size: 0.8rem;">💡 AI Recommendation: Reorder 40 units immediately to avoid stockout by Friday.</span>
+                                <span style="color: #B87B10; font-size: 0.8rem;">💡 AI Recommendation: Reorder 40 units immediately to avoid stockout by Friday.</span>
                             </div>
                             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 12px; border-radius: 8px; font-size: 0.85rem;">
                                 <strong>Fast-Charging USB-C Cable (2m):</strong> 14 units remaining.<br>
@@ -2711,7 +2744,7 @@ body.in-assistant-view .footer {
                         </div>
                     </div>
 
-                    <div style="background: #FFFFFF; border: 1px solid #EDE9FE; border-radius: 16px; padding: 1.5rem;">
+                    <div style="background: #FFFFFF; border: 1px solid #E5E1D8; border-radius: 16px; padding: 1.5rem;">
                         <h4 style="font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; color: #0F172A;">🤖 Ask AI Analytics</h4>
                         <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 10px;">Ask any question about store performance, margin calculations, or restocking schedules.</p>
                         <div style="display: flex; gap: 8px;">
@@ -2744,7 +2777,7 @@ body.in-assistant-view .footer {
                         <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1rem;">Upload any GST certificate, invoice, or merchandise image to test visual OCR extraction.</p>
 
                         <div class="dropzone-box" onclick="triggerFileUpload()">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#157A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
                                 <polyline points="21 15 16 10 5 21"></polyline>
@@ -2827,7 +2860,7 @@ body.in-assistant-view .footer {
             <div class="footer-container">
                 <div class="footer-left">
                     <p class="copyright-text">© 2026 GoLo Ai — <strong>Product by NexaPrime Ecosystem</strong>. All rights reserved.</p>
-                    <span style="font-size: 0.78rem; color: #10B981; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px;">
+                    <span style="font-size: 0.78rem; color: #157A4F; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px;">
                         <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
                         Backend Active: 176 FAQs Indexed • Port 8000
                     </span>
@@ -2895,21 +2928,35 @@ body.in-assistant-view .footer {
     <!-- Sign-in is handled by the parent GOLO app — modal removed intentionally -->
 
     <!-- ===============================================================
-         LANGUAGE SELECTOR MODAL (105 LANGUAGES)
+         LANGUAGE SELECTOR MODAL (English, Hindi, Marathi)
          =============================================================== -->
     <div class="results-overlay" id="languageOverlay" onclick="closeLanguageModal(event)">
-        <div class="signin-modal" style="max-width: 540px;" onclick="event.stopPropagation()">
+        <div class="signin-modal" style="max-width: 560px; width: 95%;" onclick="event.stopPropagation()">
             <button class="btn-close-modal" onclick="closeLanguageModal()">✕</button>
-            <div class="signin-header">
-                <h2>🌐 Global Language Support</h2>
-                <p>Select your native language. GoLo AI supports over 105 global and regional languages.</p>
+            <div class="signin-header" style="text-align: left; margin-bottom: 1.25rem;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                    <span style="font-size: 1.6rem;">🌐</span>
+                    <h2 style="font-size: 1.35rem; font-weight: 800; color: #1F2937; margin: 0;">Language Preferences</h2>
+                </div>
+                <p style="color: #64748B; font-size: 0.9rem; margin-top: 4px; line-height: 1.5;">
+                    Select your active language. GoLo AI will answer all your questions in your preferred language.
+                </p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem;" id="languageGrid">
-                <!-- Populated dynamically via script.js -->
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem;" id="languageGrid">
+                <!-- Populated dynamically via script.js (English, Hindi, Marathi) -->
             </div>
-            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 10px; font-size: 0.85rem; color: #475569;" id="langSampleDisplay">
-                Selected Language: <strong>English (Default)</strong><br>
-                <em>"How can I help you manage your store today?"</em>
+
+            <div style="background: #FEF8EC; border: 1.5px solid #FCE4B8; padding: 14px 16px; border-radius: 12px; font-size: 0.88rem; color: #4B5563; margin-bottom: 1.5rem;" id="langSampleDisplay">
+                <div style="font-weight: 700; color: #B87B10; margin-bottom: 4px;" id="langSelectedHeader">Selected Language: English</div>
+                <div style="font-style: italic; color: #374151;" id="langSelectedQuote">"Ask anything. Get instant intelligent answers."</div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; align-items: center;">
+                <button type="button" class="btn-cancel-lang" onclick="closeLanguageModal()" style="background: transparent; border: 1px solid #D1D5DB; color: #4B5563; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancel</button>
+                <button type="button" class="btn-save-lang" id="btnSaveLanguage" onclick="saveSelectedLanguage()" style="background: #F5B849; color: #1F2937; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(245, 184, 73, 0.4); display: inline-flex; align-items: center; gap: 8px;">
+                    <span>💾 Save Language</span>
+                </button>
             </div>
         </div>
     </div>
@@ -2929,7 +2976,7 @@ body.in-assistant-view .footer {
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px;">
                     <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0F172A; font-size: 0.9rem;">
                         <span>Path A: Canonical In-Memory Matching</span>
-                        <span style="color: #10B981;">< 50 ms ($0 cost)</span>
+                        <span style="color: #157A4F;">< 50 ms ($0 cost)</span>
                     </div>
                     <p style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">Resolves 70% of standard merchant queries instantly from the 171-FAQ index.</p>
                 </div>
@@ -2937,14 +2984,14 @@ body.in-assistant-view .footer {
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px;">
                     <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0F172A; font-size: 0.9rem;">
                         <span>Path B: Google Gemini 3 Grounded RAG</span>
-                        <span style="color: #6366F1;">< 1.8 s (Complex)</span>
+                        <span style="color:#157A4F;">< 1.8 s (Complex)</span>
                     </div>
                     <p style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">Deep reasoning with 1M token context window, strict source attribution, and zero hallucination.</p>
                 </div>
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span id="pingResultLabel" style="font-size: 0.85rem; font-weight: 600; color: #4F46E5;">Click ping to test live latency...</span>
+                <span id="pingResultLabel" style="font-size: 0.85rem; font-weight: 600; color: #157A4F;">Click ping to test live latency...</span>
                 <button class="btn-signin" onclick="testLiveLatency()">Ping Backend API</button>
             </div>
         </div>
@@ -3001,7 +3048,7 @@ curl -X POST "http://127.0.0.1:8000/chat" \
             </pre>
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-                <span id="apiExecStatus" style="font-size: 0.82rem; color: #10B981; font-weight: 600;">Status: Ready to execute</span>
+                <span id="apiExecStatus" style="font-size: 0.82rem; color: #157A4F; font-weight: 600;">Status: Ready to execute</span>
                 <button class="btn-signin" onclick="executePlaygroundCode()">Run Live Request</button>
             </div>
         </div>
@@ -3044,7 +3091,7 @@ curl -X POST "http://127.0.0.1:8000/chat" \
         <div class="signin-modal" style="max-width: 530px; text-align: left;" onclick="event.stopPropagation()">
             <button class="btn-close-modal" onclick="closeUpgradeModal()">✕</button>
             <div class="signin-header" style="text-align: left;">
-                <h2 style="font-size: 1.3rem; color: #4F46E5;">⚡ Update Plan & API Quota</h2>
+                <h2 style="font-size: 1.3rem; color: #157A4F;">⚡ Update Plan & API Quota</h2>
                 <p>Unlock higher reasoning concurrency, multimodal vision, and all 105+ global languages.</p>
             </div>
 
@@ -3055,12 +3102,12 @@ curl -X POST "http://127.0.0.1:8000/chat" \
                         <span style="font-weight: 700; font-size: 1rem; color: #0F172A;">🚀 Professional Monthly</span>
                         <div style="text-align: right;">
                             <span style="text-decoration: line-through; color: #94A3B8; font-size: 0.9rem; margin-right: 6px;">₹8,000</span>
-                            <span style="font-weight: 800; color: #4F46E5; font-size: 1.25rem;">₹5,000 / mo</span>
+                            <span style="font-weight: 800; color: #157A4F; font-size: 1.25rem;">₹5,000 / mo</span>
                         </div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
                         <p style="font-size: 0.8rem; color: #64748B; margin: 0;">First month special discount! 100 RPM quota • Multimodal OCR • Sub-second Dual-Path RAG.</p>
-                        <span style="background: #DCFCE7; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-left: 8px;">SAVE ₹3,000</span>
+                        <span style="background: #E8F5E9; color: #2E7D32; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-left: 8px;">SAVE ₹3,000</span>
                     </div>
                 </div>
 
@@ -3070,12 +3117,12 @@ curl -X POST "http://127.0.0.1:8000/chat" \
                         <span style="font-weight: 700; font-size: 1rem; color: #0F172A;">🌟 Annual All-Access Pass</span>
                         <div style="text-align: right;">
                             <span style="text-decoration: line-through; color: #94A3B8; font-size: 0.9rem; margin-right: 6px;">₹9,600</span>
-                            <span style="font-weight: 800; color: #10B981; font-size: 1.25rem;">₹5,000 / yr</span>
+                            <span style="font-weight: 800; color: #157A4F; font-size: 1.25rem;">₹5,000 / yr</span>
                         </div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
                         <p style="font-size: 0.8rem; color: #64748B; margin: 0;">Only ₹416/mo (calculated at ₹800/mo × 12 = ₹9,600). Unlimited RPM • All 105+ Languages • Priority Speech Dictation.</p>
-                        <span style="background: #FEF3C7; color: #92400E; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-left: 8px;">BEST VALUE</span>
+                        <span style="background: #FEF3C7; color: #B87B10; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-left: 8px;">BEST VALUE</span>
                     </div>
                 </div>
             </div>
@@ -3110,7 +3157,7 @@ curl -X POST "http://127.0.0.1:8000/chat" \
                 </div>
                 <div style="padding: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;">
                     <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">SUBSCRIPTION TIER</div>
-                    <div style="font-weight: 700; color: #4F46E5; font-size: 0.95rem;" id="profileModalTier">Free Tier (20 RPM)</div>
+                    <div style="font-weight: 700; color: #157A4F; font-size: 0.95rem;" id="profileModalTier">Free Tier (20 RPM)</div>
                 </div>
             </div>
 
@@ -3334,7 +3381,7 @@ function renderStructuredAnswer(rawText, source, category, faqId, needsCustomerS
             <div>
                 <strong>Source:</strong> ${sourceLabel} ${category ? '• ' + category : ''}
             </div>
-            <span style="font-size: 0.78rem; background: #EEF2FF; color: #4338CA; padding: 2px 8px; border-radius: 999px; font-weight: 600;">Verified Grounding</span>
+            <span style="font-size: 0.78rem; background: #E8F5EF; color: #157A4F; padding: 2px 8px; border-radius: 999px; font-weight: 600;">Verified Grounding</span>
         </div>
         ${careCard}
         <div class="resolution-actions-bar" style="margin-top:12px;">
@@ -3351,7 +3398,7 @@ function formatMarkdown(text) {
     return text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/`([^`]+)`/g, '<code style="background:#F1F5F9; color:#4F46E5; padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:0.88em;">$1</code>')
+        .replace(/`([^`]+)`/g, '<code style="background:#F1F5F9; color:#157A4F; padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:0.88em;">$1</code>')
         .replace(/^• (.*?)$/gm, '<li style="margin-left: 20px;">$1</li>')
         .replace(/\n\n/g, '<br><br>')
         .replace(/\n/g, '<br>');
@@ -3719,9 +3766,9 @@ function appendChatThinkingIndicator(id) {
         <div class="chat-avatar ai-av">G</div>
         <div class="chat-bubble" style="display: flex; gap: 10px; align-items: center; padding: 12px 18px; background: #FAF5FF; border: 1px solid #E9D5FF;">
             <div style="display: flex; gap: 4px; align-items: center;">
-                <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
-                <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
-                <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
+                <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
+                <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
+                <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
             </div>
             <span style="font-size: 0.84rem; color: #6B21A8; font-weight: 600;">Synthesizing response with Dual-Path RAG & Gemini 3.8 Flash...</span>
         </div>
@@ -3836,7 +3883,7 @@ function appendChatMessage(role, text, meta = {}) {
     if (role === 'user') {
         const imgHtml = meta.image_base64 ? `<img src="${meta.image_base64}" class="chat-attached-thumbnail" alt="Uploaded attachment">` : '';
         msgDiv.innerHTML = `
-            <div class="chat-avatar user-av">👤</div>
+            <div class="chat-avatar user-av">A</div>
             <div>
                 <div class="chat-bubble">
                     ${escapeHtml(text)}
@@ -3921,9 +3968,9 @@ function appendChatTypingIndicator(id) {
     div.innerHTML = `
         <div class="chat-avatar ai-av">G</div>
         <div class="chat-bubble" style="display: flex; gap: 6px; align-items: center; padding: 14px 18px;">
-            <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
-            <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
-            <span style="width: 8px; height: 8px; background: #6366F1; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
+            <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.1s;"></span>
+            <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.3s;"></span>
+            <span style="width: 8px; height: 8px; background: #157A4F; border-radius: 50%; animation: pulseDot 1s infinite 0.5s;"></span>
         </div>
     `;
     container.appendChild(div);
@@ -4018,12 +4065,12 @@ function inspectSampleDoc(type) {
     const body = document.getElementById('multimodalResultsBody');
 
     statusTag.innerText = 'Analyzing Visuals...';
-    statusTag.style.background = '#EEF2FF';
-    statusTag.style.color = '#4F46E5';
+    statusTag.style.background = '#E8F5EF';
+    statusTag.style.color = '#157A4F';
 
     body.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; color: #4F46E5; margin-bottom: 12px;">
-            <span style="display:inline-block; width:16px; height:16px; border:2px solid #4F46E5; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></span>
+        <div style="display: flex; align-items: center; gap: 10px; color: #157A4F; margin-bottom: 12px;">
+            <span style="display:inline-block; width:16px; height:16px; border:2px solid #157A4F; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></span>
             <span>Running OCR text recognition & catalog entity resolution...</span>
         </div>
     `;
@@ -4108,8 +4155,8 @@ function renderFaqList(faqs) {
     list.innerHTML = faqs.map(faq => `
         <div class="faq-card-item" onclick="toggleFaqCard(this)">
             <div class="faq-item-question">
-                <span><span style="color:#6366F1; font-family:var(--font-mono); margin-right:8px;">#${faq.id}</span> ${escapeHtml(faq.question)}</span>
-                <span style="font-size: 0.78rem; background: #EEF2FF; color: #4338CA; padding: 3px 8px; border-radius: 999px;">${escapeHtml(faq.category)}</span>
+                <span><span style="color:#157A4F; font-family:var(--font-mono); margin-right:8px;">#${faq.id}</span> ${escapeHtml(faq.question)}</span>
+                <span style="font-size: 0.78rem; background: #E8F5EF; color: #157A4F; padding: 3px 8px; border-radius: 999px;">${escapeHtml(faq.category)}</span>
             </div>
             <div class="faq-item-answer">
                 ${formatMarkdown(faq.answer)}
@@ -4261,7 +4308,7 @@ console.log(data);`;
 async function executePlaygroundCode() {
     const status = document.getElementById('apiExecStatus');
     status.innerText = 'Executing live request...';
-    status.style.color = '#4F46E5';
+    status.style.color = '#157A4F';
     try {
         const res = await fetch(`${API_BASE}/chat`, {
             method: 'POST',
@@ -4281,83 +4328,110 @@ async function executePlaygroundCode() {
 }
 
 // ==========================================================================
-// PILLAR 4 & NAV: GLOBAL LANGUAGES
+// PILLAR 4 & NAV: ACTIVE LANGUAGE PREFERENCES (ENGLISH, HINDI, MARATHI)
 // ==========================================================================
-async function preloadLanguageList() {
-    const grid = document.getElementById('languageGrid');
-    if (!grid) return;
-    const defaultLangs = [
-        { code: 'en', name: 'English (US)', flag: '🇺🇸' },
-        { code: 'hi', name: 'हिन्दी (Hindi)', flag: '🇮🇳' },
-        { code: 'es', name: 'Español (Spanish)', flag: '🇪🇸' },
-        { code: 'fr', name: 'Français (French)', flag: '🇫🇷' },
-        { code: 'de', name: 'Deutsch (German)', flag: '🇩🇪' },
-        { code: 'ja', name: '日本語 (Japanese)', flag: '🇯🇵' },
-        { code: 'zh', name: '中文 (Mandarin)', flag: '🇨🇳' },
-        { code: 'ar', name: 'العربية (Arabic)', flag: '🇸🇦' },
-        { code: 'pt', name: 'Português (Portuguese)', flag: '🇧🇷' }
-    ];
+let pendingSelectedLanguage = currentSelectedLanguage || 'English';
 
-    grid.innerHTML = defaultLangs.map(l => `
-        <button class="btn-sample-doc" onclick="selectLanguage('${l.name}')" style="display:flex; align-items:center; gap:6px;">
-            <span>${l.flag}</span>
-            <span>${l.name}</span>
-        </button>
-    `).join('');
-}
-function openLanguageModal(event) {
-    if (event) event.preventDefault();
-    document.getElementById('languageOverlay').style.display = 'flex';
-}
-function closeLanguageModal(event) {
-    if (event && event.target !== event.currentTarget && !event.target.classList.contains('btn-close-modal')) return;
-    document.getElementById('languageOverlay').style.display = 'none';
-}
+const SUPPORTED_LANGUAGES = [
+    { code: 'en', name: 'English', native: 'English', flag: '🇬🇧', label: 'Global', greeting: 'Ask anything. Get instant intelligent answers.' },
+    { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳', label: 'राजभाषा', greeting: 'कुछ भी पूछें। समझदार और सटीक उत्तर पाएं।' },
+    { code: 'mr', name: 'Marathi', native: 'मराठी', flag: '🇮🇳', label: 'प्रादेशिक', greeting: 'काहीही विचारा. बुद्धिमान आणि अचूक उत्तरे मिळवा.' }
+];
+
 const LANGUAGE_LOCALE_MAP = {
     'English': 'en-US',
     'Hindi': 'hi-IN',
-    'Spanish': 'es-ES',
-    'French': 'fr-FR',
-    'German': 'de-DE',
-    'Marathi': 'mr-IN',
-    'Gujarati': 'gu-IN',
-    'Bengali': 'bn-IN',
-    'Tamil': 'ta-IN',
-    'Telugu': 'te-IN',
-    'Kannada': 'kn-IN',
-    'Arabic': 'ar-SA',
-    'Chinese': 'zh-CN',
-    'Japanese': 'ja-JP',
-    'Portuguese': 'pt-BR',
-    'Russian': 'ru-RU',
-    'Italian': 'it-IT'
+    'Marathi': 'mr-IN'
 };
 
-function selectLanguage(langName) {
-    currentSelectedLanguage = langName;
-    currentLanguageCode = LANGUAGE_LOCALE_MAP[langName] || 'en-US';
+async function preloadLanguageList() {
+    // Check saved local preference
+    const saved = localStorage.getItem('golo_selected_language');
+    if (saved && (saved === 'English' || saved === 'Hindi' || saved === 'Marathi')) {
+        currentSelectedLanguage = saved;
+        pendingSelectedLanguage = saved;
+    }
+    renderLanguageCards();
+    updateLanguageUIState();
+}
+
+function renderLanguageCards() {
+    const grid = document.getElementById('languageGrid');
+    if (!grid) return;
+
+    grid.innerHTML = SUPPORTED_LANGUAGES.map(l => {
+        const isSelected = (pendingSelectedLanguage === l.name);
+        return `
+            <div class="lang-choice-card ${isSelected ? 'active-lang' : ''}" 
+                 onclick="choosePendingLanguage('${l.name}')" 
+                 style="border: 2px solid ${isSelected ? '#F5B849' : '#E5E7EB'}; background: ${isSelected ? '#FEF8EC' : '#FFFFFF'}; border-radius: 12px; padding: 14px 10px; cursor: pointer; text-align: center; transition: all 0.2s ease; position: relative;">
+                ${isSelected ? '<span style="position: absolute; top: 6px; right: 8px; font-size: 0.85rem; color: #D97706; font-weight: 800;">✓</span>' : ''}
+                <div style="font-size: 1.8rem; margin-bottom: 4px;">${l.flag}</div>
+                <div style="font-weight: 700; font-size: 0.95rem; color: #1F2937;">${l.name}</div>
+                <div style="font-size: 0.85rem; color: #6B7280; margin-top: 2px; font-weight: 600;">${l.native}</div>
+                <span style="display: inline-block; margin-top: 6px; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: ${isSelected ? '#FCE4B8' : '#F3F4F6'}; color: ${isSelected ? '#92400E' : '#4B5563'};">${l.label}</span>
+            </div>
+        `;
+    }).join('');
+
+    const matched = SUPPORTED_LANGUAGES.find(l => l.name === pendingSelectedLanguage) || SUPPORTED_LANGUAGES[0];
+    const headerEl = document.getElementById('langSelectedHeader');
+    const quoteEl = document.getElementById('langSelectedQuote');
+    if (headerEl) headerEl.innerText = `Selected Language: ${matched.name} (${matched.native})`;
+    if (quoteEl) quoteEl.innerText = `"${matched.greeting}"`;
+}
+
+function choosePendingLanguage(langName) {
+    pendingSelectedLanguage = langName;
+    renderLanguageCards();
+}
+
+function openLanguageModal(event) {
+    if (event) event.preventDefault();
+    pendingSelectedLanguage = currentSelectedLanguage;
+    renderLanguageCards();
+    document.getElementById('languageOverlay').style.display = 'flex';
+}
+
+function closeLanguageModal(event) {
+    if (event && event.target !== event.currentTarget && !event.target.classList.contains('btn-close-modal') && !event.target.classList.contains('btn-cancel-lang')) return;
+    document.getElementById('languageOverlay').style.display = 'none';
+}
+
+function saveSelectedLanguage() {
+    currentSelectedLanguage = pendingSelectedLanguage;
+    localStorage.setItem('golo_selected_language', currentSelectedLanguage);
+    currentLanguageCode = LANGUAGE_LOCALE_MAP[currentSelectedLanguage] || 'en-US';
 
     if (speechRecognizer) {
         speechRecognizer.lang = currentLanguageCode;
     }
 
-    const disp = document.getElementById('langSampleDisplay');
-    if (disp) {
-        disp.innerHTML = `Active Language: <strong>${langName}</strong><br><em>All responses and voice recognition calibrated to ${langName}.</em>`;
-    }
+    updateLanguageUIState();
+    document.getElementById('languageOverlay').style.display = 'none';
+    showToast(`🌐 Language saved: ${currentSelectedLanguage}. Next answers will be generated in ${currentSelectedLanguage}!`);
+}
 
-    const navBtn = document.getElementById('navLangBtn');
+function updateLanguageUIState() {
+    const navBtn = document.getElementById('btnLangSelect');
     if (navBtn) {
-        navBtn.innerHTML = `🌐 ${langName.substring(0, 8)}`;
+        const matched = SUPPORTED_LANGUAGES.find(l => l.name === currentSelectedLanguage) || SUPPORTED_LANGUAGES[0];
+        navBtn.innerHTML = `
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #FEF8EC; border: 1.5px solid #FCE4B8; border-radius: 9999px; font-size: 0.88rem; font-weight: 700; color: #92400E; cursor: pointer;">
+                <span>${matched.flag}</span>
+                <span>${matched.native}</span>
+                <span style="font-size: 0.7rem; color: #B45309;">▾</span>
+            </span>
+        `;
+        navBtn.style.width = 'auto';
+        navBtn.style.height = 'auto';
+        navBtn.style.background = 'transparent';
     }
 
     const statusNote = document.getElementById('assistantStatusNote');
     if (statusNote) {
-        statusNote.innerText = `Active Language: ${langName} • Dual-Path RAG • Multimodal Vision`;
+        statusNote.innerText = `Active Language: ${currentSelectedLanguage} • Dual-Path RAG • Grounded Output`;
     }
-
-    showToast(`🌐 Language set to ${langName}. All answers will be generated in ${langName}!`);
-    setTimeout(() => closeLanguageModal(), 300);
 }
 
 // ==========================================================================
@@ -4623,6 +4697,78 @@ function removeElement(id) {
 // CLIENT-SIDE SPECIFICATION & FAQ FALLBACK
 // ==========================================================================
 function generateClientFallbackAnswer(query) {
+    const lang = (currentSelectedLanguage || 'English').toLowerCase();
+    const isHi = lang === 'hindi' || lang === 'hi';
+    const isMr = lang === 'marathi' || lang === 'mr';
+
+    if (isHi) {
+        const ql = query.toLowerCase();
+        if (ql.includes('logout') || ql.includes('log out') || ql.includes('sign out')) {
+            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: '**GOLO खाते से लॉग आउट करने की सुरक्षित प्रक्रिया:**
+
+1. **चरण 1:** शीर्ष नेविगेशन बार में अपने **Profile Avatar (Alex Merchant)** पर क्लिक करें।
+2. **चरण 2:** मेनू में से **Log Out / Sign Out** चुनें।
+3. **चरण 3:** आपका प्रमाणीकरण सत्र तुरंत समाप्त हो जाएगा।' };
+        }
+        if (ql.includes('product') || ql.includes('item') || ql.includes('listing')) {
+            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: '**GOLO पर नया उत्पाद जोड़ने की प्रक्रिया:**
+
+1. **चरण 1:** मर्चेंट पोर्टल में **Catalog → Products** खोलें।
+2. **चरण 2:** **Add Product** बटन दबाएं।
+3. **चरण 3:** उत्पाद का नाम, श्रेणी, मूल्य और स्टॉक दर्ज करें।
+4. **चरण 4:** स्पष्ट तस्वीरें अपलोड करके **Publish** पर क्लिक करें।' };
+        }
+        if (ql.includes('payout') || ql.includes('settlement') || ql.includes('money') || ql.includes('payment')) {
+            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: '**GOLO मर्चेंट पेआउट और निपटान चक्र:**
+
+• **निपटान चक्र:** T+2 / T+3 कार्य दिवस।
+• **न्यूनतम पेआउट:** ₹500 शुद्ध आय।
+• **भुगतान विधि:** सीधे पंजीकृत बैंक खाते में सुरक्षित NEFT/RTGS स्थानांतरण।' };
+        }
+        if (ql.includes('support') || ql.includes('care') || ql.includes('help') || ql.includes('contact')) {
+            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: '**GOLO मर्चेंट कस्टमर सपोर्ट सहायता (२४/७ उपलब्ध):**
+
+• **टोल-फ्री:** `1800-267-4656` (सुबह ९:०० से रात ९:०० IST)
+• **ईमेल:** `support@golo.com`
+• **लाइव टिकट:** तुरंत समाधान के लिए Create Ticket पर क्लिक करें।' };
+        }
+        return { faq_id: 1, category: 'General GOLO FAQ', source: 'faq', answer: '**GOLO** एक अग्रणी हाइपर-लोकल खोज और रिटेल बचत प्लेटफ़ॉर्म है, जिसे **NexaPrime Ecosystem** द्वारा संचालित किया जाता है। यह स्थानीय दुकानदारों और ग्राहकों को डिजिटल स्टोरफ़्रंट और क्यूआर कोड वाउचर छूट से जोड़ता है।' };
+    }
+
+    if (isMr) {
+        const ql = query.toLowerCase();
+        if (ql.includes('logout') || ql.includes('log out') || ql.includes('sign out')) {
+            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: '**GOLO खात्यामधून सुरक्षितपणे लॉग आउट करण्याची प्रक्रिया:**
+
+1. **पायरी १:** वरच्या नेव्हिगेशन बारमधील तुमच्या **Profile Avatar (Alex Merchant)** वर क्लिक करा.
+2. **पायरी २:** मेनूमधून **Log Out / Sign Out** पर्याय निवडा.
+3. **पायरी ३:** तुमचे प्रमाणीकरण सत्र त्वरित बंद होईल.' };
+        }
+        if (ql.includes('product') || ql.includes('item') || ql.includes('listing')) {
+            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: '**GOLO वर नवीन उत्पादन जोडण्याची सोपी पद्धत:**
+
+1. **पायरी १:** मर्चंट पोर्टलवर **Catalog → Products** उघडा.
+2. **पायरी २:** **Add Product** बटण दाबा.
+3. **पायरी ३:** उत्पादनाचे नाव, श्रेणी, किंमत व उपलब्ध स्टॉक प्रविष्ट करा.
+4. **पायरी ४:** स्पष्ट फोटो अपलोड करून **Publish** दाबा.' };
+        }
+        if (ql.includes('payout') || ql.includes('settlement') || ql.includes('money') || ql.includes('payment')) {
+            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: '**GOLO मर्चंट्ससाठी पेआउट आणि सेटलमेंट सायकल:**
+
+• **सेटलमेंट सायकल:** T+2 / T+3 व्यावसायिक दिवस.
+• **किमान पेआउट:** ₹500 शुद्ध उत्पन्न.
+• **पद्धत:** थेट नोंदणीकृत बँक खात्यात NEFT/RTGS द्वारे सुरक्षित ट्रान्सफर.' };
+        }
+        if (ql.includes('support') || ql.includes('care') || ql.includes('help') || ql.includes('contact')) {
+            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: '**GOLO मर्चंट कस्टमर सपोर्ट सहाय्य (२४/७ उपलब्ध):**
+
+• **टोल-फ्री:** `1800-267-4656` (सकाळी ९:०० ते रात्री ९:०० IST)
+• **ईमेल:** `support@golo.com`
+• **लाइव्ह तिकीट:** तांत्रिक मदतीसाठी Create Ticket बटणावर क्लिक करा.' };
+        }
+        return { faq_id: 1, category: 'General GOLO FAQ', source: 'faq', answer: '**GOLO** हे एक अग्रगण्य हायपर-लोकल शोध आणि रिटेल सेव्हिंग्स प्लॅटफॉर्म आहे, जे **NexaPrime Ecosystem** द्वारे चालवले जाते. हे स्थानिक दुकानदार आणि ग्राहकांना डिजिटल स्टोअरफ्रंट आणि QR कोड व्हाउचर सवलतींद्वारे जोडते.' };
+    }
+
     const q = query.toLowerCase();
 
     // 1. Project Specifications
