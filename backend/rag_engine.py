@@ -24,7 +24,7 @@ load_dotenv()
 api_key = os.getenv("GOLO_API_KEY") or os.getenv("GEMINI_API_KEY")
 
 genai_client = None
-if api_key:
+if api_key and not api_key.startswith("your_"):
     try:
         from google import genai
         genai_client = genai.Client(api_key=api_key)
@@ -245,9 +245,9 @@ class GoloRAGEngine:
             target_faq = _get_faq_by_id(163)
             ans = target_faq["answer"]
             if is_hindi:
-                ans = "**GOLO खाते से लॉग आउट करने की चरण-दर-चरण मार्गदर्शिका:**\n\n1. **चरण 1:** शीर्ष नेविगेशन बार में अपने **Profile Avatar** पर क्लिक करें।\n2. **चरण 2:** ड्रॉपडाउन मेनू से **Sign Out / Log Out** का चयन करें।\n3. **चरण 3:** आपका सत्र सुरक्षित रूप से समाप्त हो जाएगा।"
+                ans = "**GOLO खाते से लॉग आउट करने की चरण-दर-चरण मार्गदर्शिका:**\n\n**चरण 1:** शीर्ष नेविगेशन बार में अपने **Profile Avatar** पर क्लिक करें।\n**चरण 2:** ड्रॉपडाउन मेनू से **Sign Out / Log Out** का चयन करें।\n**चरण 3:** आपका सत्र सुरक्षित रूप से समाप्त हो जाएगा।"
             elif is_marathi:
-                ans = "**GOLO खात्यामधून लॉग आउट करण्याची सोपी प्रक्रिया:**\n\n1. **पायरी १:** वरच्या नेव्हिगेशन बारमधील तुमच्या **Profile Avatar** वर क्लिक करा.\n2. **पायरी २:** ड्रॉपडाउन मेनूमधून **Sign Out / Log Out** निवडा.\n3. **पायरी ३:** तुमचे सत्र सुरक्षितपणे बंद होईल."
+                ans = "**GOLO खात्यामधून लॉग आउट करण्याची सोपी प्रक्रिया:**\n\n**पायरी १:** वरच्या नेव्हिगेशन बारमधील तुमच्या **Profile Avatar** वर क्लिक करा.\n**पायरी २:** ड्रॉपडाउन मेनूमधून **Sign Out / Log Out** निवडा.\n**पायरी ३:** तुमचे सत्र सुरक्षितपणे बंद होईल."
             return {
                 "response": ans,
                 "source": "faq",
@@ -260,12 +260,18 @@ class GoloRAGEngine:
 
         # INTENT C: REGISTER / ADD MOBILE NUMBER / NEW ACCOUNT
         if any(p in q_norm for p in ["register", "create account", "add mobile", "add number", "signup", "sign up", "open account"]) and not any(p in q_norm for p in ["change", "update", "edit", "replace"]):
-            target_faq = _get_faq_by_id(172)
+            merchant_registration_terms = [
+                "merchant", "seller", "store", "shop", "business"
+            ]
+            is_merchant_registration = any(
+                term in q_norm for term in merchant_registration_terms
+            )
+            target_faq = _get_faq_by_id(174 if is_merchant_registration else 172)
             ans = target_faq["answer"]
-            if is_hindi:
-                ans = "**GOLO पर मोबाइल नंबर रजिस्टर करने और नया खाता बनाने की चरण-दर-चरण प्रक्रिया:**\n\n1. **चरण 1 — पोर्टल खोलें:** GOLO वेब पोर्टल या ऐप पर जाएं।\n2. **चरण 2 — रजिस्टर चुनें:** शीर्ष दाएं कोने में **Register** बटन पर क्लिक करें।\n3. **चरण 3 — मोबाइल नंबर दर्ज करें:** अपना 10-अंकों का वैध मोबाइल नंबर दर्ज करें।\n4. **चरण 4 — ओटीपी सत्यापन:** प्राप्त 6-अंकों का OTP दर्ज करके **Verify OTP** पर क्लिक करें।\n5. **चरण 5 — पुष्टि:** आपका GOLO खाता तुरंत सक्रिय हो जाएगा।"
-            elif is_marathi:
-                ans = "**GOLO वर मोबाईल नंबर नोंदणी करण्याची पद्धत:**\n\n1. **पायरी १:** GOLO वेब पोर्टल किंवा ॲप उघडा.\n2. **पायरी २:** वरच्या उजव्या कोपऱ्यातील **Register** बटणावर क्लिक करा.\n3. **पायरी ३:** तुमचा १०-अंकी मोबाईल नंबर टाका.\n4. **पायरी ४:** SMS द्वारे मिळालेला ६-अंकी OTP टाकून **Verify OTP** वर क्लिक करा.\n5. **पायरी ५:** तुमचे GOLO खाते त्वरित सक्रिय होईल."
+            if is_hindi and not is_merchant_registration:
+                ans = "**GOLO पर मोबाइल नंबर रजिस्टर करने और नया खाता बनाने की चरण-दर-चरण प्रक्रिया:**\n\n**चरण 1 — पोर्टल खोलें:** GOLO वेब पोर्टल या ऐप पर जाएं。\n**चरण 2 — रजिस्टर चुनें:** शीर्ष दाएं कोने में **Register** बटन पर क्लिक करें。\n**चरण 3 — मोबाइल नंबर दर्ज करें:** अपना 10-अंकों का वैध मोबाइल नंबर दर्ज करें。\n**चरण 4 — ओटीपी सत्यापन:** प्राप्त 6-अंकों का OTP दर्ज करके **Verify OTP** पर क्लिक करें。\n**चरण 5 — पुष्टि:** आपका GOLO खाता तुरंत सक्रिय हो जाएगा।"
+            elif is_marathi and not is_merchant_registration:
+                ans = "**GOLO वर मोबाईल नंबर नोंदणी करण्याची पद्धत:**\n\n**पायरी १:** GOLO वेब पोर्टल किंवा ॲप उघडा。\n**पायरी २:** वरच्या उजव्या कोपऱ्यातील **Register** बटणावर क्लिक करा。\n**पायरी ३:** तुमचा १०-अंकी मोबाईल नंबर टाका。\n**पायरी ४:** SMS द्वारे मिळालेला ६-अंकी OTP टाकून **Verify OTP** वर क्लिक करा。\n**पायरी ५:** तुमचे GOLO खाते त्वरित सक्रिय होईल।"
             return {
                 "response": ans,
                 "source": "faq",
@@ -281,9 +287,9 @@ class GoloRAGEngine:
             target_faq = _get_faq_by_id(173)
             ans = target_faq["answer"]
             if is_hindi:
-                ans = "**पंजीकृत मोबाइल नंबर बदलने की प्रक्रिया:**\n1. **Account Settings** → **Security & Login** पर जाएं।\n2. **Change Mobile Number** पर क्लिक करें।\n3. पुराने और नए नंबर पर आए OTP को सत्यापित करें।"
+                ans = "**पंजीकृत मोबाइल नंबर बदलने की प्रक्रिया:**\n**Account Settings** → **Security & Login** पर जाएं。\n**Change Mobile Number** पर क्लिक करें。\nपुराने और नए नंबर पर आए OTP को सत्यापित करें।"
             elif is_marathi:
-                ans = "**नोंदणीकृत मोबाईल नंबर बदलण्याची प्रक्रिया:**\n1. **Account Settings** → **Security & Login** वर जा.\n2. **Change Mobile Number** निवडा.\n3. जुन्या व नवीन नंबरवर आलेला OTP व्हेरिफाय करा."
+                ans = "**नोंदणीकृत मोबाईल नंबर बदलण्याची प्रक्रिया:**\n**Account Settings** → **Security & Login** वर जा。\n**Change Mobile Number** निवडा。\nजुन्या व नवीन नंबरवर आलेला OTP व्हेरिफाय करा।"
             return {
                 "response": ans,
                 "source": "faq",
@@ -299,9 +305,9 @@ class GoloRAGEngine:
             target_faq = _get_faq_by_id(176)
             ans = target_faq["answer"]
             if is_hindi:
-                ans = "**GOLO व्यापारियों के लिए भुगतान (Payout) और निपटान चक्र:**\n\n• **निपटान चक्र:** T+2 / T+3 कार्य दिवस (शनिवार, रविवार और बैंक अवकाश छोड़कर)।\n• **न्यूनतम पेआउट सीमा:** ₹500 शुद्ध आय।\n• **स्थानांतरण विधि:** सीधे पंजीकृत बैंक खाते में सुरक्षित NEFT / RTGS / IMPS।\n• **कटौतियां:** प्लेटफ़ॉर्म सुविधा शुल्क और लागू GST स्वचालित रूप से समायोजित होते हैं।"
+                ans = "**GOLO व्यापारियों के लिए भुगतान (Payout) और निपटान चक्र:**\n\n**निपटान चक्र:** T+2 / T+3 कार्य दिवस (शनिवार, रविवार और बैंक अवकाश छोड़कर)。\n**न्यूनतम पेआउट सीमा:** ₹500 शुद्ध आय。\n**स्थानांतरण विधि:** सीधे पंजीकृत बैंक खाते में सुरक्षित NEFT / RTGS / IMPS。\n**कटौतियां:** प्लेटफ़ॉर्म सुविधा शुल्क और लागू GST स्वचालित रूप से समायोजित होते हैं।"
             elif is_marathi:
-                ans = "**GOLO मर्चंट्ससाठी पेआउट आणि सेटलमेंट सायकल:**\n\n• **सेटलमेंट सायकल:** T+2 / T+3 व्यावसायिक दिवस.\n• **किमान पेआउट मर्यादा:** ₹500 शुद्ध उत्पन्न.\n• **पद्धत:** थेट नोंदणीकृत बँक खात्यात NEFT / RTGS / IMPS द्वारे सुरक्षित ट्रान्सफर.\n• **कपाती:** प्लॅटफॉर्म फी आणि GST आपोआप समायोजित होतात."
+                ans = "**GOLO मर्चंट्ससाठी पेआउट आणि सेटलमेंट सायकल:**\n\n**सेटलमेंट सायकल:** T+2 / T+3 व्यावसायिक दिवस.\n**किमान पेआउट मर्यादा:** ₹500 शुद्ध उत्पन्न.\n**पद्धत:** थेट नोंदणीकृत बँक खात्यात NEFT / RTGS / IMPS द्वारे सुरक्षित ट्रान्सफर.\n**कपाती:** प्लॅटफॉर्म फी आणि GST आपोआप समायोजित होतात."
             return {
                 "response": ans,
                 "source": "faq",
@@ -317,9 +323,9 @@ class GoloRAGEngine:
             target_faq = _get_faq_by_id(175)
             ans = target_faq["answer"]
             if is_hindi:
-                ans = "**GOLO मर्चेंट कस्टमर सपोर्ट २४/७ सहायता:**\n- **टोल-फ्री हेल्पलाइन:** 1800-267-4656\n- **ईमेल सपोर्ट:** support@golo.com\n- **लाइव टिकट:** 'Create Ticket' पर क्लिक करके वरिष्ठ तकनीकी डेस्क से संपर्क करें।"
+                ans = "**GOLO मर्चेंट कस्टमर सपोर्ट २४/७ सहायता:**\n**टोल-फ्री हेल्पलाइन:** 1800-267-4656\n**ईमेल सपोर्ट:** support@golo.com\n**लाइव टिकट:** 'Create Ticket' पर क्लिक करके वरिष्ठ तकनीकी डेस्क से संपर्क करें।"
             elif is_marathi:
-                ans = "**GOLO मर्चंट कस्टमर सपोर्ट २४/७ उपलब्ध आहे:**\n- **टोल-फ्री हेल्पलाइन:** 1800-267-4656\n- **ईमेल सहाय्य:** support@golo.com\n- **लाइव्ह तिकीट:** 'Create Ticket' बटणावर क्लिक करून थेट संपर्क साधा."
+                ans = "**GOLO मर्चंट कस्टमर सपोर्ट २४/७ उपलब्ध आहे:**\n**टोल-फ्री हेल्पलाइन:** 1800-267-4656\n**ईमेल सहाय्य:** support@golo.com\n**लाइव्ह तिकीट:** 'Create Ticket' बटणावर क्लिक करून थेट संपर्क साधा."
             return {
                 "response": ans,
                 "source": "faq",
@@ -333,12 +339,12 @@ class GoloRAGEngine:
 
         # INTENT G: KYC VERIFICATION
         if any(p in q_norm for p in ["kyc", "pan", "aadhaar", "verification", "verify account", "documents"]):
-            target_faq = _get_faq_by_id(73)
+            target_faq = _get_faq_by_id(30)
             ans = target_faq["answer"]
             if is_hindi:
-                ans = "**KYC सत्यापन आवश्यकताएं:**\n1. **GSTIN प्रमाणपत्र** या पैन कार्ड\n2. **रद्द चेक (Cancelled Cheque)** या बैंक पासबुक विवरण\n3. **व्यावसायिक पते का प्रमाण**.\nस्वीकृति में आमतौर पर ४ व्यावसायिक घंटे लगते हैं।"
+                ans = "**KYC सत्यापन आवश्यकताएं:**\n**GSTIN प्रमाणपत्र** या पैन कार्ड\n**रद्द चेक (Cancelled Cheque)** या बैंक पासबुक विवरण\n**व्यावसायिक पते का प्रमाण**.\nस्वीकृति में आमतौर पर ४ व्यावसायिक घंटे लगते हैं।"
             elif is_marathi:
-                ans = "**KYC पडताळणी आवश्यकता:**\n1. **GSTIN प्रमाणपत्र** किंवा पॅन कार्ड\n2. **रद्द केलेला चेक (Cancelled Cheque)** किंवा बँक पासबुक\n3. **पत्ता पुरावा**.\nमंजुरी साधारणतः ४ व्यावसायिक तासांत मिळते."
+                ans = "**KYC पडताळणी आवश्यकता:**\n**GSTIN प्रमाणपत्र** किंवा पॅन कार्ड\n**रद्द केलेला चेक (Cancelled Cheque)** किंवा बँक पासबुक\n**पत्ता पुरावा**.\nमंजुरी साधारणतः ४ व्यावसायिक तासांत मिळते."
             return {
                 "response": ans,
                 "source": "faq",
@@ -354,9 +360,9 @@ class GoloRAGEngine:
             target_faq = _get_faq_by_id(66)
             ans = target_faq["answer"]
             if is_hindi:
-                ans = "**नया उत्पाद जोड़ने की चरण-दर-चरण प्रक्रिया:**\n1. **Catalog** → **Products** → **Add Product** पर जाएं।\n2. उत्पाद शीर्षक, विवरण, मूल्य और स्टॉक दर्ज करें।\n3. उच्च गुणवत्ता वाली तस्वीरें अपलोड करें और **Publish** दबाएं।"
+                ans = "**नया उत्पाद जोड़ने की चरण-दर-चरण प्रक्रिया:**\n**Catalog** → **Products** → **Add Product** पर जाएं।\nउत्पाद शीर्षक, विवरण, मूल्य और स्टॉक दर्ज करें।\nउच्च गुणवत्ता वाली तस्वीरें अपलोड करें और **Publish** दबाएं।"
             elif is_marathi:
-                ans = "**नवीन उत्पादन जोडण्याची सोपी पद्धत:**\n1. **Catalog** → **Products** → **Add Product** वर जा.\n2. उत्पादनाचे नाव, किंमत, स्टॉक आणि वर्णन प्रविष्ट करा.\n3. फोटो अपलोड करून **Publish** दाबा."
+                ans = "**नवीन उत्पादन जोडण्याची सोपी पद्धत:**\n**Catalog** → **Products** → **Add Product** वर जा.\nउत्पादनाचे नाव, किंमत, स्टॉक आणि वर्णन प्रविष्ट करा.\nफोटो अपलोड करून **Publish** दाबा."
             return {
                 "response": ans,
                 "source": "faq",
@@ -608,4 +614,3 @@ USER QUESTION: {query}
                         "category": faq["category"]
                     })
         return popular[:limit]
-

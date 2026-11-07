@@ -13,6 +13,11 @@ import time
 import subprocess
 import signal
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8')
+
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 BACKEND_DIR = os.path.join(ROOT_DIR, "backend")
 FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
@@ -43,20 +48,39 @@ def main():
     print("=" * 65)
     print("  Press Ctrl+C to stop both servers...\n")
 
-    def shutdown(sig, frame):
-        print("\nStopping GoLo AI servers...")
-        backend_proc.terminate()
-        frontend_proc.terminate()
-        print("Done.")
+    shutdown_started = False
+
+    def shutdown(sig=None, frame=None):
+        nonlocal shutdown_started
+
+        if shutdown_started:
+            return
+
+        shutdown_started = True
+        print("\nStopping GoLo AI servers...", flush=True)
+
+        for process in (backend_proc, frontend_proc):
+            try:
+                if process.poll() is None:
+                    process.terminate()
+            except Exception:
+                pass
+
+        print("Done.", flush=True)
         sys.exit(0)
 
     signal.signal(signal.SIGINT, shutdown)
-    signal.signal(signal.SIGTERM, shutdown)
+    try:
+        signal.signal(signal.SIGTERM, shutdown)
+    except (AttributeError, ValueError):
+        pass
 
     try:
         backend_proc.wait()
     except KeyboardInterrupt:
-        shutdown(None, None)
+        shutdown()
+    finally:
+        shutdown()
 
 if __name__ == "__main__":
     main()

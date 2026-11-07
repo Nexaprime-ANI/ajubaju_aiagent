@@ -1536,33 +1536,33 @@ function generateClientFallbackAnswer(query) {
     if (isHi) {
         const ql = query.toLowerCase();
         if (ql.includes('logout') || ql.includes('log out') || ql.includes('sign out')) {
-            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: '**GOLO खाते से लॉग आउट करने की सुरक्षित प्रक्रिया:**
+            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: `**GOLO खाते से लॉग आउट करने की सुरक्षित प्रक्रिया:**
 
 1. **चरण 1:** शीर्ष नेविगेशन बार में अपने **Profile Avatar (Alex Merchant)** पर क्लिक करें।
 2. **चरण 2:** मेनू में से **Log Out / Sign Out** चुनें।
-3. **चरण 3:** आपका प्रमाणीकरण सत्र तुरंत समाप्त हो जाएगा।' };
+3. **चरण 3:** आपका प्रमाणीकरण सत्र तुरंत समाप्त हो जाएगा।` };
         }
         if (ql.includes('product') || ql.includes('item') || ql.includes('listing')) {
-            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: '**GOLO पर नया उत्पाद जोड़ने की प्रक्रिया:**
+            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: `**GOLO पर नया उत्पाद जोड़ने की प्रक्रिया:**
 
 1. **चरण 1:** मर्चेंट पोर्टल में **Catalog → Products** खोलें।
 2. **चरण 2:** **Add Product** बटन दबाएं।
 3. **चरण 3:** उत्पाद का नाम, श्रेणी, मूल्य और स्टॉक दर्ज करें।
-4. **चरण 4:** स्पष्ट तस्वीरें अपलोड करके **Publish** पर क्लिक करें।' };
+4. **चरण 4:** स्पष्ट तस्वीरें अपलोड करके **Publish** पर क्लिक करें।` };
         }
         if (ql.includes('payout') || ql.includes('settlement') || ql.includes('money') || ql.includes('payment')) {
-            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: '**GOLO मर्चेंट पेआउट और निपटान चक्र:**
+            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: `**GOLO मर्चेंट पेआउट और निपटान चक्र:**
 
 • **निपटान चक्र:** T+2 / T+3 कार्य दिवस।
 • **न्यूनतम पेआउट:** ₹500 शुद्ध आय।
-• **भुगतान विधि:** सीधे पंजीकृत बैंक खाते में सुरक्षित NEFT/RTGS स्थानांतरण।' };
+• **भुगतान विधि:** सीधे पंजीकृत बैंक खाते में सुरक्षित NEFT/RTGS स्थानांतरण।` };
         }
         if (ql.includes('support') || ql.includes('care') || ql.includes('help') || ql.includes('contact')) {
-            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: '**GOLO मर्चेंट कस्टमर सपोर्ट सहायता (२४/७ उपलब्ध):**
+            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: `**GOLO मर्चेंट कस्टमर सपोर्ट सहायता (२४/७ उपलब्ध):**
 
-• **टोल-फ्री:** `1800-267-4656` (सुबह ९:०० से रात ९:०० IST)
-• **ईमेल:** `support@golo.com`
-• **लाइव टिकट:** तुरंत समाधान के लिए Create Ticket पर क्लिक करें।' };
+• **टोल-फ्री:** \`1800-267-4656\` (सुबह ९:०० से रात ९:०० IST)
+• **ईमेल:** \`support@golo.com\`
+• **लाइव टिकट:** तुरंत समाधान के लिए Create Ticket पर क्लिक करें।` };
         }
         return { faq_id: 1, category: 'General GOLO FAQ', source: 'faq', answer: '**GOLO** एक अग्रणी हाइपर-लोकल खोज और रिटेल बचत प्लेटफ़ॉर्म है, जिसे **NexaPrime Ecosystem** द्वारा संचालित किया जाता है। यह स्थानीय दुकानदारों और ग्राहकों को डिजिटल स्टोरफ़्रंट और क्यूआर कोड वाउचर छूट से जोड़ता है।' };
     }
@@ -1570,33 +1570,33 @@ function generateClientFallbackAnswer(query) {
     if (isMr) {
         const ql = query.toLowerCase();
         if (ql.includes('logout') || ql.includes('log out') || ql.includes('sign out')) {
-            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: '**GOLO खात्यामधून सुरक्षितपणे लॉग आउट करण्याची प्रक्रिया:**
+            return { faq_id: 163, category: 'Account FAQ', source: 'faq', answer: `**GOLO खात्यामधून सुरक्षितपणे लॉग आउट करण्याची प्रक्रिया:**
 
 1. **पायरी १:** वरच्या नेव्हिगेशन बारमधील तुमच्या **Profile Avatar (Alex Merchant)** वर क्लिक करा.
 2. **पायरी २:** मेनूमधून **Log Out / Sign Out** पर्याय निवडा.
-3. **पायरी ३:** तुमचे प्रमाणीकरण सत्र त्वरित बंद होईल.' };
+3. **पायरी ३:** तुमचे प्रमाणीकरण सत्र त्वरित बंद होईल.` };
         }
         if (ql.includes('product') || ql.includes('item') || ql.includes('listing')) {
-            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: '**GOLO वर नवीन उत्पादन जोडण्याची सोपी पद्धत:**
+            return { faq_id: 66, category: 'Product FAQ', source: 'faq', answer: `**GOLO वर नवीन उत्पादन जोडण्याची सोपी पद्धत:**
 
 1. **पायरी १:** मर्चंट पोर्टलवर **Catalog → Products** उघडा.
 2. **पायरी २:** **Add Product** बटण दाबा.
 3. **पायरी ३:** उत्पादनाचे नाव, श्रेणी, किंमत व उपलब्ध स्टॉक प्रविष्ट करा.
-4. **पायरी ४:** स्पष्ट फोटो अपलोड करून **Publish** दाबा.' };
+4. **पायरी ४:** स्पष्ट फोटो अपलोड करून **Publish** दाबा.` };
         }
         if (ql.includes('payout') || ql.includes('settlement') || ql.includes('money') || ql.includes('payment')) {
-            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: '**GOLO मर्चंट्ससाठी पेआउट आणि सेटलमेंट सायकल:**
+            return { faq_id: 176, category: 'Payment FAQ', source: 'faq', answer: `**GOLO मर्चंट्ससाठी पेआउट आणि सेटलमेंट सायकल:**
 
 • **सेटलमेंट सायकल:** T+2 / T+3 व्यावसायिक दिवस.
 • **किमान पेआउट:** ₹500 शुद्ध उत्पन्न.
-• **पद्धत:** थेट नोंदणीकृत बँक खात्यात NEFT/RTGS द्वारे सुरक्षित ट्रान्सफर.' };
+• **पद्धत:** थेट नोंदणीकृत बँक खात्यात NEFT/RTGS द्वारे सुरक्षित ट्रान्सफर.` };
         }
         if (ql.includes('support') || ql.includes('care') || ql.includes('help') || ql.includes('contact')) {
-            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: '**GOLO मर्चंट कस्टमर सपोर्ट सहाय्य (२४/७ उपलब्ध):**
+            return { faq_id: 175, category: 'Customer Support', source: 'customer_support', answer: `**GOLO मर्चंट कस्टमर सपोर्ट सहाय्य (२४/७ उपलब्ध):**
 
-• **टोल-फ्री:** `1800-267-4656` (सकाळी ९:०० ते रात्री ९:०० IST)
-• **ईमेल:** `support@golo.com`
-• **लाइव्ह तिकीट:** तांत्रिक मदतीसाठी Create Ticket बटणावर क्लिक करा.' };
+• **टोल-फ्री:** \`1800-267-4656\` (सकाळी ९:०० ते रात्री ९:०० IST)
+• **ईमेल:** \`support@golo.com\`
+• **लाइव्ह तिकीट:** तांत्रिक मदतीसाठी Create Ticket बटणावर क्लिक करा.` };
         }
         return { faq_id: 1, category: 'General GOLO FAQ', source: 'faq', answer: '**GOLO** हे एक अग्रगण्य हायपर-लोकल शोध आणि रिटेल सेव्हिंग्स प्लॅटफॉर्म आहे, जे **NexaPrime Ecosystem** द्वारे चालवले जाते. हे स्थानिक दुकानदार आणि ग्राहकांना डिजिटल स्टोअरफ्रंट आणि QR कोड व्हाउचर सवलतींद्वारे जोडते.' };
     }
