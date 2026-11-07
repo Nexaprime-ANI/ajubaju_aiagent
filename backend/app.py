@@ -6,6 +6,7 @@ Provides endpoints for chat, FAQ retrieval, and health checks.
 """
 
 import uuid
+import os
 from datetime import datetime
 from typing import Optional
 
@@ -23,9 +24,22 @@ app = FastAPI(
 )
 
 # ─── CORS Configuration ─────────────────────────────
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "").strip()
+if allowed_origins:
+    allowed_origins = [
+        origin.strip()
+        for origin in allowed_origins.split(",")
+        if origin.strip()
+    ]
+else:
+    allowed_origins = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict to specific domains
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -276,10 +290,6 @@ async def query_suggestions(q: str = "", limit: int = 4):
         "count": len(suggestions),
         "suggestions": suggestions
     }
-
-
-
-
 
 
 @app.get("/project/overview", tags=["Project"])
