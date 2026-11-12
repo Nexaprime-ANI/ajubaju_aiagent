@@ -3,7 +3,7 @@
    Connects all frontend components, views, modals, and endpoints to FastAPI.
    ========================================================================== */
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = 'https://golo-ai-backend.onrender.com';
 let activeSessionId = 'v2_session_' + Math.random().toString(36).substring(2, 9);
 let activeMerchantId = 'MRC-8821';
 let isRecording = false;
@@ -1067,7 +1067,7 @@ function closeBenchmarkModal(event) {
 }
 async function testLiveLatency() {
     const label = document.getElementById('pingResultLabel');
-    label.innerText = 'Pinging http://127.0.0.1:8000/health...';
+    label.innerText = `Pinging ${API_BASE}/health...`;
     const start = performance.now();
     try {
         const res = await fetch(`${API_BASE}/health`, { cache: 'no-cache' });
